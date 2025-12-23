@@ -6,10 +6,11 @@ import random
 
 router = APIRouter(prefix="/api/seed", tags=["seed"])
 
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+# MongoDB connection - lazy load
+def get_db():
+    mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
+    client = AsyncIOMotorClient(mongo_url)
+    return client[os.environ.get('DB_NAME', 'test_database')]
 
 @router.post("/populate-december-2025")
 async def seed_december_2025():
