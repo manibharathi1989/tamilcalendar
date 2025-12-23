@@ -196,6 +196,7 @@ async def search_calendar(
 ):
     """Search calendar events within a date range"""
     try:
+        db = get_db()
         start = datetime.fromisoformat(start_date)
         end = datetime.fromisoformat(end_date)
         
