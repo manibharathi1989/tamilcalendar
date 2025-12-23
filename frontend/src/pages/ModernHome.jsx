@@ -14,30 +14,30 @@ const ModernHome = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchCalendarData();
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth() + 1;
+        const day = currentDate.getDate();
+
+        // Fetch daily calendar and special days
+        const [dailyData, specialData] = await Promise.all([
+          calendarAPI.getDailyCalendar(year, month, day),
+          calendarAPI.getSpecialDays(year, month),
+        ]);
+
+        setCalendarData(dailyData);
+        setSpecialDays(specialData);
+      } catch (error) {
+        console.error('Error fetching calendar data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchData();
   }, [currentDate]);
-
-  const fetchCalendarData = async () => {
-    setLoading(true);
-    try {
-      const year = currentDate.getFullYear();
-      const month = currentDate.getMonth() + 1;
-      const day = currentDate.getDate();
-
-      // Fetch daily calendar and special days
-      const [dailyData, specialData] = await Promise.all([
-        calendarAPI.getDailyCalendar(year, month, day),
-        calendarAPI.getSpecialDays(year, month),
-      ]);
-
-      setCalendarData(dailyData);
-      setSpecialDays(specialData);
-    } catch (error) {
-      console.error('Error fetching calendar data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleDateChange = (newDate) => {
     setCurrentDate(newDate);
