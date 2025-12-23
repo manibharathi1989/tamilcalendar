@@ -23,11 +23,26 @@ async def get_daily_calendar(year: int, month: int, day: int):
         })
         
         if not calendar_data:
-            # Return default data if not found
+            # Calculate Tamil day name dynamically
+            tamil_days = ["திங்கள்", "செவ்வாய்", "புதன்", "வியாழன்", "வெள்ளி", "சனி", "ஞாயிறு"]
+            tamil_day = tamil_days[date.weekday()]
+            
+            # Calculate Tamil month (approximate mapping)
+            tamil_months = [
+                "தை", "மாசி", "பங்குனி", "சித்திரை", "வைகாசி", "ஆனி",
+                "ஆடி", "ஆவணி", "புரட்டாசி", "ஐப்பசி", "கார்த்திகை", "மார்கழி"
+            ]
+            tamil_month_index = (month - 1) % 12
+            tamil_month = tamil_months[tamil_month_index]
+            
+            # Return default data with calculated values
             return {
                 "date": date.isoformat(),
-                "tamil_date": f"{day} - மார்கழி - விசுவாவசு",
-                "tamil_day": "செவ்வாய்",
+                "tamil_date": f"{day} - {tamil_month} - விசுவாவசு",
+                "tamil_day": tamil_day,
+                "tamil_month": tamil_month,
+                "tamil_year": "விசுவாவசு",
+                "english_day": date.strftime("%A"),
                 "nalla_neram": {
                     "morning": "07:45 - 08:45 கா / AM",
                     "evening": "04:45 - 05:45 மா / PM"
