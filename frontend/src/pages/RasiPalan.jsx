@@ -1,0 +1,155 @@
+import React, { useState } from 'react';
+import ModernHeader from '../components/ModernHeader';
+import ModernFooter from '../components/ModernFooter';
+import { Star, Sparkles } from 'lucide-react';
+import { useParams } from 'react-router-dom';
+
+const RasiPalan = () => {
+  const { type } = useParams();
+  const [selectedRasi, setSelectedRasi] = useState('mesham');
+
+  const rasiList = [
+    { id: 'mesham', tamil: 'மேஷம்', english: 'Aries (Mesham)', icon: '♈' },
+    { id: 'rishabam', tamil: 'ரிஷபம்', english: 'Taurus (Rishabam)', icon: '♉' },
+    { id: 'mithunam', tamil: 'மிதுனம்', english: 'Gemini (Mithunam)', icon: '♊' },
+    { id: 'kadagam', tamil: 'கடகம்', english: 'Cancer (Kadagam)', icon: '♋' },
+    { id: 'simmam', tamil: 'சிம்மம்', english: 'Leo (Simmam)', icon: '♌' },
+    { id: 'kanni', tamil: 'கன்னி', english: 'Virgo (Kanni)', icon: '♍' },
+    { id: 'thulam', tamil: 'துலாம்', english: 'Libra (Thulam)', icon: '♎' },
+    { id: 'viruchagam', tamil: 'விருச்சகம்', english: 'Scorpio (Viruchagam)', icon: '♏' },
+    { id: 'dhanusu', tamil: 'தனுசு', english: 'Sagittarius (Dhanusu)', icon: '♐' },
+    { id: 'makaram', tamil: 'மகரம்', english: 'Capricorn (Makaram)', icon: '♑' },
+    { id: 'kumbam', tamil: 'கும்பம்', english: 'Aquarius (Kumbam)', icon: '♒' },
+    { id: 'meenam', tamil: 'மீனம்', english: 'Pisces (Meenam)', icon: '♓' },
+  ];
+
+  const palanTypes = [
+    { id: 'daily', tamil: 'இன்றைய ராசி பலன்', english: 'Daily Rasi Palan' },
+    { id: 'weekly', tamil: 'வார ராசி பலன்', english: 'Weekly Rasi Palan' },
+    { id: 'monthly', tamil: 'மாத ராசி பலன்', english: 'Monthly Rasi Palan' },
+    { id: 'yearly', tamil: 'ஆண்டு ராசி பலன்', english: 'Yearly Rasi Palan' },
+  ];
+
+  const currentType = palanTypes.find(t => t.id === type) || palanTypes[0];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50">
+      <ModernHeader />
+      
+      <main className="max-w-7xl mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl shadow-xl p-8 mb-8 text-center">
+          <Star className="w-16 h-16 text-white mx-auto mb-4" />
+          <h1 className="text-4xl font-bold text-white mb-2">{currentType.english}</h1>
+          <p className="text-purple-100 text-lg">{currentType.tamil}</p>
+        </div>
+
+        {/* Rasi Selection */}
+        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">Select Your Rasi</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {rasiList.map((rasi) => (
+              <button
+                key={rasi.id}
+                onClick={() => setSelectedRasi(rasi.id)}
+                className={`p-4 rounded-xl border-2 transition-all ${
+                  selectedRasi === rasi.id
+                    ? 'bg-gradient-to-r from-purple-500 to-pink-500 border-purple-500 text-white shadow-lg scale-105'
+                    : 'bg-white border-purple-200 text-gray-700 hover:border-purple-400 hover:shadow-md'
+                }`}
+              >
+                <div className="text-3xl mb-2">{rasi.icon}</div>
+                <div className="font-semibold text-sm">{rasi.english.split(' ')[0]}</div>
+                <div className="text-xs mt-1">{rasi.tamil}</div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Palan Display */}
+        <div className="bg-white rounded-2xl shadow-lg p-8">
+          <div className="flex items-center gap-3 mb-6">
+            <Sparkles className="w-8 h-8 text-purple-500" />
+            <h2 className="text-2xl font-bold text-gray-800">
+              {rasiList.find(r => r.id === selectedRasi)?.english} - {currentType.english}
+            </h2>
+          </div>
+
+          {/* Palan Content */}
+          <div className="space-y-6">
+            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border-2 border-purple-200">
+              <h3 className="text-lg font-bold text-purple-800 mb-3">பொது பலன் / General Prediction</h3>
+              <p className="text-gray-700 leading-relaxed">
+                This is a favorable period for you. Your efforts will bring good results. Financial gains are indicated. 
+                Be careful in communication with others. Health will be good overall. This is an auspicious time for 
+                starting new ventures and making important decisions.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-green-50 rounded-xl p-4 border-2 border-green-200">
+                <h4 className="font-bold text-green-800 mb-2">வேலை / Career</h4>
+                <p className="text-gray-700 text-sm">
+                  Good progress in career. New opportunities may come your way. Recognition for your work is likely.
+                </p>
+              </div>
+
+              <div className="bg-yellow-50 rounded-xl p-4 border-2 border-yellow-200">
+                <h4 className="font-bold text-yellow-800 mb-2">பணம் / Finance</h4>
+                <p className="text-gray-700 text-sm">
+                  Financial situation improves. Good time for investments. Unexpected gains possible.
+                </p>
+              </div>
+
+              <div className="bg-pink-50 rounded-xl p-4 border-2 border-pink-200">
+                <h4 className="font-bold text-pink-800 mb-2">கல்யாணம் / Marriage</h4>
+                <p className="text-gray-700 text-sm">
+                  Harmony in relationships. Good time for marriage proposals. Understanding with partner increases.
+                </p>
+              </div>
+
+              <div className="bg-blue-50 rounded-xl p-4 border-2 border-blue-200">
+                <h4 className="font-bold text-blue-800 mb-2">ஆரோக்கியம் / Health</h4>
+                <p className="text-gray-700 text-sm">
+                  Overall health will be good. Take care of diet. Regular exercise recommended.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-6 border-2 border-orange-200">
+              <h3 className="text-lg font-bold text-orange-800 mb-3">நல்ல நேரம் / Lucky Time</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <p className="text-sm text-gray-600 mb-1">Lucky Number</p>
+                  <p className="text-2xl font-bold text-orange-600">7</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600 mb-1">Lucky Color</p>
+                  <p className="text-2xl font-bold text-orange-600">Green</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600 mb-1">Lucky Day</p>
+                  <p className="text-2xl font-bold text-orange-600">Wednesday</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Disclaimer */}
+        <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl shadow-lg p-6 mt-8 border-2 border-gray-200">
+          <h3 className="text-lg font-bold text-gray-800 mb-3">⚠️ Disclaimer</h3>
+          <p className="text-gray-700 text-sm leading-relaxed">
+            The predictions given here are based on general astrological principles and Moon sign (Rasi). 
+            For accurate and personalized predictions, please consult a qualified astrologer with your complete birth chart details.
+            These predictions are for entertainment and guidance purposes only.
+          </p>
+        </div>
+      </main>
+      
+      <ModernFooter />
+    </div>
+  );
+};
+
+export default RasiPalan;
