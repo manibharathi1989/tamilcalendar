@@ -2,8 +2,18 @@ import React from 'react';
 import { Sun, Moon, Clock, Star, AlertCircle } from 'lucide-react';
 
 const ModernDailyCalendar = ({ date, calendarData }) => {
-  const formatDate = (date) => {
-    return date.toLocaleDateString('en-US', {
+  const formatDate = (dateObj) => {
+    // If we have calendar data with the actual date, use it to ensure accuracy
+    if (calendarData && calendarData.date) {
+      const actualDate = new Date(calendarData.date);
+      return actualDate.toLocaleDateString('en-US', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+        weekday: 'long'
+      });
+    }
+    return dateObj.toLocaleDateString('en-US', {
       day: '2-digit',
       month: 'long',
       year: 'numeric',
