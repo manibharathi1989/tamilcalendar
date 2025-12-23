@@ -109,6 +109,29 @@ def get_parigaram(day_num):
     ]
     return parigarams[day_num % 4]
 
+def get_subakariyam(weekday, day):
+    """Get Subakariyam (auspicious activities) based on day"""
+    subakariyam_list = [
+        "சிகிச்சை செய்ய, ஆயுதஞ் செய்ய, யந்திரம் ஸ்தாபிக்க சிறந்த நாள்",
+        "கல்வி, கலை, வாகனம் வாங்க நல்ல நாள்",
+        "திருமணம், நிச்சயதார்த்தம் செய்ய நல்ல நாள்",
+        "புதிய வீடு கட்ட, கிரஹப்பிரவேசம் செய்ய சிறந்த நாள்",
+        "பயணம் மேற்கொள்ள, புதிய வேலை தொடங்க நல்ல நாள்",
+        "பூஜை, ஹோமம் செய்ய, தானம் செய்ய நல்ல நாள்",
+        "வியாபாரம் தொடங்க, கடை திறக்க சிறந்த நாள்",
+        "நகை வாங்க, பொருள் சேர்க்க நல்ல நாள்",
+        "உபநயனம், முண்டன் செய்ய சிறந்த நாள்",
+        "கல்யாண பத்திரிகை அச்சிட, வீடு வாங்க நல்ல நாள்",
+        "விவசாயம் தொடங்க, விதை விதைக்க சிறந்த நாள்",
+        "புதிய தொழில் ஆரம்பிக்க, பங்குதாரர் சேர நல்ல நாள்",
+        "பொன் வாங்க, வெள்ளி வாங்க சிறந்த நாள்",
+        "குழந்தை பெயர் சூட்டு விழா செய்ய நல்ல நாள்",
+        "புதிய உடை தைக்க, அணிய சிறந்த நாள்"
+    ]
+    # Use combination of weekday and day to get variety
+    index = (weekday * 3 + day) % len(subakariyam_list)
+    return subakariyam_list[index]
+
 def generate_daily_calendar(date):
     """Generate complete daily calendar data for a given date"""
     weekday = date.weekday()
@@ -144,7 +167,7 @@ def generate_daily_calendar(date):
         "sraardha_thithi": ["சதுர்த்தி", "பஞ்சமி", "சஷ்டி", "சப்தமி"][day % 4],
         "thithi": f"இன்று காலை 11:30 AM வரை திரிதியை பின்பு {['சதுர்த்தி', 'பஞ்சமி'][day % 2]}",
         "star": f"இன்று அதிகாலை 05:31 AM வரை {['உத்திராடம்', 'திருவோணம்', 'அவிட்டம்'][day % 3]} பின்பு {['திருவோணம்', 'அவிட்டம்', 'சதயம்'][day % 3]}",
-        "subakariyam": "சிகிச்சை செய்ய, ஆயுதஞ் செய்ய, யந்திரம் ஸ்தாபிக்க சிறந்த நாள்" if weekday in [0, 2, 4] else "கல்வி, கலை, வாகனம் வாங்க நல்ல நாள்"
+        "subakariyam": get_subakariyam(weekday, day)
     }
 
 @router.post("/populate-year/{year}")
