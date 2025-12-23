@@ -31,8 +31,8 @@ const ModernDailyCalendar = ({ date, calendarData }) => {
       {/* Date Header */}
       <div className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 rounded-2xl shadow-xl p-6 text-center">
         <h2 className="text-3xl font-bold text-white mb-2">{formatDate(date)}</h2>
-        <p className="text-orange-100 text-lg">{calendarData.tamilDate}</p>
-        <p className="text-orange-100 text-lg font-semibold">{calendarData.tamilDay}</p>
+        <p className="text-orange-100 text-lg">{calendarData.tamil_date}</p>
+        <p className="text-orange-100 text-lg font-semibold">{calendarData.tamil_day}</p>
       </div>
 
       {/* Auspicious Times Section */}
@@ -46,14 +46,14 @@ const ModernDailyCalendar = ({ date, calendarData }) => {
             icon={Sun}
             tamilLabel="நல்ல நேரம்"
             englishLabel="Nalla Neram"
-            value={`${calendarData.nallaNeram.morning}\n${calendarData.nallaNeram.evening}`}
+            value={`${calendarData.nalla_neram?.morning || ''}\n${calendarData.nalla_neram?.evening || ''}`}
             bgColor="bg-gradient-to-br from-yellow-50 to-orange-50"
           />
           <InfoCard
             icon={Star}
             tamilLabel="கௌரி நல்ல நேரம்"
             englishLabel="Gowri Nalla Neram"
-            value={`${calendarData.gowriNallaNeram.morning}\n${calendarData.gowriNallaNeram.evening}`}
+            value={`${calendarData.gowri_nalla_neram?.morning || ''}\n${calendarData.gowri_nalla_neram?.evening || ''}`}
             bgColor="bg-gradient-to-br from-pink-50 to-purple-50"
           />
         </div>
@@ -70,21 +70,21 @@ const ModernDailyCalendar = ({ date, calendarData }) => {
             icon={Moon}
             tamilLabel="இராகு காலம்"
             englishLabel="Raahu Kaalam"
-            value={calendarData.raahuKaalam}
+            value={calendarData.raahu_kaalam || ''}
             bgColor="bg-gradient-to-br from-red-50 to-pink-50"
           />
           <InfoCard
             icon={Clock}
             tamilLabel="எமகண்டம்"
             englishLabel="Yemagandam"
-            value={calendarData.yemagandam}
+            value={calendarData.yemagandam || ''}
             bgColor="bg-gradient-to-br from-red-50 to-orange-50"
           />
           <InfoCard
             icon={Clock}
             tamilLabel="குளிகை"
             englishLabel="Kuligai"
-            value={calendarData.kuligai}
+            value={calendarData.kuligai || ''}
             bgColor="bg-gradient-to-br from-orange-50 to-yellow-50"
           />
         </div>
@@ -101,55 +101,55 @@ const ModernDailyCalendar = ({ date, calendarData }) => {
             icon={Star}
             tamilLabel="சூலம்"
             englishLabel="Soolam"
-            value={`${calendarData.soolam.tamil} / ${calendarData.soolam.english}`}
+            value={`${calendarData.soolam?.tamil || ''} / ${calendarData.soolam?.english || ''}`}
           />
           <InfoCard
             icon={Sun}
             tamilLabel="பரிகாரம்"
             englishLabel="Parigaram"
-            value={`${calendarData.parigaram.tamil} / ${calendarData.parigaram.english}`}
+            value={`${calendarData.parigaram?.tamil || ''} / ${calendarData.parigaram?.english || ''}`}
           />
           <InfoCard
             icon={Moon}
             tamilLabel="சந்திராஷ்டமம்"
             englishLabel="Chandirashtamam"
-            value={calendarData.chandirashtamam}
+            value={calendarData.chandirashtamam || ''}
           />
           <InfoCard
             icon={Star}
             tamilLabel="நாள்"
             englishLabel="Naal"
-            value={calendarData.naal}
+            value={calendarData.naal || ''}
           />
           <InfoCard
             icon={Sun}
             tamilLabel="லக்னம்"
             englishLabel="Lagnam"
-            value={calendarData.lagnam}
+            value={calendarData.lagnam || ''}
           />
           <InfoCard
             icon={Sun}
             tamilLabel="சூரிய உதயம்"
             englishLabel="Sun Rise"
-            value={calendarData.sunRise}
+            value={calendarData.sun_rise || ''}
           />
           <InfoCard
             icon={Moon}
             tamilLabel="ஸ்ரார்த திதி"
             englishLabel="Sraardha Thithi"
-            value={calendarData.sraardhaThithi}
+            value={calendarData.sraardha_thithi || ''}
           />
           <InfoCard
             icon={Moon}
             tamilLabel="திதி"
             englishLabel="Thithi"
-            value={calendarData.thithi}
+            value={calendarData.thithi || ''}
           />
           <InfoCard
             icon={Star}
             tamilLabel="நட்சத்திரம்"
             englishLabel="Star"
-            value={calendarData.star}
+            value={calendarData.star || ''}
           />
         </div>
       </div>
@@ -160,7 +160,7 @@ const ModernDailyCalendar = ({ date, calendarData }) => {
           <Star className="w-6 h-6 text-green-600" />
           <h3 className="text-xl font-bold text-gray-800">சுபகாரியம் / Subakariyam</h3>
         </div>
-        <p className="text-gray-700 leading-relaxed">{calendarData.subakariyam}</p>
+        <p className="text-gray-700 leading-relaxed">{calendarData.subakariyam || ''}</p>
       </div>
     </div>
   );
