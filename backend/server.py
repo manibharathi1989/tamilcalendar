@@ -77,6 +77,7 @@ app.include_router(api_router)
 # Include calendar and seed routes
 app.include_router(calendar_router)
 app.include_router(seed_router)
+app.include_router(admin_router)
 
 app.add_middleware(
     CORSMiddleware,
