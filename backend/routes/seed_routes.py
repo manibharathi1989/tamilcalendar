@@ -107,12 +107,15 @@ async def seed_daily_calendar():
         
         # Generate daily calendar for December 2025
         daily_calendars = []
+        # Tamil days: Monday=0, Tuesday=1, Wednesday=2, Thursday=3, Friday=4, Saturday=5, Sunday=6
+        tamil_days = ["திங்கள்", "செவ்வாய்", "புதன்", "வியாழன்", "வெள்ளி", "சனி", "ஞாயிறு"]
+        
         for day in range(1, 32):
             date = datetime(2025, 12, day)
             daily_calendars.append({
                 "date": date,
                 "tamil_date": f"{day} - மார்கழி - விசுவாவசு",
-                "tamil_day": ["ஞாயிறு", "திங்கள்", "செவ்வாய்", "புதன்", "வியாழன்", "வெள்ளி", "சனி"][date.weekday()],
+                "tamil_day": tamil_days[date.weekday()],
                 "tamil_month": "மார்கழி",
                 "tamil_year": "விசுவாவசு",
                 "english_day": date.strftime("%A"),
