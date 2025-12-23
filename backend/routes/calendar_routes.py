@@ -16,6 +16,7 @@ def get_db():
 async def get_daily_calendar(year: int, month: int, day: int):
     """Get daily calendar data for a specific date"""
     try:
+        db = get_db()
         date = datetime(year, month, day)
         calendar_data = await db.daily_calendars.find_one({
             "date": date
