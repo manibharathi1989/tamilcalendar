@@ -144,6 +144,7 @@ async def get_special_days(year: int, month: int):
 async def get_rasi_palan(type: str, date: Optional[str] = None):
     """Get Rasi Palan (horoscope) data"""
     try:
+        db = get_db()
         query = {"type": type}
         if date:
             query["date"] = datetime.fromisoformat(date)
