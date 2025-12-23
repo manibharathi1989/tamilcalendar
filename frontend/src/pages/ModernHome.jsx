@@ -66,7 +66,11 @@ const ModernHome = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Main Calendar Section */}
             <div className="lg:col-span-2">
-              <ModernDailyCalendar date={currentDate} calendarData={calendarData} />
+              <ModernDailyCalendar 
+                key={currentDate.toISOString()} 
+                date={currentDate} 
+                calendarData={calendarData} 
+              />
             </div>
             
             {/* Sidebar */}
