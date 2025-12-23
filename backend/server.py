@@ -13,6 +13,7 @@ from datetime import datetime, timezone
 # Import routes
 from routes.calendar_routes import router as calendar_router
 from routes.seed_routes import router as seed_router
+from routes.admin_routes import router as admin_router
 
 
 ROOT_DIR = Path(__file__).parent
