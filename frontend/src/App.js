@@ -10,6 +10,13 @@ import GovtHolidays from "./pages/GovtHolidays";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Privacy from "./pages/Privacy";
+import Pournami from "./pages/Pournami";
+import Amavasai from "./pages/Amavasai";
+import Pradosham from "./pages/Pradosham";
+import Ekadasi from "./pages/Ekadasi";
+import GuruPeyarchi from "./pages/GuruPeyarchi";
+import SaniPeyarchi from "./pages/SaniPeyarchi";
+import RaaguKethuPeyarchi from "./pages/RaaguKethuPeyarchi";
 
 function App() {
   return (
@@ -38,11 +45,17 @@ function App() {
           <Route path="/rasi-palan" element={<RasiPalan />} />
           <Route path="/rasi-palan/:type" element={<RasiPalan />} />
           
-          {/* Special Days - All redirect to Home for now */}
-          <Route path="/pournami" element={<ModernHome />} />
-          <Route path="/amavasai" element={<ModernHome />} />
-          <Route path="/pradosham" element={<ModernHome />} />
+          {/* Special Religious Days */}
+          <Route path="/pournami" element={<Pournami />} />
+          <Route path="/amavasai" element={<Amavasai />} />
+          <Route path="/pradosham" element={<Pradosham />} />
+          <Route path="/ekadasi" element={<Ekadasi />} />
           <Route path="/karinal" element={<ModernHome />} />
+          
+          {/* Planetary Transits */}
+          <Route path="/rasi-palan/guru" element={<GuruPeyarchi />} />
+          <Route path="/rasi-palan/sani" element={<SaniPeyarchi />} />
+          <Route path="/rasi-palan/ragu-kethu" element={<RaaguKethuPeyarchi />} />
           
           {/* Government Holidays */}
           <Route path="/govt-holidays" element={<GovtHolidays />} />
