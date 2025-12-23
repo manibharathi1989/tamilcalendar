@@ -162,6 +162,7 @@ async def get_rasi_palan(type: str, date: Optional[str] = None):
 async def get_monthly_calendar(year: int, month: int):
     """Get monthly calendar overview"""
     try:
+        db = get_db()
         monthly_data = await db.monthly_calendars.find_one({
             "year": year,
             "month": month
