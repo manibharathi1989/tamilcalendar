@@ -16,6 +16,7 @@ def get_db():
 async def seed_december_2025():
     """Seed database with December 2025 calendar data"""
     try:
+        db = get_db()
         # Clear existing data for December 2025
         await db.special_days.delete_many({"year": 2025, "month": 12})
         
