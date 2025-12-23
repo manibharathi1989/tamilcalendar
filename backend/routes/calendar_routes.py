@@ -6,10 +6,11 @@ import os
 
 router = APIRouter(prefix="/api/calendar", tags=["calendar"])
 
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+# MongoDB connection - lazy load
+def get_db():
+    mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
+    client = AsyncIOMotorClient(mongo_url)
+    return client[os.environ.get('DB_NAME', 'test_database')]
 
 @router.get("/daily/{year}/{month}/{day}")
 async def get_daily_calendar(year: int, month: int, day: int):
