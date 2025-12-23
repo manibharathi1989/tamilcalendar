@@ -63,6 +63,7 @@ async def get_daily_calendar(year: int, month: int, day: int):
 async def get_special_days(year: int, month: int):
     """Get special days for a specific month"""
     try:
+        db = get_db()
         # Get all special days for the month
         special_days = await db.special_days.find({
             "year": year,
