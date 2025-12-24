@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, Menu, X, Sun, Moon, Star, Heart } from 'lucide-react';
+import { Calendar, Menu, X, Sun, Moon, Star, Heart, Search, Printer } from 'lucide-react';
 
 const ModernHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -11,7 +11,9 @@ const ModernHeader = () => {
     { to: '/monthly', label: 'Monthly', icon: Calendar },
     { to: '/festivals', label: 'Festivals', icon: Star },
     { to: '/wedding', label: 'Wedding Dates', icon: Heart },
-    { to: '/rasi-palan', label: 'Rasi Palan', icon: Moon }
+    { to: '/rasi-palan', label: 'Rasi Palan', icon: Moon },
+    { to: '/search', label: 'Search', icon: Search },
+    { to: '/print', label: 'Print', icon: Printer }
   ];
 
   return (
