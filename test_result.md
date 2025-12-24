@@ -13,6 +13,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ PARIGARAM ACCURACY VERIFIED: All 7 test dates (Dec 22-28, 2025) show correct Parigaram calculations. Dec 22 (Monday): Soolam=கிழக்கு, Parigaram=தயிர் ✓. Dec 23 (Tuesday): Soolam=வடக்கு, Parigaram=பால் ✓. Dec 24 (Wednesday): Soolam=மேற்கு, Parigaram=தேன் ✓. Dec 25 (Thursday): Soolam=தெற்கு, Parigaram=நெய் ✓. Dec 26 (Friday): Soolam=வடக்கு, Parigaram=பால் ✓. Dec 27 (Saturday): Soolam=கிழக்கு, Parigaram=தயிர் ✓. Dec 28 (Sunday): Soolam=மேற்கு, Parigaram=தேன் ✓. All values match reference website data exactly."
+      - working: true
+        agent: "testing"
+        comment: "🎯 COMPREHENSIVE DATA ACCURACY TESTING COMPLETED: ✅ Star/Nakshatra Time Variation: Verified star transition times show proper variation across dates (Dec 20-25, 2025). Found 6 different transition times: 02:52 AM, 03:45 AM, 04:38 AM, 05:31 AM, 06:24 AM, 07:17 AM - all matching expected reference times exactly. ✅ Soolam and Parigaram Consistency: All 7 test dates (Dec 22-28, 2025) show perfect weekday-based calculations matching the reference mapping table. ✅ Monthly Calendar Data Variation: Monthly API (GET /api/calendar/monthly/2025/12) accessible and daily data within month shows proper star time variation with 6 unique transition times. All backend APIs working correctly with accurate Tamil calendar data."
 
   - task: "Search API - Event Type & Date Range"
     implemented: true
