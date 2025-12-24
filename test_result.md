@@ -264,7 +264,9 @@ test_plan:
   current_focus:
     - "Search Page - Search by Date"
     - "Search Page - Search by Range & Type"
-  stuck_tasks: []
+  stuck_tasks:
+    - "Search Page - Search by Date"
+    - "Search Page - Search by Range & Type"
   test_all: false
   test_priority: "high_first"
   
