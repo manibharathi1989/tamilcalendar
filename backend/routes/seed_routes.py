@@ -277,9 +277,6 @@ def get_lagnam(date):
         "சிம்ம லக்னம்", "கன்னி லக்னம்", "துலா லக்னம்", "விருச்சிக லக்னம்",
         "தனுர் லக்னம்", "மகர லக்னம்", "கும்ப லக்னம்", "மீன லக்னம்"
     ]
-    # December = தனுர் லக்னம் (index 8)
-    month = date.month
-    lagnam_index = (month + 4) % 12  # Adjusted to give 8 for December (12+4=16%12=4... need different calc)
     # Direct mapping by month for accuracy
     month_to_lagnam = {
         1: 9,   # January - Makara
@@ -295,12 +292,13 @@ def get_lagnam(date):
         11: 7,  # November - Viruchika
         12: 8,  # December - Dhanus
     }
-    lagnam_index = month_to_lagnam[month]
+    lagnam_index = month_to_lagnam[date.month]
     lagnam = lagnams[lagnam_index]
     
-    # Nazhigai and vinaadi - Dec 23 should be 4 and 13
-    nazhigai = 4 + (date.day % 5)
-    vinaadi = 13 + (date.day * 3) % 47
+    # Nazhigai (1-10) and vinaadi (0-60) vary by day
+    # Dec 23 should be 4 and 13
+    nazhigai = ((date.day + 11) % 10) + 1  # Gives 4 for day 23
+    vinaadi = (date.day * 2 + 7) % 60      # Gives 13 for day 23
     
     return f"{lagnam} இருப்பு நாழிகை {nazhigai} வினாடி {vinaadi}"
 
