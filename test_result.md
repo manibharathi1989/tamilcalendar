@@ -91,7 +91,7 @@ frontend:
     implemented: true
     working: false
     file: "/app/frontend/src/pages/Search.jsx"
-    stuck_count: 1
+    stuck_count: 2
     priority: "high"
     needs_retesting: false
     status_history:
@@ -104,6 +104,9 @@ frontend:
       - working: false
         agent: "testing"
         comment: "❌ CRITICAL ISSUE IDENTIFIED: Same JavaScript functionality issue as date search. Range search UI renders correctly (tabs, date inputs, dropdown), but no API calls are made when search button is clicked. Backend API verified working (GET /api/calendar/search?start_date=2025-12-01&end_date=2025-12-31&event_type=pournami returns correct data). React event handlers not executing - requires JavaScript/React debugging."
+      - working: false
+        agent: "testing"
+        comment: "🚨 SAME ROOT CAUSE AS DATE SEARCH: React 19 not initializing properly. Range search has identical issue - UI renders but React event handlers never attach because React global is undefined. Both search functionalities affected by same React 19 hydration/initialization problem. Backend APIs confirmed working for range search as well."
 
   - task: "Print/Download Page"
     implemented: true
