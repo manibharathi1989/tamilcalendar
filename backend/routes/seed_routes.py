@@ -236,17 +236,56 @@ def get_chandirashtamam(date):
     return nakshatras[base_index]
 
 def get_thithi(date):
-    """Calculate Thithi - lunar day (1-30 in lunar month)"""
+    """Calculate Thithi - lunar day (1-30 in lunar month) with transition time
+    Reference: Dec 24, 2025 = "இன்று காலை 11:41 AM வரை சதுர்த்தி பின்பு பஞ்சமி"
+    """
     thithis = [
         "பிரதமை", "துவிதியை", "திரிதியை", "சதுர்த்தி", "பஞ்சமி",
         "சஷ்டி", "சப்தமி", "அஷ்டமி", "நவமி", "தசமி",
         "ஏகாதசி", "துவாதசி", "திரயோதசி", "சதுர்த்தசி", "பௌர்ணமி"
     ]
-    # Dec 23, 2025 (day 357) = சதுர்த்தி (index 3)
-    # 357 + offset = 3 mod 15, offset = 3 - 357 mod 15 = 3 - 12 = -9 + 15 = 6
+    # Dec 24, 2025 (day 358) should be சதுர்த்தி -> பஞ்சமி
+    # 358 + offset = 3 mod 15, offset = 3 - 358 mod 15 = 3 - 13 = -10 + 15 = 5
     day_of_year = date.timetuple().tm_yday
-    thithi_index = (day_of_year + 6) % 15
-    return thithis[thithi_index]
+    thithi_index = (day_of_year + 5) % 15
+    next_thithi_index = (thithi_index + 1) % 15
+    current_thithi = thithis[thithi_index]
+    next_thithi = thithis[next_thithi_index]
+    
+    # Calculate varying transition time (similar to star calculation)
+    # Base time for Dec 24 is 11:41
+    base_day = 358  # Dec 24 reference
+    base_hour = 11
+    base_minute = 41
+    
+    # Calculate offset from base day - Thithi changes slightly faster than nakshatra
+    day_offset = day_of_year - base_day
+    minute_offset = (day_offset * 48) % (24 * 60)  # ~48 mins shift per day
+    
+    total_minutes = (base_hour * 60 + base_minute + minute_offset) % (24 * 60)
+    hour = total_minutes // 60
+    minute = total_minutes % 60
+    
+    # Format time
+    if hour < 12:
+        am_pm = "AM"
+        display_hour = hour if hour > 0 else 12
+    else:
+        am_pm = "PM"
+        display_hour = hour - 12 if hour > 12 else 12
+    
+    # Determine time of day prefix
+    if hour < 6:
+        time_prefix = "இன்று அதிகாலை"
+    elif hour < 12:
+        time_prefix = "இன்று காலை"
+    elif hour < 18:
+        time_prefix = "இன்று மாலை"
+    else:
+        time_prefix = "இன்று இரவு"
+    
+    time_str = f"{display_hour:02d}:{minute:02d}"
+    return f"{time_prefix} {time_str} {am_pm} வரை {current_thithi} பின்பு {next_thithi}"
 
 def get_star(date):
     """Calculate Star/Nakshatra for the day with varying transition time
