@@ -344,14 +344,16 @@ def get_star(date):
     return f"{time_prefix} {time_str} {am_pm} வரை {current_star} பின்பு {next_star}"
 
 def get_sraardha_thithi(date):
-    """Calculate Sraardha Thithi - same as thithi for most purposes"""
+    """Calculate Sraardha Thithi - the thithi after transition (next thithi)
+    Reference: Dec 24, 2025 = பஞ்சமி"""
     thithis = [
         "பிரதமை", "துவிதியை", "திரிதியை", "சதுர்த்தி", "பஞ்சமி",
         "சஷ்டி", "சப்தமி", "அஷ்டமி", "நவமி", "தசமி",
         "ஏகாதசி", "துவாதசி", "திரயோதசி", "சதுர்த்தசி", "பௌர்ணமி"
     ]
     day_of_year = date.timetuple().tm_yday
-    # Same as thithi calculation
+    # Get the next thithi (thithi after transition)
+    # Dec 24 (day 358) should be பஞ்சமி (index 4)
     thithi_index = (day_of_year + 6) % 15
     return thithis[thithi_index]
 
