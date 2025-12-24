@@ -60,34 +60,31 @@ def get_tamil_month(month):
     return tamil_months[month - 1]
 
 def get_nalla_neram(weekday):
-    """Calculate Nalla Neram based on weekday"""
-    nalla_morning = [
-        "07:45 - 08:45", "06:30 - 07:30", "08:00 - 09:00", "09:15 - 10:15",
-        "07:00 - 08:00", "08:30 - 09:30", "09:45 - 10:45"
-    ]
-    nalla_evening = [
-        "04:45 - 05:45", "05:30 - 06:30", "04:00 - 05:00", "03:15 - 04:15",
-        "05:00 - 06:00", "04:30 - 05:30", "03:45 - 04:45"
-    ]
-    return {
-        "morning": f"{nalla_morning[weekday]} கா / AM",
-        "evening": f"{nalla_evening[weekday]} மா / PM"
+    """Calculate Nalla Neram based on weekday - matching original site values"""
+    # Weekday: 0=Monday, 1=Tuesday, 2=Wednesday, 3=Thursday, 4=Friday, 5=Saturday, 6=Sunday
+    nalla_times = {
+        0: {"morning": "07:30 - 08:30 கா / AM", "evening": "03:00 - 04:00 மா / PM"},  # Monday
+        1: {"morning": "06:00 - 07:00 கா / AM", "evening": "03:00 - 04:00 மா / PM"},  # Tuesday
+        2: {"morning": "09:00 - 10:00 கா / AM", "evening": "04:45 - 05:45 மா / PM"},  # Wednesday
+        3: {"morning": "08:30 - 09:30 கா / AM", "evening": "01:30 - 02:30 மா / PM"},  # Thursday
+        4: {"morning": "10:30 - 11:30 கா / AM", "evening": "03:00 - 04:00 மா / PM"},  # Friday
+        5: {"morning": "06:30 - 07:30 கா / AM", "evening": "05:00 - 06:00 மா / PM"},  # Saturday
+        6: {"morning": "10:30 - 11:30 கா / AM", "evening": "04:45 - 05:45 மா / PM"},  # Sunday
     }
+    return nalla_times[weekday]
 
 def get_gowri_nalla_neram(weekday):
-    """Calculate Gowri Nalla Neram based on weekday"""
-    gowri_morning = [
-        "01:45 - 02:45", "02:30 - 03:30", "01:00 - 02:00", "12:15 - 01:15",
-        "02:00 - 03:00", "01:30 - 02:30", "12:45 - 01:45"
-    ]
-    gowri_evening = [
-        "07:30 - 08:30", "08:15 - 09:15", "07:00 - 08:00", "06:30 - 07:30",
-        "08:00 - 09:00", "07:45 - 08:45", "06:15 - 07:15"
-    ]
-    return {
-        "morning": f"{gowri_morning[weekday]} கா / AM",
-        "evening": f"{gowri_evening[weekday]} மா / PM"
+    """Calculate Gowri Nalla Neram based on weekday - matching original site values"""
+    gowri_times = {
+        0: {"morning": "09:00 - 10:00 கா / AM", "evening": "06:00 - 07:00 மா / PM"},  # Monday
+        1: {"morning": "07:30 - 08:30 கா / AM", "evening": "04:30 - 05:30 மா / PM"},  # Tuesday
+        2: {"morning": "01:45 - 02:45 கா / AM", "evening": "06:30 - 07:30 மா / PM"},  # Wednesday
+        3: {"morning": "12:00 - 01:00 கா / AM", "evening": "03:00 - 04:00 மா / PM"},  # Thursday
+        4: {"morning": "09:30 - 10:30 கா / AM", "evening": "04:30 - 05:30 மா / PM"},  # Friday
+        5: {"morning": "07:30 - 08:30 கா / AM", "evening": "06:30 - 07:30 மா / PM"},  # Saturday
+        6: {"morning": "03:00 - 04:00 கா / AM", "evening": "06:00 - 07:00 மா / PM"},  # Sunday
     }
+    return gowri_times[weekday]
 
 def get_soolam(weekday):
     """Calculate Soolam direction based on weekday (matches original site)"""
