@@ -174,15 +174,27 @@ def get_soolam(weekday):
     }
     return soolams[weekday]
 
-def get_parigaram(day_num):
-    """Calculate Parigaram based on day number"""
-    parigarams = [
-        {"tamil": "பால்", "english": "Milk"},
-        {"tamil": "தயிர்", "english": "Curd"},
-        {"tamil": "நெய்", "english": "Ghee"},
-        {"tamil": "தேன்", "english": "Honey"},
-    ]
-    return parigarams[day_num % 4]
+def get_parigaram(weekday):
+    """Calculate Parigaram based on weekday - linked to Soolam direction
+    Reference: tamilnaalkaati.com
+    - North (வடக்கு) → Milk (பால்)
+    - East (கிழக்கு) → Curd (தயிர்)
+    - South (தெற்கு) → Ghee (நெய்)
+    - West (மேற்கு) → Honey (தேன்)
+    
+    Soolam by weekday: Mon=East, Tue=North, Wed=West, Thu=South, Fri=North, Sat=East, Sun=West
+    """
+    # Map weekday to Soolam direction, then to Parigaram
+    parigaram_by_weekday = {
+        0: {"tamil": "தயிர்", "english": "Curd"},    # Monday - East → Curd
+        1: {"tamil": "பால்", "english": "Milk"},     # Tuesday - North → Milk
+        2: {"tamil": "தேன்", "english": "Honey"},    # Wednesday - West → Honey
+        3: {"tamil": "நெய்", "english": "Ghee"},     # Thursday - South → Ghee
+        4: {"tamil": "பால்", "english": "Milk"},     # Friday - North → Milk
+        5: {"tamil": "தயிர்", "english": "Curd"},    # Saturday - East → Curd
+        6: {"tamil": "தேன்", "english": "Honey"},    # Sunday - West → Honey
+    }
+    return parigaram_by_weekday[weekday]
 
 def get_subakariyam(weekday, day):
     """Get Subakariyam (auspicious activities) based on day"""
