@@ -1,85 +1,82 @@
-<analysis>**original_problem_statement**: The user wants to create a clone of the PHP website .
-The project evolved through several requests:
-1.  Create a pixel-perfect clone of the website.
-2.  Redesign the clone to have a modern, colorful, and user-friendly interface.
-3.  Make the application full-stack, with all data served dynamically from a database instead of being mocked.
-4.  Clone all pages from the original website.
-5.  Ensure calendar data (Auspicious Times, Inauspicious Times, Daily Details) is fetched dynamically from the database for all dates and years from 2005 to 2026.
-6.  Fix the Subakariyam section to show more than two rotating messages.
-7.  Create an admin panel to update all details in the database.
-8.  Create all remaining pages, including special religious days and other potential pages/enhancements.
+<analysis>**original_problem_statement**: The user wants to create a clone of a Tamil calendar website. The project has evolved to require:
+1.  A modern, full-stack application (React/FastAPI/MongoDB) instead of a simple clone.
+2.  All calendar data to be served dynamically from a database for the years 2005-2026.
+3.  An admin panel to manage website data.
+4.  Creation of all pages from the original reference site, including numerous special religious day pages.
+5.  **Most recently**, the user has requested that the calendar data (Auspicious Times, Daily Details like Parigaram, Lagnam, Natchathiram) be corrected to match the accuracy of specific reference websites. The latest request is to use  as the source of truth and to redesign the homepage to match it.
 
 **User's preferred language**: English
 
 **what currently exists?**
-A full-stack application with a modern React frontend and a FastAPI backend connected to a MongoDB database. The application is a redesigned version of the Tamil Daily Calendar website. It features 19 created pages (16 public, 3 admin). The database has been seeded with dynamically calculated calendar data for all days from 2005 to 2026. A functional admin panel with login, dashboard, and a calendar editor has been implemented to manage the calendar data.
+A full-stack application with a React frontend and FastAPI backend using MongoDB. The app features a comprehensive set of public-facing pages (~25), including a homepage, monthly calendar, and numerous special day pages. A secure admin panel allows for editing calendar data. The database is fully seeded with dynamically calculated calendar data for 8,035 days (2005-2026). The most recent work involved multiple iterative fixes to the data generation logic to improve its accuracy based on user feedback and different reference websites. Optional enhancement pages (Search, Print, Admin Analytics) have also been created but may have bugs.
 
 **Last working item**:
--   Last item agent was working: The user requested the creation of all remaining pages (special religious days like Karinal) and optional enhancements (like search, print features, and more admin tools). The agent acknowledged the request and was about to start the implementation.
--   Status: NOT STARTED
+-   Last item agent was working: The user requested a fix for incorrect data (, , ) and a homepage redesign, both based on a new reference website: . The agent attempted to access this website but encountered 404 Not Found errors, blocking progress.
+-   Status: BLOCKED
 -   Agent Testing Done: N
--   Which testing method agent to use? Frontend testing agent should be used to verify the new pages and routes after they are created.
+-   Which testing method agent to use? Web search to find the correct URL for the reference site. Once the data logic is updated, use  to test the backend API responses. For the UI redesign, use the .
 -   User Testing Done: N
 
 **All Pending/In progress Issue list**:
-There are no pending issues or bugs. The current work is focused on new feature development.
+-   Issue 1: Data Accuracy for Parigaram, Lagnam, Natchathiram (P0)
+-   Issue 2: Search Page is not rendering results (P1)
+
+**Issues Detail**:
+-   **Issue 1: Data Accuracy for Parigaram, Lagnam, Natchathiram**
+    -   **Attempted fixes**: The agent has repeatedly modified the data generation logic in  to match patterns from two previous reference sites. While some fields (Soolam, Nalla Neram) were corrected, core astronomical data like Lagnam, Natchathiram (Star), and Parigaram remain inaccurate according to the user. The latest attempt to use the user-provided reference site  failed due to 404 errors.
+    -   **Next debug checklist**:
+        1.  Use the  to find the correct, working URL for the daily calendar on . The current links are broken.
+        2.  If the site cannot be accessed, inform the user, explain the situation, and ask for a valid link or permission to use the previous reference ().
+        3.  Once a valid source is available, scrape data for several sample dates to understand the correct patterns for , , and .
+        4.  Update the data calculation functions in  with the new, accurate logic.
+        5.  Re-run the database seeding process via the  endpoint.
+        6.  Verify the fix by checking multiple random dates against the reference site.
+    -   **Why fix this issue and what will be achieved with the fix?** This is the user's top priority. The application's core value depends on providing accurate calendar data.
+    -   **Status**: BLOCKED
+    -   **Is recurring issue?** Y
+    -   **Should Test frontend/backend/both after fix?** Both.
+    -   **Blocked on other issue**: No.
+
+-   **Issue 2: Search Page is not rendering results**
+    -   **Attempted fixes**: The agent identified that the backend search API works correctly, but the frontend component at  fails to render the results. The agent confirmed the API call was not being triggered on button click and that the page was loading correctly, but debugging was paused to address the higher-priority data accuracy issue.
+    -   **Next debug checklist**:
+        1.  Examine  to trace the state flow from user input to the  function.
+        2.  Verify the  handler is correctly bound and that React state () is updated properly.
+        3.  Add  statements within the  function to confirm it's being triggered and the  call is being made.
+        4.  Inspect the  state and the conditional rendering logic to ensure the component displays the data once it's fetched.
+    -   **Why fix this issue and what will be achieved with the fix?** This will complete one of the optional enhancement features requested by the user.
+    -   **Status**: NOT STARTED
+    -   **Is recurring issue?** N
+    -   **Should Test frontend/backend/both after fix?** Frontend.
+    -   **Blocked on other issue**: No.
 
 **In progress Task List**:
--   Task 1: Create all remaining pages and optional enhancements. (P0)
-
-    -   Where to resume: Begin by creating the frontend page components for the remaining special religious days. Then, implement the optional enhancements.
-    -   What will be achieved with this? This will complete the feature set of the website, bringing it to full parity with the original site and adding new, user-requested features.
-    -   Status: NOT STARTED
-    -   Should Test frontend/backend/both after fix? Both. New frontend pages will require UI/UX testing, and any new backend endpoints for enhancements will need API testing.
-    -   Blocked on something: No.
+-   **Task 1: Redesign Home Page**
+    -   **Where to resume**: The agent needs to find the daily calendar view on the reference website  to use as a design reference. The homepage it scraped was just a landing page.
+    -   **What will be achieved with this?** The application's homepage will match the user's desired design.
+    -   **Status**: BLOCKED
+    -   **Should Test frontend/backend/both after fix?** Frontend.
+    -   **Blocked on something**: Issue 1 (finding the correct URL on the reference site).
 
 **Upcoming and Future Tasks**
-**Upcoming Tasks (P0):**
-1.  **Create Remaining Special Days Pages:**
-    -    page ()
-    -    page
-    -    page
-    -    page
-    -    page
-    -    page
-    -    page
-    -    page
-
-**Future Tasks (P1 - Optional Enhancements):**
+**Future Tasks (P2 - Optional Enhancements):**
 1.  **Enhanced User Features:**
-    -   Implement a search page for finding specific dates/events.
-    -   Add a Print/Download Calendar feature.
+    -   Add a Print/Download Calendar feature (placeholder page exists).
     -   Create a notifications/reminders settings page.
     -   Implement a user favorites/bookmarks page.
 2.  **Enhanced Admin Features:**
     -   Develop a bulk upload page for calendar data.
-    -   Create a dedicated editor for special days.
     -   Add a user management page for the admin panel.
-    -   Implement an analytics/reports page.
 
 **Completed work in this session**
--   **Initial Frontend Clone**: Created a frontend-only clone of the original website with mocked data.
--   **Modern Redesign**: Completely redesigned the UI to be modern, colorful, and responsive.
--   **Full-Stack Implementation**:
-    -   Built a FastAPI backend with MongoDB.
-    -   Created API endpoints for calendar and special days data.
-    -   Integrated the frontend to fetch data dynamically, removing all mock data.
--   **Dynamic Data Seeding**:
-    -   Implemented a seeding script to populate the database with calendar data for all years from 2005 to 2026 (8,035 days).
-    -   Enhanced the backend to dynamically calculate Tamil day names and auspicious times for any given date.
--   **Page Creation**:
-    -   Created 16 public pages, including Home, Monthly Calendar, Wedding Dates, Festival Dates, various Rasi Palan pages, and special religious day pages (Pournami, Amavasai, etc.).
--   **Admin Panel**:
-    -   Created a secure admin section with login, a dashboard, and a calendar editor to perform CRUD operations on calendar data.
-    -   Implemented JWT-based authentication for admin routes.
--   **Bug Fixes**:
-    -   Corrected the Tamil day name mapping (e.g., திங்கள் for Tuesday).
-    -   Fixed an issue where the date header did not update when a new date was selected.
-    -   Resolved a problem where only December 2025 had correct data.
-    -   Increased the variety of Subakariyam (auspicious activity) messages from 2 to 15.
+-   **New Special Day Pages**: Created and tested 8 new special day pages (e.g., , ) and integrated them into the router.
+-   **New Enhancement Pages**: Created placeholder pages and routes for Search, Print, Admin Analytics, and a Special Days Editor.
+-   **Core Data Accuracy Fixes**: Performed multiple, extensive revisions of the data generation logic in  based on user feedback. Corrected calculations for Tamil Date, Soolam, Raahu Kaalam, Nalla Neram, and other fields. Re-seeded the entire 2005-2026 database multiple times with the improved data.
+-   **Admin Panel Enhancements**: Added backend routes and frontend dashboard links for the new Special Days Editor and Analytics pages.
+-   **UI Links**: Added Search and Print links to the main site navigation header.
 
 **Earlier issues found/mentioned but not fixed**
-None. All identified issues have been addressed.
+-   The Search Page bug (Issue #2 in the list above) was discovered during testing and was not fixed.
 
 **Known issue recurrence from previous fork**
 None.
@@ -91,70 +88,69 @@ None.
 -   **Frontend**: React, React Router, Axios, TailwindCSS, Shadcn components.
 -   **Backend**: FastAPI, Pydantic.
 -   **Database**: MongoDB with Motor (async driver).
--   **Architecture**: Full-stack with REST API communication.
--   **Authentication**: JWT-based token authentication for the admin panel.
--   **Deployment**: Environment variables used for configuration ().
+-   **Data Generation**: Complex calendar data is dynamically calculated and seeded into the DB using Python logic in . This has been the main source of issues.
+-   **Authentication**: JWT for admin panel.
 
 **key DB schema**
 -   **daily_calendars**: 
--   **admin_users**:  (Implicit schema in )
+-   **admin_users**: 
 
 **changes in tech stack**
-None. The project has consistently used the React, FastAPI, and MongoDB stack.
+None.
 
 **All files of reference**
--   : Contains all the routes for the 19+ pages.
--   : Main FastAPI application file, which imports all the route modules.
--   : Contains the logic for dynamically calculating and seeding calendar data for all years (2005-2026).
--   : Defines the admin authentication and CRUD endpoints.
--   : Directory containing all frontend components for the admin panel.
--   : Directory containing all 16 public-facing page components.
--   : Manages admin authentication state on the frontend.
+-   : **Most important file**. Contains all the complex and frequently modified data calculation and seeding logic.
+-   : Defines all frontend routes.
+-   : Buggy search component.
+-   : The page to be redesigned.
+-   : Admin panel logic, including credentials.
 
-**Areas that need refactoring**:
--   The special day pages (, , etc.) and the upcoming ones likely share a lot of boilerplate code for fetching and displaying lists of dates. This could be refactored into a reusable  component that accepts props for the title and data type.
+**Areas that need refactoring**
+-   The special day pages (now over 10) share identical boilerplate for fetching and displaying date lists. They should be consolidated into a single reusable component.
+-    has grown very large and complex. The calculation functions could be moved to a separate  or  directory to improve modularity.
 
 **key api endpoints**
--   : Fetches daily calendar details.
--   : Fetches a list of dates for a given special day type (e.g., 'pournami').
--   : Seeds the database with data for all years from 2005 to 2026.
--   : Authenticates an admin user and returns a JWT token.
--   : Retrieves calendar entries for editing (protected).
--   : Updates a calendar entry (protected).
+-   : Fetches corrected daily data.
+-   : Re-seeds the entire database with the latest calculation logic.
+-   : Endpoint for the buggy search page.
+-   : Admin login.
+-   : For the special days editor.
+-   : For the analytics page.
 
 **Critical Info for New Agent**
--   The database is fully seeded with calendar data from 2005-2026. Do not re-seed unless the calculation logic in  is changed.
--   The user has requested the creation of all remaining pages and optional enhancements. The highest priority is to create the remaining special days pages.
--   The admin panel is located at . Hardcoded credentials in  are  and .
+-   **The primary blocker is the inaccessible reference website**: . You must resolve this before proceeding with the user's latest request. Use web search or communicate the issue to the user.
+-   **Data accuracy is paramount**: The user is very sensitive to discrepancies between the app's data and reference calendars. All data logic resides in . Do not assume the current calculations are correct; they are the result of many failed attempts.
+-   **The admin password is **, not  as stated in a previous handoff.
+-   The Search page at  is known to be buggy.
 
 **documents and test_reports created in this job**
--   
+-    (created and updated for frontend testing)
 
 **Last 10 User Messages and any pending HUMAN messages**
-1.  yes create
-2.  what are the pages you created
-3.  what are the pages you created and tell me what are the pages remaining to create
-4.  what are files remaing let me know
-5.  1.Auspicious Times, Inauspicious Times, Daily Details section, fetch the details dynamically from db for all the dates for all the years 2.Dynamic data for years 2005-2026 correctly accurately fetch
-6.  சுபகாரியம் / Subakariyam section, 1.சிகிச்சை செய்ய, ஆயுதஞ் செய்ய, யந்திரம் ஸ்தாபிக்க சிறந்த நாள் 2.கல்வி, கலை, வாகனம் வாங்க நல்ல நாள் these two data only show and change for all the dates, check it and fix it or let me know if any. create admin pannel to update the all the details to db
-7.  only december month showing correct remains other month other years showing only செவ்வாய்
-8.  when i change the date above the date selection, the screenshot part showing wrong only
-9.  Tuesday, December 23, 2025 shows right 23 - மார்கழி - விசுவாவசு, திங்கள் -> this one is wrong fix it
-10. Yes create remaining pages and optional enchantments
+1.  take reference this website data https://www.omtamilcalendar.com/
+2.  பரிகாரம், லக்னம், நட்சத்திரம் datas mistake for different dates
+3.  and do home page like above reference website
+4.  All the calendar data is now correctly matching the reference website. Let me provide the final summary:
+5.  https://tamilnaalkaati.com/ use this website take reference.
+6.  1.Auspicious Times - showing wrong for all days check and fix it
+7.  2.Daily Details - showing wrong data fix it
+8.  from above reference website data calculations
+9.  Chandirashtamam, Lagnam, Sraardha ThithiStar, Thithi, Star. These are different showing compare with original website
+10. Home page, Auspicious Times and Daily Details section shows wrong data so check the details from original website and fetch correct data from db for all the years. And also check all the years randomly
 
 **Project Health Check:**
--   **Functional**: The core application, including the data backend and multi-page frontend, is working as intended.
--   **Broken**: No broken parts.
--   **Mocked**: No data is mocked. The entire application is dynamic.
+-   **Functional**: The application is running, and most pages are accessible.
+-   **Broken**: The core feature (displaying accurate calendar data) is incorrect as per the user's latest feedback. The Search page functionality is broken.
+-   **Mocked**: No data is mocked.
 
 **3rd Party Integrations**
 None.
 
 **Testing status**
--   **Testing agent used after significant changes**: NO
+-   **Testing agent used after significant changes**: YES (used for verifying data fixes and new pages).
 -   **Troubleshoot agent used after agent stuck in loop**: NO
 -   **Test files created**: None.
--   **Known regressions**: None.
+-   **Known regressions**: The Search functionality is not working correctly.
 
 **Credentials to test flow:**
 -   **Admin Panel**:
@@ -163,4 +159,5 @@ None.
     -   Password: 
 
 **What agent forgot to execute**
-The agent has not yet started the latest and final user request: Yes create remaining pages and optional enchantments. This is the starting point for the next session.</analysis>
+-   The agent could not start the latest user request to fix data and redesign the homepage using  because the site was inaccessible.
+-   The agent identified the bug on the  page but did not fix it, prioritizing the data accuracy issues instead.</analysis>
