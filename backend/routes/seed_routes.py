@@ -251,7 +251,9 @@ def get_thithi(date):
     return thithis[thithi_index]
 
 def get_star(date):
-    """Calculate Star/Nakshatra for the day"""
+    """Calculate Star/Nakshatra for the day with varying transition time
+    The nakshatra changes approximately every 24 hours (varies 20-28 hrs)
+    Time of transition varies daily based on moon's movement"""
     nakshatras = [
         "அஸ்வினி", "பரணி", "கிருத்திகை", "ரோகிணி", "மிருகசீரிடம்", 
         "திருவாதிரை", "புனர்பூசம்", "பூசம்", "ஆயில்யம்", "மகம்",
@@ -267,8 +269,42 @@ def get_star(date):
     next_star = nakshatras[(star_index + 1) % 27]
     current_star = nakshatras[star_index]
     
-    # Time varies slightly - use 05:31 for early morning change
-    return f"இன்று அதிகாலை 05:31 AM வரை {current_star} பின்பு {next_star}"
+    # Calculate varying transition time based on date
+    # Time shifts by ~53 minutes per day (24 hrs / 27 nakshatras ≈ 53 mins)
+    # Base time for Dec 23 is 05:31
+    base_day = 357  # Dec 23 reference
+    base_hour = 5
+    base_minute = 31
+    
+    # Calculate offset from base day
+    day_offset = day_of_year - base_day
+    # Each day shifts by approximately 53 minutes
+    minute_offset = (day_offset * 53) % (24 * 60)
+    
+    total_minutes = (base_hour * 60 + base_minute + minute_offset) % (24 * 60)
+    hour = total_minutes // 60
+    minute = total_minutes % 60
+    
+    # Format time
+    if hour < 12:
+        am_pm = "AM"
+        display_hour = hour if hour > 0 else 12
+    else:
+        am_pm = "PM"
+        display_hour = hour - 12 if hour > 12 else 12
+    
+    # Determine if morning or evening
+    if hour < 6:
+        time_prefix = "இன்று அதிகாலை"
+    elif hour < 12:
+        time_prefix = "இன்று காலை"
+    elif hour < 18:
+        time_prefix = "இன்று மாலை"
+    else:
+        time_prefix = "இன்று இரவு"
+    
+    time_str = f"{display_hour:02d}:{minute:02d}"
+    return f"{time_prefix} {time_str} {am_pm} வரை {current_star} பின்பு {next_star}"
 
 def get_sraardha_thithi(date):
     """Calculate Sraardha Thithi - same as thithi for most purposes"""
