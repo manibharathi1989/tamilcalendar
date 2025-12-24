@@ -173,15 +173,14 @@ test_plan:
   current_focus:
     - "Search Page - Search by Date"
     - "Search Page - Search by Range & Type"
-    - "Print/Download Page"
-    - "Admin Login"
-    - "Admin Dashboard"
-    - "Admin Analytics"
-    - "Admin Special Days Editor"
-  stuck_tasks: []
+  stuck_tasks:
+    - "Search Page - Search by Date"
+    - "Search Page - Search by Range & Type"
   test_all: true
   test_priority: "high_first"
 
 agent_communication:
   - agent: "testing"
     message: "Starting comprehensive testing of Tamil Daily Calendar application. Will test all new features including search, print, admin functionality, and special day pages."
+  - agent: "testing"
+    message: "COMPREHENSIVE TESTING COMPLETED: Print/Download page works perfectly with calendar generation. Admin functionality (login, dashboard, analytics, special days editor) works excellently with proper authentication and data display. All special day pages (Pournami, Amavasai, Karthigai, Maadha Sivarathiri) load correctly with data and information. CRITICAL ISSUE: Search functionality (both by date and by range) does not return results - backend API integration needs debugging for search endpoints."
