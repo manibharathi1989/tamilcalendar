@@ -55,11 +55,17 @@ const Search = () => {
   };
 
   const handleRangeSearch = async () => {
-    if (!startDate || !endDate) return;
+    console.log('handleRangeSearch called, startDate:', startDate, 'endDate:', endDate, 'eventType:', eventType);
+    if (!startDate || !endDate) {
+      console.log('Missing dates, returning');
+      return;
+    }
     setLoading(true);
     setSearched(true);
     try {
+      console.log('Fetching search results...');
       const data = await calendarAPI.searchCalendar(startDate, endDate, eventType || null);
+      console.log('Received search data:', data);
       setResults({ type: 'range', data });
     } catch (error) {
       console.error('Search error:', error);
