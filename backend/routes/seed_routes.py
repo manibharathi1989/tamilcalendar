@@ -342,7 +342,7 @@ def generate_daily_calendar(date):
         "yemagandam": calculate_yemagandam(weekday),
         "kuligai": calculate_kuligai(weekday),
         "soolam": get_soolam(weekday),
-        "parigaram": get_parigaram(day),
+        "parigaram": get_parigaram(weekday),
         "chandirashtamam": get_chandirashtamam(date),
         "naal": "மேல் நோக்கு நாள்" if day % 2 == 0 else "கீழ் நோக்கு நாள்",
         "lagnam": get_lagnam(date),
