@@ -208,3 +208,123 @@ async def get_admin_stats(authenticated: bool = Depends(verify_admin)):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+class SpecialDayCreate(BaseModel):
+    date: str
+    type: str
+    tamil_name: Optional[str] = None
+    english_name: Optional[str] = None
+    year: int
+    month: int
+
+@router.get("/special-days/{year}/{month}")
+async def get_special_days_admin(
+    year: int,
+    month: int,
+    authenticated: bool = Depends(verify_admin)
+):
+    """Get special days for admin editing"""
+    try:
+        db = get_db()
+        special_days = await db.special_days.find({
+            "year": year,
+            "month": month
+        }).to_list(1000)
+        
+        result = []
+        for day in special_days:
+            day["id"] = str(day.pop("_id"))
+            if "date" in day and hasattr(day["date"], 'isoformat'):
+                day["date"] = day["date"].isoformat()
+            result.append(day)
+        
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/special-days")
+async def add_special_day(
+    day_data: SpecialDayCreate,
+    authenticated: bool = Depends(verify_admin)
+):
+    """Add a new special day"""
+    try:
+        db = get_db()
+        
+        # Parse the date
+        date_obj = datetime.fromisoformat(day_data.date)
+        
+        new_day = {
+            "date": date_obj,
+            "type": day_data.type,
+            "tamil_name": day_data.tamil_name or day_data.type,
+            "english_name": day_data.english_name or day_data.type,
+            "year": day_data.year,
+            "month": day_data.month
+        }
+        
+        result = await db.special_days.insert_one(new_day)
+        
+        return {
+            "success": True,
+            "message": "Special day added successfully",
+            "id": str(result.inserted_id)
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.delete("/special-days/{day_id}")
+async def delete_special_day(
+    day_id: str,
+    authenticated: bool = Depends(verify_admin)
+):
+    """Delete a special day"""
+    try:
+        from bson import ObjectId
+        db = get_db()
+        
+        result = await db.special_days.delete_one({"_id": ObjectId(day_id)})
+        
+        if result.deleted_count == 0:
+            raise HTTPException(status_code=404, detail="Special day not found")
+        
+        return {
+            "success": True,
+            "message": "Special day deleted successfully"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/analytics")
+async def get_analytics(authenticated: bool = Depends(verify_admin)):
+    """Get comprehensive analytics"""
+    try:
+        db = get_db()
+        
+        total_days = await db.daily_calendars.count_documents({})
+        total_special_days = await db.special_days.count_documents({})
+        
+        # Count by event type
+        pipeline = [
+            {"$group": {"_id": "$type", "count": {"$sum": 1}}}
+        ]
+        type_counts = await db.special_days.aggregate(pipeline).to_list(100)
+        events_by_type = {item["_id"]: item["count"] for item in type_counts}
+        
+        # Get years with data
+        years_pipeline = [
+            {"$group": {"_id": {"$year": "$date"}}},
+            {"$count": "total"}
+        ]
+        years_result = await db.daily_calendars.aggregate(years_pipeline).to_list(1)
+        years_available = years_result[0]["total"] if years_result else 0
+        
+        return {
+            "totalDays": total_days,
+            "totalSpecialDays": total_special_days,
+            "yearsAvailable": years_available,
+            "monthsWithData": years_available * 12,
+            "eventsByType": events_by_type
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
