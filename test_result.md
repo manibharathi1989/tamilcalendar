@@ -189,13 +189,17 @@ metadata:
 
 test_plan:
   current_focus:
+    - "Data Accuracy - Parigaram Fix Verification"
     - "Search Page - Search by Date"
     - "Search Page - Search by Range & Type"
-  stuck_tasks:
-    - "Search Page - Search by Date"
-    - "Search Page - Search by Range & Type"
+  stuck_tasks: []
   test_all: true
   test_priority: "high_first"
+  
+recent_changes:
+  - "Fixed Parigaram calculation to be based on Soolam direction (weekday-based)"
+  - "Re-seeded database with corrected data for all 8035 days (2005-2026)"
+  - "Parigaram now correctly maps: Mon=Curd, Tue=Milk, Wed=Honey, Thu=Ghee, Fri=Milk, Sat=Curd, Sun=Honey"
 
 agent_communication:
   - agent: "testing"
