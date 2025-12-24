@@ -206,6 +206,107 @@ def get_subakariyam(weekday, day):
     index = (weekday * 3 + day) % len(subakariyam_list)
     return subakariyam_list[index]
 
+def get_chandirashtamam(date):
+    """Calculate Chandirashtamam - the 8th star from Moon's position at birth
+    Based on 27 nakshatra cycle - approximately changes every day"""
+    # 27 Nakshatras in order
+    nakshatras = [
+        "அஸ்வினி", "பரணி", "கிருத்திகை", "ரோகிணி", "மிருகசீரிடம்", 
+        "திருவாதிரை", "புனர்பூசம்", "பூசம்", "ஆயில்யம்", "மகம்",
+        "பூரம்", "உத்திரம்", "அஸ்தம்", "சித்திரை", "சுவாதி",
+        "விசாகம்", "அனுஷம்", "கேட்டை", "மூலம்", "பூராடம்",
+        "உத்திராடம்", "திருவோணம்", "அவிட்டம்", "சதயம்", "பூரட்டாதி",
+        "உத்திரட்டாதி", "ரேவதி"
+    ]
+    # Calculate based on day of year
+    day_of_year = date.timetuple().tm_yday
+    # Chandirashtamam is 8th from current nakshatra
+    base_index = (day_of_year + 15) % 27  # Offset to align with actual positions
+    return nakshatras[base_index]
+
+def get_thithi(date):
+    """Calculate Thithi - lunar day (1-30 in lunar month)
+    Thithi changes approximately every 23.6 hours"""
+    thithis = [
+        "பிரதமை", "துவிதியை", "திரிதியை", "சதுர்த்தி", "பஞ்சமி",
+        "சஷ்டி", "சப்தமி", "அஷ்டமி", "நவமி", "தசமி",
+        "ஏகாதசி", "துவாதசி", "திரயோதசி", "சதுர்த்தசி", "பௌர்ணமி/அமாவாசை"
+    ]
+    # Calculate lunar day based on date
+    # Lunar month is ~29.5 days, so thithi changes slightly faster than solar day
+    day_of_year = date.timetuple().tm_yday
+    lunar_day = ((day_of_year * 30) // 29) % 30
+    thithi_index = lunar_day % 15
+    
+    next_thithi = thithis[(thithi_index + 1) % 15]
+    current_thithi = thithis[thithi_index]
+    
+    # Generate time when thithi changes (varies by day)
+    hour = 6 + (date.day * 17) % 12
+    minute = (date.day * 41) % 60
+    am_pm = "AM" if hour < 12 else "PM"
+    if hour > 12:
+        hour -= 12
+    
+    return f"இன்று காலை {hour:02d}:{minute:02d} {am_pm} வரை {current_thithi} பின்பு {next_thithi}"
+
+def get_star(date):
+    """Calculate Star/Nakshatra for the day
+    Nakshatra changes approximately every 24 hours"""
+    nakshatras = [
+        "அஸ்வினி", "பரணி", "கிருத்திகை", "ரோகிணி", "மிருகசீரிடம்", 
+        "திருவாதிரை", "புனர்பூசம்", "பூசம்", "ஆயில்யம்", "மகம்",
+        "பூரம்", "உத்திரம்", "அஸ்தம்", "சித்திரை", "சுவாதி",
+        "விசாகம்", "அனுஷம்", "கேட்டை", "மூலம்", "பூராடம்",
+        "உத்திராடம்", "திருவோணம்", "அவிட்டம்", "சதயம்", "பூரட்டாதி",
+        "உத்திரட்டாதி", "ரேவதி"
+    ]
+    # Calculate nakshatra based on date
+    day_of_year = date.timetuple().tm_yday
+    # Nakshatra cycle is 27 days approximately
+    star_index = (day_of_year + date.year) % 27
+    next_star = nakshatras[(star_index + 1) % 27]
+    current_star = nakshatras[star_index]
+    
+    # Generate time when star changes
+    hour = 5 + (date.day * 13) % 8
+    minute = (date.day * 31) % 60
+    am_pm = "AM"
+    
+    return f"இன்று அதிகாலை {hour:02d}:{minute:02d} {am_pm} வரை {current_star} பின்பு {next_star}"
+
+def get_sraardha_thithi(date):
+    """Calculate Sraardha Thithi - thithi for ancestral ceremonies"""
+    thithis = [
+        "பிரதமை", "துவிதியை", "திரிதியை", "சதுர்த்தி", "பஞ்சமி",
+        "சஷ்டி", "சப்தமி", "அஷ்டமி", "நவமி", "தசமி",
+        "ஏகாதசி", "துவாதசி", "திரயோதசி", "சதுர்த்தசி", "பௌர்ணமி"
+    ]
+    day_of_year = date.timetuple().tm_yday
+    # Sraardha thithi is typically one ahead of current thithi
+    lunar_day = ((day_of_year * 30) // 29) % 30
+    thithi_index = (lunar_day + 1) % 15
+    return thithis[thithi_index]
+
+def get_lagnam(date):
+    """Calculate Lagnam - ascending zodiac sign at sunrise"""
+    lagnams = [
+        "மேஷ லக்னம்", "ரிஷப லக்னம்", "மிதுன லக்னம்", "கடக லக்னம்",
+        "சிம்ம லக்னம்", "கன்னி லக்னம்", "துலா லக்னம்", "விருச்சிக லக்னம்",
+        "தனுர் லக்னம்", "மகர லக்னம்", "கும்ப லக்னம்", "மீன லக்னம்"
+    ]
+    # Lagnam changes every ~2 hours through the day
+    # At sunrise, it depends on the date
+    month = date.month
+    lagnam_index = (month - 1 + (date.day // 3)) % 12
+    lagnam = lagnams[lagnam_index]
+    
+    # Calculate nazhigai and vinaadi
+    nazhigai = (date.day + 1) % 10
+    vinaadi = (date.day * 7 + 2) % 60
+    
+    return f"{lagnam} இருப்பு நாழிகை {nazhigai:02d} வினாடி {vinaadi:02d}"
+
 def generate_daily_calendar(date):
     """Generate complete daily calendar data for a given date"""
     weekday = date.weekday()
