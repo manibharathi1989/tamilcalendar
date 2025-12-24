@@ -70,7 +70,7 @@ frontend:
     implemented: true
     working: false
     file: "/app/frontend/src/pages/Search.jsx"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
     needs_retesting: false
     status_history:
@@ -80,12 +80,15 @@ frontend:
       - working: false
         agent: "testing"
         comment: "Search page loads correctly with proper UI elements, but search by date (Dec 25, 2025) does not return results. Backend API may not have data for this specific date or search functionality needs debugging."
+      - working: false
+        agent: "testing"
+        comment: "❌ CRITICAL ISSUE IDENTIFIED: Search page UI loads correctly but JavaScript functionality is completely broken. No API calls are made when search button is clicked (tested Dec 23, 2025). Backend APIs work perfectly (verified: GET /api/calendar/daily/2025/12/23 returns correct data). Issue is React event handlers not binding/executing - possible React hydration or JavaScript execution problem. Frontend service running but React functionality not working."
 
   - task: "Search Page - Search by Range & Type"
     implemented: true
     working: false
     file: "/app/frontend/src/pages/Search.jsx"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
     needs_retesting: false
     status_history:
@@ -95,6 +98,9 @@ frontend:
       - working: false
         agent: "testing"
         comment: "Search by range UI works correctly (Dec 1-31, 2025, Ekadasi type), but no results are returned. Backend API integration may need debugging for search functionality."
+      - working: false
+        agent: "testing"
+        comment: "❌ CRITICAL ISSUE IDENTIFIED: Same JavaScript functionality issue as date search. Range search UI renders correctly (tabs, date inputs, dropdown), but no API calls are made when search button is clicked. Backend API verified working (GET /api/calendar/search?start_date=2025-12-01&end_date=2025-12-31&event_type=pournami returns correct data). React event handlers not executing - requires JavaScript/React debugging."
 
   - task: "Print/Download Page"
     implemented: true
