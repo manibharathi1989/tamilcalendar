@@ -74,7 +74,14 @@ function App() {
             <Route path="/amavasai" element={<Amavasai />} />
             <Route path="/pradosham" element={<Pradosham />} />
             <Route path="/ekadasi" element={<Ekadasi />} />
-            <Route path="/karinal" element={<ModernHome />} />
+            <Route path="/karinal" element={<Karinal />} />
+            <Route path="/sashti-viradham" element={<SashtiViradham />} />
+            <Route path="/sankatahara-chathurthi" element={<SankataharaChathurthi />} />
+            <Route path="/karthigai" element={<Karthigai />} />
+            <Route path="/navami" element={<Navami />} />
+            <Route path="/ashtami" element={<Ashtami />} />
+            <Route path="/thiruvonam" element={<Thiruvonam />} />
+            <Route path="/maadha-sivarathiri" element={<MaadhaSivarathiri />} />
             
             {/* Planetary Transits */}
             <Route path="/rasi-palan/guru" element={<GuruPeyarchi />} />
