@@ -214,15 +214,14 @@ def generate_daily_calendar(date):
     year = date.year
     
     tamil_days = ["திங்கள்", "செவ்வாய்", "புதன்", "வியாழன்", "வெள்ளி", "சனி", "ஞாயிறு"]
-    tamil_month = get_tamil_month(month)
     
-    # Calculate year in Tamil calendar (approximate)
-    tamil_year_names = ["விசுவாவசு", "பிரபவ", "விபவ", "சுக்ல", "பிரமோதூத", "பிரஜோத்பத்தி"]
-    tamil_year = tamil_year_names[(year - 2000) % len(tamil_year_names)]
+    # Get correct Tamil month and date
+    tamil_month, tamil_day = get_tamil_month_and_date(date)
+    tamil_year = get_tamil_year(year, month)
     
     return {
         "date": date,
-        "tamil_date": f"{day} - {tamil_month} - {tamil_year}",
+        "tamil_date": f"{tamil_day} - {tamil_month} - {tamil_year}",
         "tamil_day": tamil_days[weekday],
         "tamil_month": tamil_month,
         "tamil_year": tamil_year,
@@ -232,12 +231,12 @@ def generate_daily_calendar(date):
         "raahu_kaalam": calculate_raahu_kaalam(weekday),
         "yemagandam": calculate_yemagandam(weekday),
         "kuligai": calculate_kuligai(weekday),
-        "soolam": get_soolam(day),
+        "soolam": get_soolam(weekday),
         "parigaram": get_parigaram(day),
         "chandirashtamam": ["புனர்பூசம்", "பூசம்", "ஆயில்யம்", "மகம்"][day % 4],
         "naal": "மேல் நோக்கு நாள்" if day % 2 == 0 else "கீழ் நோக்கு நாள்",
         "lagnam": f"தனுர் லக்னம் இருப்பு நாழிகை {day % 5} வினாடி {(day * 3) % 60}",
-        "sun_rise": "06:25 கா / AM" if month < 6 else "05:45 கா / AM",
+        "sun_rise": "06:25 கா / AM" if month in [11, 12, 1, 2] else "05:45 கா / AM",
         "sraardha_thithi": ["சதுர்த்தி", "பஞ்சமி", "சஷ்டி", "சப்தமி"][day % 4],
         "thithi": f"இன்று காலை 11:30 AM வரை திரிதியை பின்பு {['சதுர்த்தி', 'பஞ்சமி'][day % 2]}",
         "star": f"இன்று அதிகாலை 05:31 AM வரை {['உத்திராடம்', 'திருவோணம்', 'அவிட்டம்'][day % 3]} பின்பு {['திருவோணம்', 'அவிட்டம்', 'சதயம்'][day % 3]}",
