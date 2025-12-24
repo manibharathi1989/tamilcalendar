@@ -184,3 +184,5 @@ agent_communication:
     message: "Starting comprehensive testing of Tamil Daily Calendar application. Will test all new features including search, print, admin functionality, and special day pages."
   - agent: "testing"
     message: "COMPREHENSIVE TESTING COMPLETED: Print/Download page works perfectly with calendar generation. Admin functionality (login, dashboard, analytics, special days editor) works excellently with proper authentication and data display. All special day pages (Pournami, Amavasai, Karthigai, Maadha Sivarathiri) load correctly with data and information. CRITICAL ISSUE: Search functionality (both by date and by range) does not return results - backend API integration needs debugging for search endpoints."
+  - agent: "testing"
+    message: "HOME PAGE CALENDAR DATA TESTING COMPLETED: Successfully tested Tamil Daily Calendar home page with comprehensive verification of calendar data display. All core functionality works perfectly including date navigation, Tamil calendar data display, and weekday-based Soolam patterns. Calendar data is available for years 2005-2026. All requested test scenarios passed successfully."
