@@ -334,13 +334,13 @@ def generate_daily_calendar(date):
         "kuligai": calculate_kuligai(weekday),
         "soolam": get_soolam(weekday),
         "parigaram": get_parigaram(day),
-        "chandirashtamam": ["புனர்பூசம்", "பூசம்", "ஆயில்யம்", "மகம்"][day % 4],
+        "chandirashtamam": get_chandirashtamam(date),
         "naal": "மேல் நோக்கு நாள்" if day % 2 == 0 else "கீழ் நோக்கு நாள்",
-        "lagnam": f"தனுர் லக்னம் இருப்பு நாழிகை {day % 5} வினாடி {(day * 3) % 60}",
+        "lagnam": get_lagnam(date),
         "sun_rise": "06:25 கா / AM" if month in [11, 12, 1, 2] else "05:45 கா / AM",
-        "sraardha_thithi": ["சதுர்த்தி", "பஞ்சமி", "சஷ்டி", "சப்தமி"][day % 4],
-        "thithi": f"இன்று காலை 11:30 AM வரை திரிதியை பின்பு {['சதுர்த்தி', 'பஞ்சமி'][day % 2]}",
-        "star": f"இன்று அதிகாலை 05:31 AM வரை {['உத்திராடம்', 'திருவோணம்', 'அவிட்டம்'][day % 3]} பின்பு {['திருவோணம்', 'அவிட்டம்', 'சதயம்'][day % 3]}",
+        "sraardha_thithi": get_sraardha_thithi(date),
+        "thithi": get_thithi(date),
+        "star": get_star(date),
         "subakariyam": get_subakariyam(weekday, day)
     }
 
