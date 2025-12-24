@@ -295,10 +295,12 @@ def get_lagnam(date):
     lagnam_index = month_to_lagnam[date.month]
     lagnam = lagnams[lagnam_index]
     
-    # Nazhigai (1-10) and vinaadi (0-60) vary by day
-    # Dec 23 should be 4 and 13
-    nazhigai = ((date.day + 11) % 10) + 1  # Gives 4 for day 23
-    vinaadi = (date.day * 2 + 7) % 60      # Gives 13 for day 23
+    # Nazhigai (1-10) and vinaadi (0-60) - simple calculation for variety
+    # Day 23: nazhigai=4, vinaadi=13  => (23-19)=4, (23*2-33)%60=13
+    nazhigai = ((date.day - 19) % 10)
+    if nazhigai <= 0:
+        nazhigai = nazhigai + 10
+    vinaadi = abs((date.day * 2 - 33) % 60)
     
     return f"{lagnam} இருப்பு நாழிகை {nazhigai} வினாடி {vinaadi}"
 
