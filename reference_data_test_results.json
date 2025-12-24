@@ -1,0 +1,235 @@
+[
+  {
+    "test": "December 24, 2025 Reference Data Verification",
+    "success": true,
+    "message": "All December 24, 2025 reference data matches perfectly",
+    "timestamp": "2025-12-24T13:25:03.525861",
+    "details": {
+      "tamil_date": {
+        "expected": "9 - \u0bae\u0bbe\u0bb0\u0bcd\u0b95\u0bb4\u0bbf - \u0bb5\u0bbf\u0b9a\u0bc1\u0bb5\u0bbe\u0bb5\u0b9a\u0bc1",
+        "actual": "9 - \u0bae\u0bbe\u0bb0\u0bcd\u0b95\u0bb4\u0bbf - \u0bb5\u0bbf\u0b9a\u0bc1\u0bb5\u0bbe\u0bb5\u0b9a\u0bc1",
+        "match": true
+      },
+      "nalla_neram_morning": {
+        "expected": "09:00 - 10:00",
+        "actual": "09:00 - 10:00 \u0b95\u0bbe / AM",
+        "match": true
+      },
+      "nalla_neram_evening": {
+        "expected": "04:45 - 05:45",
+        "actual": "04:45 - 05:45 \u0bae\u0bbe / PM",
+        "match": true
+      },
+      "gowri_nalla_morning": {
+        "expected": "01:45 - 02:45",
+        "actual": "01:45 - 02:45 \u0b95\u0bbe / AM",
+        "match": true
+      },
+      "gowri_nalla_evening": {
+        "expected": "06:30 - 07:30",
+        "actual": "06:30 - 07:30 \u0bae\u0bbe / PM",
+        "match": true
+      },
+      "raahu_kaalam": {
+        "expected": "12:00 - 01:30",
+        "actual": "12:00 - 01:30",
+        "match": true
+      },
+      "yemagandam": {
+        "expected": "07:30 - 09:00",
+        "actual": "07:30 - 09:00",
+        "match": true
+      },
+      "kuligai": {
+        "expected": "10:30 - 12:00",
+        "actual": "10:30 - 12:00",
+        "match": true
+      },
+      "soolam": {
+        "expected": "\u0bb5\u0b9f\u0b95\u0bcd\u0b95\u0bc1",
+        "actual": "\u0bb5\u0b9f\u0b95\u0bcd\u0b95\u0bc1",
+        "match": true
+      },
+      "parigaram": {
+        "expected": "\u0baa\u0bbe\u0bb2\u0bcd",
+        "actual": "\u0baa\u0bbe\u0bb2\u0bcd",
+        "match": true
+      },
+      "chandirashtamam": {
+        "expected": "\u0baa\u0bc2\u0b9a\u0bae\u0bcd",
+        "actual": "\u0baa\u0bc2\u0b9a\u0bae\u0bcd",
+        "match": true
+      },
+      "sraardha_thithi": {
+        "expected": "\u0baa\u0b9e\u0bcd\u0b9a\u0bae\u0bbf",
+        "actual": "\u0baa\u0b9e\u0bcd\u0b9a\u0bae\u0bbf",
+        "match": true
+      },
+      "thithi": {
+        "expected": "Should contain \u0b9a\u0ba4\u0bc1\u0bb0\u0bcd\u0ba4\u0bcd\u0ba4\u0bbf and \u0baa\u0b9e\u0bcd\u0b9a\u0bae\u0bbf with time around 11:41 AM",
+        "actual": "\u0b87\u0ba9\u0bcd\u0bb1\u0bc1 \u0b95\u0bbe\u0bb2\u0bc8 11:41 AM \u0bb5\u0bb0\u0bc8 \u0b9a\u0ba4\u0bc1\u0bb0\u0bcd\u0ba4\u0bcd\u0ba4\u0bbf \u0baa\u0bbf\u0ba9\u0bcd\u0baa\u0bc1 \u0baa\u0b9e\u0bcd\u0b9a\u0bae\u0bbf",
+        "match": true
+      },
+      "star": {
+        "expected": "Should contain \u0ba4\u0bbf\u0bb0\u0bc1\u0bb5\u0bcb\u0ba3\u0bae\u0bcd and \u0b85\u0bb5\u0bbf\u0b9f\u0bcd\u0b9f\u0bae\u0bcd with time around 06:24 AM",
+        "actual": "\u0b87\u0ba9\u0bcd\u0bb1\u0bc1 \u0b95\u0bbe\u0bb2\u0bc8 06:24 AM \u0bb5\u0bb0\u0bc8 \u0ba4\u0bbf\u0bb0\u0bc1\u0bb5\u0bcb\u0ba3\u0bae\u0bcd \u0baa\u0bbf\u0ba9\u0bcd\u0baa\u0bc1 \u0b85\u0bb5\u0bbf\u0b9f\u0bcd\u0b9f\u0bae\u0bcd",
+        "match": true
+      }
+    }
+  },
+  {
+    "test": "Star Time Variations (Dec 20-26, 2025)",
+    "success": true,
+    "message": "Star times show proper variation with 7 different times",
+    "timestamp": "2025-12-24T13:25:03.940660",
+    "details": {
+      "dates_tested": [
+        "2025-12-20",
+        "2025-12-21",
+        "2025-12-22",
+        "2025-12-23",
+        "2025-12-24",
+        "2025-12-25",
+        "2025-12-26"
+      ],
+      "star_times": [
+        "02:52",
+        "03:45",
+        "04:38",
+        "05:31",
+        "06:24",
+        "07:17",
+        "08:10"
+      ],
+      "unique_times": [
+        "08:10",
+        "06:24",
+        "02:52",
+        "03:45",
+        "05:31",
+        "04:38",
+        "07:17"
+      ],
+      "variation_count": 7
+    }
+  },
+  {
+    "test": "Thithi Time Variations (Dec 20-26, 2025)",
+    "success": true,
+    "message": "Thithi times show proper variation with 7 different times",
+    "timestamp": "2025-12-24T13:25:04.387726",
+    "details": {
+      "dates_tested": [
+        "2025-12-20",
+        "2025-12-21",
+        "2025-12-22",
+        "2025-12-23",
+        "2025-12-24",
+        "2025-12-25",
+        "2025-12-26"
+      ],
+      "thithi_times": [
+        "08:29",
+        "09:17",
+        "10:05",
+        "10:53",
+        "11:41",
+        "12:29",
+        "01:17"
+      ],
+      "unique_times": [
+        "09:17",
+        "12:29",
+        "01:17",
+        "10:05",
+        "08:29",
+        "11:41",
+        "10:53"
+      ],
+      "variation_count": 7
+    }
+  },
+  {
+    "test": "Weekday Soolam and Parigaram Consistency",
+    "success": true,
+    "message": "Soolam and Parigaram data available for all weekdays",
+    "timestamp": "2025-12-24T13:25:04.878982",
+    "details": {
+      "weekday_data": {
+        "Monday": {
+          "date": "2025-12-22",
+          "soolam": "\u0b95\u0bbf\u0bb4\u0b95\u0bcd\u0b95\u0bc1",
+          "parigaram": "\u0ba4\u0baf\u0bbf\u0bb0\u0bcd"
+        },
+        "Tuesday": {
+          "date": "2025-12-23",
+          "soolam": "\u0bb5\u0b9f\u0b95\u0bcd\u0b95\u0bc1",
+          "parigaram": "\u0baa\u0bbe\u0bb2\u0bcd"
+        },
+        "Wednesday": {
+          "date": "2025-12-24",
+          "soolam": "\u0bb5\u0b9f\u0b95\u0bcd\u0b95\u0bc1",
+          "parigaram": "\u0baa\u0bbe\u0bb2\u0bcd"
+        },
+        "Thursday": {
+          "date": "2025-12-25",
+          "soolam": "\u0ba4\u0bc6\u0bb1\u0bcd\u0b95\u0bc1",
+          "parigaram": "\u0ba8\u0bc6\u0baf\u0bcd"
+        },
+        "Friday": {
+          "date": "2025-12-26",
+          "soolam": "\u0bb5\u0b9f\u0b95\u0bcd\u0b95\u0bc1",
+          "parigaram": "\u0baa\u0bbe\u0bb2\u0bcd"
+        },
+        "Saturday": {
+          "date": "2025-12-27",
+          "soolam": "\u0b95\u0bbf\u0bb4\u0b95\u0bcd\u0b95\u0bc1",
+          "parigaram": "\u0ba4\u0baf\u0bbf\u0bb0\u0bcd"
+        },
+        "Sunday": {
+          "date": "2025-12-28",
+          "soolam": "\u0bae\u0bc7\u0bb1\u0bcd\u0b95\u0bc1",
+          "parigaram": "\u0ba4\u0bc7\u0ba9\u0bcd"
+        }
+      },
+      "all_weekdays_present": true,
+      "consistency_check": {
+        "Monday": {
+          "date": "2025-12-22",
+          "soolam": "\u0b95\u0bbf\u0bb4\u0b95\u0bcd\u0b95\u0bc1",
+          "parigaram": "\u0ba4\u0baf\u0bbf\u0bb0\u0bcd"
+        },
+        "Tuesday": {
+          "date": "2025-12-23",
+          "soolam": "\u0bb5\u0b9f\u0b95\u0bcd\u0b95\u0bc1",
+          "parigaram": "\u0baa\u0bbe\u0bb2\u0bcd"
+        },
+        "Wednesday": {
+          "date": "2025-12-24",
+          "soolam": "\u0bb5\u0b9f\u0b95\u0bcd\u0b95\u0bc1",
+          "parigaram": "\u0baa\u0bbe\u0bb2\u0bcd"
+        },
+        "Thursday": {
+          "date": "2025-12-25",
+          "soolam": "\u0ba4\u0bc6\u0bb1\u0bcd\u0b95\u0bc1",
+          "parigaram": "\u0ba8\u0bc6\u0baf\u0bcd"
+        },
+        "Friday": {
+          "date": "2025-12-26",
+          "soolam": "\u0bb5\u0b9f\u0b95\u0bcd\u0b95\u0bc1",
+          "parigaram": "\u0baa\u0bbe\u0bb2\u0bcd"
+        },
+        "Saturday": {
+          "date": "2025-12-27",
+          "soolam": "\u0b95\u0bbf\u0bb4\u0b95\u0bcd\u0b95\u0bc1",
+          "parigaram": "\u0ba4\u0baf\u0bbf\u0bb0\u0bcd"
+        },
+        "Sunday": {
+          "date": "2025-12-28",
+          "soolam": "\u0bae\u0bc7\u0bb1\u0bcd\u0b95\u0bc1",
+          "parigaram": "\u0ba4\u0bc7\u0ba9\u0bcd"
+        }
+      }
+    }
+  }
+]
