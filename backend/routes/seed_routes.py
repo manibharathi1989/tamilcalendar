@@ -133,29 +133,29 @@ def get_tamil_year(english_year, english_month):
     return tamil_year_names[cycle_index]
 
 def get_nalla_neram(weekday):
-    """Calculate Nalla Neram based on weekday - matching original site values"""
+    """Calculate Nalla Neram based on weekday - matching tamilnaalkaati.com values"""
     # Weekday: 0=Monday, 1=Tuesday, 2=Wednesday, 3=Thursday, 4=Friday, 5=Saturday, 6=Sunday
     nalla_times = {
-        0: {"morning": "07:30 - 08:30 கா / AM", "evening": "03:00 - 04:00 மா / PM"},  # Monday
-        1: {"morning": "06:00 - 07:00 கா / AM", "evening": "03:00 - 04:00 மா / PM"},  # Tuesday
-        2: {"morning": "09:00 - 10:00 கா / AM", "evening": "04:45 - 05:45 மா / PM"},  # Wednesday
-        3: {"morning": "08:30 - 09:30 கா / AM", "evening": "01:30 - 02:30 மா / PM"},  # Thursday
-        4: {"morning": "10:30 - 11:30 கா / AM", "evening": "03:00 - 04:00 மா / PM"},  # Friday
-        5: {"morning": "06:30 - 07:30 கா / AM", "evening": "05:00 - 06:00 மா / PM"},  # Saturday
-        6: {"morning": "10:30 - 11:30 கா / AM", "evening": "04:45 - 05:45 மா / PM"},  # Sunday
+        0: {"morning": "07:30 - 09:00 கா / AM", "evening": "02:15 - 03:45 மா / PM"},  # Monday
+        1: {"morning": "07:45 - 08:45 கா / AM", "evening": "04:45 - 05:45 மா / PM"},  # Tuesday
+        2: {"morning": "09:00 - 10:30 கா / AM", "evening": "12:00 - 01:30 மா / PM"},  # Wednesday
+        3: {"morning": "07:30 - 09:00 கா / AM", "evening": "01:30 - 03:00 மா / PM"},  # Thursday
+        4: {"morning": "10:30 - 12:00 கா / AM", "evening": "03:00 - 04:30 மா / PM"},  # Friday
+        5: {"morning": "09:00 - 10:30 கா / AM", "evening": "06:00 - 07:30 மா / PM"},  # Saturday
+        6: {"morning": "04:30 - 06:00 கா / AM", "evening": "06:00 - 07:30 மா / PM"},  # Sunday
     }
     return nalla_times[weekday]
 
 def get_gowri_nalla_neram(weekday):
-    """Calculate Gowri Nalla Neram based on weekday - matching original site values"""
+    """Calculate Gowri Nalla Neram based on weekday - matching tamilnaalkaati.com values"""
     gowri_times = {
-        0: {"morning": "09:00 - 10:00 கா / AM", "evening": "06:00 - 07:00 மா / PM"},  # Monday
-        1: {"morning": "07:30 - 08:30 கா / AM", "evening": "04:30 - 05:30 மா / PM"},  # Tuesday
-        2: {"morning": "01:45 - 02:45 கா / AM", "evening": "06:30 - 07:30 மா / PM"},  # Wednesday
-        3: {"morning": "12:00 - 01:00 கா / AM", "evening": "03:00 - 04:00 மா / PM"},  # Thursday
-        4: {"morning": "09:30 - 10:30 கா / AM", "evening": "04:30 - 05:30 மா / PM"},  # Friday
-        5: {"morning": "07:30 - 08:30 கா / AM", "evening": "06:30 - 07:30 மா / PM"},  # Saturday
-        6: {"morning": "03:00 - 04:00 கா / AM", "evening": "06:00 - 07:00 மா / PM"},  # Sunday
+        0: {"morning": "09:00 - 10:30 கா / AM", "evening": "06:00 - 07:30 மா / PM"},  # Monday
+        1: {"morning": "01:45 - 02:45 ப / AM", "evening": "07:30 - 08:30 இ / PM"},   # Tuesday
+        2: {"morning": "12:00 - 01:30 ப / PM", "evening": "06:00 - 07:30 இ / PM"},   # Wednesday
+        3: {"morning": "09:00 - 10:30 கா / AM", "evening": "04:30 - 06:00 மா / PM"}, # Thursday
+        4: {"morning": "07:30 - 09:00 கா / AM", "evening": "03:00 - 04:30 மா / PM"}, # Friday
+        5: {"morning": "06:00 - 07:30 கா / AM", "evening": "07:30 - 09:00 இ / PM"},  # Saturday
+        6: {"morning": "07:30 - 09:00 கா / AM", "evening": "04:30 - 06:00 மா / PM"}, # Sunday
     }
     return gowri_times[weekday]
 
