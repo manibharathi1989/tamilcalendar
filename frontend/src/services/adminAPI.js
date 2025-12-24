@@ -80,6 +80,67 @@ export const adminAPI = {
     } catch (error) {
       throw error.response?.data || error;
     }
+  },
+
+  // Get special days for a month
+  getSpecialDays: async (year, month, token) => {
+    try {
+      const response = await axios.get(
+        `${API_URL}/api/admin/special-days/${year}/${month}`,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
+
+  // Add special day
+  addSpecialDay: async (dayData, token) => {
+    try {
+      const response = await axios.post(
+        `${API_URL}/api/admin/special-days`,
+        dayData,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
+
+  // Delete special day
+  deleteSpecialDay: async (dayId, token) => {
+    try {
+      const response = await axios.delete(
+        `${API_URL}/api/admin/special-days/${dayId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
+
+  // Get analytics
+  getAnalytics: async (token) => {
+    try {
+      const response = await axios.get(
+        `${API_URL}/api/admin/analytics`,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
   }
 };
 
