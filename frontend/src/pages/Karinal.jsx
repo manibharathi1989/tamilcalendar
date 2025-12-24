@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ModernHeader from '../components/ModernHeader';
 import ModernFooter from '../components/ModernFooter';
-import { Calendar, AlertCircle } from 'lucide-react';
+import { Zap, Sparkles, AlertTriangle } from 'lucide-react';
 import { calendarAPI } from '../services/calendarAPI';
 
 const Karinal = () => {
@@ -42,9 +42,9 @@ const Karinal = () => {
       <main className="max-w-7xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="bg-gradient-to-r from-red-600 via-orange-600 to-red-700 rounded-2xl shadow-xl p-8 mb-8 text-center">
-          <AlertCircle className="w-16 h-16 text-white mx-auto mb-4" />
+          <Zap className="w-16 h-16 text-white mx-auto mb-4" />
           <h1 className="text-4xl font-bold text-white mb-2">Karinal Dates</h1>
-          <p className="text-red-100 text-lg">கரிநாள் தேதிகள் - Inauspicious Days</p>
+          <p className="text-red-200 text-lg">கரிநாள் தேதிகள் - Inauspicious Days</p>
         </div>
 
         {/* Year Selector */}
@@ -85,7 +85,7 @@ const Karinal = () => {
                       className="bg-gradient-to-br from-red-50 to-orange-50 border-2 border-red-200 rounded-xl p-4 hover:shadow-lg transition-all"
                     >
                       <div className="flex items-center gap-3">
-                        <AlertCircle className="w-8 h-8 text-red-600" />
+                        <Zap className="w-8 h-8 text-red-600" />
                         <div>
                           <p className="font-semibold text-gray-800">{item.date}</p>
                           <p className="text-sm text-gray-600">கரிநாள்</p>
@@ -96,41 +96,58 @@ const Karinal = () => {
                 </div>
               ) : (
                 <div className="text-center py-12">
-                  <AlertCircle className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600">Karinal dates data not available for {selectedYear}</p>
-                  <p className="text-sm text-gray-500 mt-2">These dates are calculated based on traditional Tamil calendar</p>
+                  <Zap className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-600">No Karinal dates available for {selectedYear}</p>
+                  <p className="text-sm text-gray-500 mt-2">Karinal days are calculated based on specific lunar positions</p>
                 </div>
               )}
             </div>
 
             {/* Info Sidebar */}
             <div className="space-y-6">
-              <div className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl shadow-lg p-6 border-2 border-orange-200">
-                <h3 className="text-xl font-bold text-gray-800 mb-3">About Karinal</h3>
+              <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl shadow-lg p-6 border-2 border-red-200">
+                <h3 className="text-xl font-bold text-gray-800 mb-3 flex items-center gap-2">
+                  <AlertTriangle className="w-6 h-6 text-red-600" />
+                  About Karinal
+                </h3>
                 <p className="text-gray-700 text-sm leading-relaxed mb-3">
-                  Karinal (கரிநாள்) refers to certain inauspicious days in the Tamil calendar when important activities should be avoided.
+                  Karinal (கரிநாள்) are inauspicious days in the Tamil calendar. These days are considered unfavorable for starting new ventures or auspicious activities.
                 </p>
                 <p className="text-gray-700 text-sm leading-relaxed">
-                  These days are traditionally considered unsuitable for starting new ventures, ceremonies, or auspicious events.
+                  The word "Kari" means black, and these days are marked as inauspicious based on specific planetary positions.
                 </p>
               </div>
 
-              <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-2xl shadow-lg p-6 border-2 border-red-200">
-                <h3 className="text-lg font-bold text-gray-800 mb-3">Activities to Avoid</h3>
+              <div className="bg-gradient-to-br from-yellow-50 to-amber-50 rounded-2xl shadow-lg p-6 border-2 border-yellow-200">
+                <h3 className="text-lg font-bold text-gray-800 mb-3">What to Avoid</h3>
                 <ul className="space-y-2 text-gray-700 text-sm">
                   <li>• Starting new business</li>
                   <li>• Marriage ceremonies</li>
                   <li>• House warming</li>
-                  <li>• Vehicle purchase</li>
-                  <li>• Important journeys</li>
-                  <li>• Financial investments</li>
+                  <li>• Buying property</li>
+                  <li>• Long journeys</li>
+                  <li>• Important meetings</li>
+                </ul>
+              </div>
+
+              <div className="bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl shadow-lg p-6 border-2 border-green-200">
+                <h3 className="text-lg font-bold text-gray-800 mb-3">Remedies</h3>
+                <ul className="space-y-2 text-gray-700 text-sm">
+                  <li>• Perform daily prayers</li>
+                  <li>• Chant Hanuman Chalisa</li>
+                  <li>• Visit Lord Shiva temple</li>
+                  <li>• Donate to the needy</li>
+                  <li>• Light lamps at home</li>
                 </ul>
               </div>
 
               <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-6 border-2 border-blue-200">
-                <h3 className="text-lg font-bold text-gray-800 mb-3">Important Note</h3>
+                <h3 className="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-blue-600" />
+                  Note
+                </h3>
                 <p className="text-gray-700 text-sm leading-relaxed">
-                  While Karinal is traditionally observed, it's recommended to consult with a qualified astrologer for personalized guidance based on your birth chart.
+                  While Karinal days are considered inauspicious, regular daily activities can continue. Only major auspicious events should be avoided.
                 </p>
               </div>
             </div>
