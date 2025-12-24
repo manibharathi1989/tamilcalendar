@@ -1,0 +1,94 @@
+[
+  {
+    "test": "Daily Calendar Endpoint",
+    "success": true,
+    "message": "Daily calendar data returned with correct structure",
+    "timestamp": "2025-12-24T04:24:53.876340",
+    "response_data": {
+      "tamil_date": "25 - \u0bae\u0bbe\u0bb0\u0bcd\u0b95\u0bb4\u0bbf - \u0baa\u0bbf\u0bb0\u0baa\u0bb5",
+      "nalla_neram": {
+        "morning": "09:15 - 10:15 \u0b95\u0bbe / AM",
+        "evening": "03:15 - 04:15 \u0bae\u0bbe / PM"
+      },
+      "raahu_kaalam": "01:30 - 03:00"
+    }
+  },
+  {
+    "test": "Search Endpoint",
+    "success": true,
+    "message": "Search returned 28 results",
+    "timestamp": "2025-12-24T04:24:54.066321",
+    "response_data": {
+      "results_count": 28,
+      "sample_result": {
+        "date": "2025-12-19T00:00:00",
+        "type": "amavasai",
+        "tamil_name": "\u0b85\u0bae\u0bbe\u0bb5\u0bbe\u0b9a\u0bc8",
+        "english_name": "Amavasai",
+        "month": 12,
+        "year": 2025
+      }
+    }
+  },
+  {
+    "test": "Special Days Endpoint",
+    "success": true,
+    "message": "Special days data returned with 28 total events",
+    "timestamp": "2025-12-24T04:24:54.142946",
+    "response_data": {
+      "categories": [
+        "amavasai",
+        "pournami",
+        "karthigai",
+        "sashtiViradham",
+        "sankatharaChathurthi",
+        "chathurthi",
+        "pradosham",
+        "thiruvonam",
+        "maadhasivarathiri",
+        "ekadhasi",
+        "ashtami",
+        "navami",
+        "govtHolidays",
+        "weddingDays",
+        "festivals"
+      ],
+      "total_events": 28
+    }
+  },
+  {
+    "test": "Admin Login Endpoint",
+    "success": true,
+    "message": "Admin login successful, token received",
+    "timestamp": "2025-12-24T04:24:54.577219",
+    "response_data": {
+      "success": true,
+      "message": "Login successful",
+      "token_received": true
+    }
+  },
+  {
+    "test": "Admin Analytics Endpoint",
+    "success": true,
+    "message": "Analytics data returned successfully",
+    "timestamp": "2025-12-24T04:24:54.896133",
+    "response_data": {
+      "totalDays": 8035,
+      "totalSpecialDays": 28,
+      "yearsAvailable": 22,
+      "monthsWithData": 264
+    }
+  },
+  {
+    "test": "Root API Endpoint",
+    "success": true,
+    "message": "Root endpoint accessible",
+    "timestamp": "2025-12-24T04:24:55.076903"
+  },
+  {
+    "test": "Available Years Endpoint",
+    "success": true,
+    "message": "Years available: 22",
+    "timestamp": "2025-12-24T04:24:55.135642"
+  }
+]
