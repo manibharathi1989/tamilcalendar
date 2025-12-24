@@ -256,11 +256,10 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Data Accuracy - Parigaram Fix Verification"
     - "Search Page - Search by Date"
     - "Search Page - Search by Range & Type"
   stuck_tasks: []
-  test_all: true
+  test_all: false
   test_priority: "high_first"
   
 recent_changes:
