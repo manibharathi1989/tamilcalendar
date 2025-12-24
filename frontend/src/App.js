@@ -26,9 +26,13 @@ import Navami from "./pages/Navami";
 import Ashtami from "./pages/Ashtami";
 import Thiruvonam from "./pages/Thiruvonam";
 import MaadhaSivarathiri from "./pages/MaadhaSivarathiri";
+import Search from "./pages/Search";
+import PrintCalendar from "./pages/PrintCalendar";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import CalendarEditor from "./pages/admin/CalendarEditor";
+import SpecialDaysEditor from "./pages/admin/SpecialDaysEditor";
+import Analytics from "./pages/admin/Analytics";
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
