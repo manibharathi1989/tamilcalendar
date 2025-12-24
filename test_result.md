@@ -164,6 +164,21 @@ frontend:
         agent: "testing"
         comment: "Maadha Sivarathiri page works perfectly! Shows correct header, year selector, displays date cards with data, and includes detailed information about observance and puja items."
 
+  - task: "Home Page Calendar Data Display"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/ModernHome.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Initial testing - need to verify home page calendar data display for specific dates and requirements"
+      - working: true
+        agent: "testing"
+        comment: "Home page calendar data display works excellently! Successfully verified: Dec 24, 2025 shows correct Tamil date (9 - மார்கழி - விசுவாவசு), Tamil day (புதன்), Nalla Neram (09:00-10:00 AM, 04:45-05:45 PM), Raahu Kaalam (12:00-01:30), Yemagandam (07:30-09:00), Kuligai (10:30-12:00), and Soolam (வடக்கு/North). Date navigation works perfectly. Weekday-based Soolam pattern verified correctly (Monday=East, Tuesday=South, Wednesday=North, Thursday=South, Friday=West). Calendar data available for years 2005-2026. All test scenarios passed successfully."
+
 metadata:
   created_by: "testing_agent"
   version: "1.0"
