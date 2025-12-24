@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { BarChart, Calendar, Edit, LogOut, Database, TrendingUp } from 'lucide-react';
+import { BarChart, Calendar, Edit, LogOut, Database, TrendingUp, Star, PieChart } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { adminAPI } from '../../services/adminAPI';
 
@@ -50,13 +50,18 @@ const AdminDashboard = () => {
             <h1 className="text-2xl font-bold">Admin Dashboard</h1>
             <p className="text-indigo-200 text-sm">Tamil Daily Calendar Management</p>
           </div>
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors"
-          >
-            <LogOut className="w-4 h-4" />
-            Logout
-          </button>
+          <div className="flex items-center gap-4">
+            <Link to="/" className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors text-sm">
+              View Site
+            </Link>
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors"
+            >
+              <LogOut className="w-4 h-4" />
+              Logout
+            </button>
+          </div>
         </div>
       </header>
 
@@ -97,7 +102,7 @@ const AdminDashboard = () => {
         {/* Quick Actions */}
         <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
           <h2 className="text-xl font-bold text-gray-800 mb-4">Quick Actions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link
               to="/admin/editor"
               className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl hover:border-indigo-500 hover:shadow-md transition-all"
@@ -105,18 +110,40 @@ const AdminDashboard = () => {
               <Edit className="w-8 h-8 text-indigo-600" />
               <div>
                 <p className="font-semibold text-gray-800">Edit Calendar</p>
-                <p className="text-sm text-gray-600">Update calendar data for any date</p>
+                <p className="text-sm text-gray-600">Update calendar data</p>
               </div>
             </Link>
 
             <Link
-              to="/admin/stats"
+              to="/admin/special-days"
               className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl hover:border-purple-500 hover:shadow-md transition-all"
             >
-              <BarChart className="w-8 h-8 text-purple-600" />
+              <Star className="w-8 h-8 text-purple-600" />
               <div>
-                <p className="font-semibold text-gray-800">View Statistics</p>
-                <p className="text-sm text-gray-600">Detailed database statistics</p>
+                <p className="font-semibold text-gray-800">Special Days</p>
+                <p className="text-sm text-gray-600">Manage special events</p>
+              </div>
+            </Link>
+
+            <Link
+              to="/admin/analytics"
+              className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl hover:border-green-500 hover:shadow-md transition-all"
+            >
+              <PieChart className="w-8 h-8 text-green-600" />
+              <div>
+                <p className="font-semibold text-gray-800">Analytics</p>
+                <p className="text-sm text-gray-600">View statistics</p>
+              </div>
+            </Link>
+
+            <Link
+              to="/search"
+              className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl hover:border-orange-500 hover:shadow-md transition-all"
+            >
+              <BarChart className="w-8 h-8 text-orange-600" />
+              <div>
+                <p className="font-semibold text-gray-800">Search</p>
+                <p className="text-sm text-gray-600">Find dates & events</p>
               </div>
             </Link>
           </div>
