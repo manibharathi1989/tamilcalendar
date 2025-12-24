@@ -89,15 +89,19 @@ def get_gowri_nalla_neram(weekday):
         "evening": f"{gowri_evening[weekday]} மா / PM"
     }
 
-def get_soolam(day_num):
-    """Calculate Soolam direction based on day number"""
-    soolams = [
-        {"tamil": "கிழக்கு", "english": "East"},
-        {"tamil": "தெற்கு", "english": "South"},
-        {"tamil": "மேற்கு", "english": "West"},
-        {"tamil": "வடக்கு", "english": "North"},
-    ]
-    return soolams[day_num % 4]
+def get_soolam(weekday):
+    """Calculate Soolam direction based on weekday (matches original site)"""
+    # Weekday: 0=Monday, 1=Tuesday, 2=Wednesday, 3=Thursday, 4=Friday, 5=Saturday, 6=Sunday
+    soolams = {
+        0: {"tamil": "கிழக்கு", "english": "East"},      # Monday - East
+        1: {"tamil": "தெற்கு", "english": "South"},      # Tuesday - South
+        2: {"tamil": "வடக்கு", "english": "North"},      # Wednesday - North
+        3: {"tamil": "தெற்கு", "english": "South"},      # Thursday - South
+        4: {"tamil": "மேற்கு", "english": "West"},       # Friday - West
+        5: {"tamil": "கிழக்கு", "english": "East"},      # Saturday - East
+        6: {"tamil": "மேற்கு", "english": "West"},       # Sunday - West
+    }
+    return soolams[weekday]
 
 def get_parigaram(day_num):
     """Calculate Parigaram based on day number"""
