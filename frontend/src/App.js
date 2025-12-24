@@ -100,10 +100,16 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/privacy" element={<Privacy />} />
             
+            {/* User Tools */}
+            <Route path="/search" element={<Search />} />
+            <Route path="/print" element={<PrintCalendar />} />
+            
             {/* Admin Routes */}
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
             <Route path="/admin/editor" element={<ProtectedRoute><CalendarEditor /></ProtectedRoute>} />
+            <Route path="/admin/special-days" element={<ProtectedRoute><SpecialDaysEditor /></ProtectedRoute>} />
+            <Route path="/admin/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
