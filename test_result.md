@@ -275,6 +275,7 @@ test_plan:
     - "Search Page - Search by Range & Type"
   test_all: false
   test_priority: "high_first"
+  critical_issue: "React 19 initialization failure - requires WEBSEARCH for React 19 specific solutions"
   
 recent_changes:
   - "Fixed Parigaram calculation to be based on Soolam direction (weekday-based)"
