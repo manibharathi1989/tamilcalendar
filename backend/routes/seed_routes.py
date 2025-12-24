@@ -51,13 +51,86 @@ def calculate_kuligai(weekday):
     }
     return kuligai_times[weekday]
 
-def get_tamil_month(month):
-    """Get Tamil month name based on English month"""
-    tamil_months = [
-        "தை", "மாசி", "பங்குனி", "சித்திரை", "வைகாசி", "ஆனி",
-        "ஆடி", "ஆவணி", "புரட்டாசி", "ஐப்பசி", "கார்த்திகை", "மார்கழி"
+def get_tamil_month_and_date(english_date):
+    """
+    Calculate Tamil month and date based on English date.
+    Tamil months start around mid-month of English calendar:
+    - Chithirai (சித்திரை) starts mid-April
+    - Vaikasi (வைகாசி) starts mid-May
+    - Aani (ஆனி) starts mid-June
+    - Aadi (ஆடி) starts mid-July
+    - Aavani (ஆவணி) starts mid-August
+    - Purattasi (புரட்டாசி) starts mid-September
+    - Aippasi (ஐப்பசி) starts mid-October
+    - Karthigai (கார்த்திகை) starts mid-November
+    - Margazhi (மார்கழி) starts mid-December
+    - Thai (தை) starts mid-January
+    - Maasi (மாசி) starts mid-February
+    - Panguni (பங்குனி) starts mid-March
+    """
+    month = english_date.month
+    day = english_date.day
+    
+    # Approximate Tamil month start dates (day of English month when Tamil month starts)
+    tamil_month_starts = {
+        1: (15, "தை"),      # Thai starts Jan 15
+        2: (14, "மாசி"),    # Maasi starts Feb 14
+        3: (15, "பங்குனி"), # Panguni starts Mar 15
+        4: (14, "சித்திரை"), # Chithirai starts Apr 14
+        5: (15, "வைகாசி"),  # Vaikasi starts May 15
+        6: (15, "ஆனி"),     # Aani starts Jun 15
+        7: (17, "ஆடி"),     # Aadi starts Jul 17
+        8: (17, "ஆவணி"),    # Aavani starts Aug 17
+        9: (17, "புரட்டாசி"), # Purattasi starts Sep 17
+        10: (17, "ஐப்பசி"),  # Aippasi starts Oct 17
+        11: (16, "கார்த்திகை"), # Karthigai starts Nov 16
+        12: (16, "மார்கழி"), # Margazhi starts Dec 16
+    }
+    
+    start_day, current_tamil_month = tamil_month_starts[month]
+    
+    # If before the start of Tamil month in this English month
+    if day < start_day:
+        # Use previous Tamil month
+        prev_month = month - 1 if month > 1 else 12
+        _, prev_tamil_month = tamil_month_starts[prev_month]
+        # Calculate Tamil date (days from start of previous Tamil month)
+        prev_start_day = tamil_month_starts[prev_month][0]
+        if month == 1:
+            tamil_day = (31 - prev_start_day) + day
+        else:
+            # Days in previous month
+            days_in_prev = [31, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30][prev_month - 1]
+            tamil_day = (days_in_prev - prev_start_day + 1) + day
+        return prev_tamil_month, min(tamil_day, 30)
+    else:
+        # Calculate Tamil date from start of current Tamil month
+        tamil_day = day - start_day + 1
+        return current_tamil_month, min(tamil_day, 32)
+
+def get_tamil_year(english_year, english_month):
+    """Get Tamil year name (60-year cycle)"""
+    # Tamil New Year starts in mid-April (Chithirai)
+    # Year changes on April 14
+    tamil_year = english_year if english_month >= 4 else english_year - 1
+    
+    # 60-year Tamil calendar cycle
+    tamil_year_names = [
+        "பிரபவ", "விபவ", "சுக்ல", "பிரமோதூத", "பிரஜோத்பத்தி", "ஆங்கீரச",
+        "ஸ்ரீமுக", "பவ", "யுவ", "தாது", "ஈஸ்வர", "வெகுதான்ய",
+        "பிரமாதி", "விக்ரம", "விஷு", "சித்ரபானு", "சுபானு", "தாரண",
+        "பார்த்திப", "விய", "சர்வஜித்", "சர்வதாரி", "விரோதி", "விக்ரிதி",
+        "கர", "நந்தன", "விஜய", "ஜய", "மன்மத", "துர்முகி",
+        "ஹேவிளம்பி", "விளம்பி", "விகாரி", "சார்வரி", "பிலவ", "சுபகிருது",
+        "சோபகிருது", "குரோதி", "விசுவாவசு", "பராபவ", "பிலவங்க", "கீலக",
+        "சௌம்ய", "சாதாரண", "விரோதகிருது", "பரிதாபி", "பிரமாதீச", "ஆனந்த",
+        "ராக்ஷச", "நள", "பிங்கள", "காளயுக்தி", "சித்தார்த்தி", "ரௌத்ரி",
+        "துர்மதி", "துந்துபி", "ருத்ரோத்காரி", "ரக்தாக்ஷி", "குரோதன", "அட்சய"
     ]
-    return tamil_months[month - 1]
+    
+    # Calculate index in 60-year cycle (based on approximate calculation)
+    cycle_index = (tamil_year - 1987) % 60  # 1987 was Pramoduta
+    return tamil_year_names[cycle_index]
 
 def get_nalla_neram(weekday):
     """Calculate Nalla Neram based on weekday - matching original site values"""
