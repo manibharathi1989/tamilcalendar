@@ -33,12 +33,18 @@ const Search = () => {
   ];
 
   const handleDateSearch = async () => {
-    if (!selectedDate) return;
+    console.log('handleDateSearch called, selectedDate:', selectedDate);
+    if (!selectedDate) {
+      console.log('No date selected, returning');
+      return;
+    }
     setLoading(true);
     setSearched(true);
     try {
       const [year, month, day] = selectedDate.split('-').map(Number);
+      console.log('Fetching calendar for:', year, month, day);
       const data = await calendarAPI.getDailyCalendar(year, month, day);
+      console.log('Received data:', data);
       setResults({ type: 'date', data });
     } catch (error) {
       console.error('Search error:', error);
