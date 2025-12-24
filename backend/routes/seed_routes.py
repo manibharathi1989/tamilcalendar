@@ -160,14 +160,15 @@ def get_gowri_nalla_neram(weekday):
     return gowri_times[weekday]
 
 def get_soolam(weekday):
-    """Calculate Soolam direction based on weekday (matches original site)"""
+    """Calculate Soolam direction based on weekday - matching tamilnaalkaati.com"""
     # Weekday: 0=Monday, 1=Tuesday, 2=Wednesday, 3=Thursday, 4=Friday, 5=Saturday, 6=Sunday
+    # Reference: Dec 23 (Tuesday) = வடக்கு
     soolams = {
         0: {"tamil": "கிழக்கு", "english": "East"},      # Monday - East
-        1: {"tamil": "தெற்கு", "english": "South"},      # Tuesday - South
-        2: {"tamil": "வடக்கு", "english": "North"},      # Wednesday - North
+        1: {"tamil": "வடக்கு", "english": "North"},      # Tuesday - North
+        2: {"tamil": "மேற்கு", "english": "West"},       # Wednesday - West  
         3: {"tamil": "தெற்கு", "english": "South"},      # Thursday - South
-        4: {"tamil": "மேற்கு", "english": "West"},       # Friday - West
+        4: {"tamil": "வடக்கு", "english": "North"},      # Friday - North
         5: {"tamil": "கிழக்கு", "english": "East"},      # Saturday - East
         6: {"tamil": "மேற்கு", "english": "West"},       # Sunday - West
     }
