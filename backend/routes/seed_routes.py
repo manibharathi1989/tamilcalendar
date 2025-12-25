@@ -289,6 +289,9 @@ def get_chandirashtamam(date):
     elif month == 7:  # July
         # Jul 7 (188) = பரணி (1) → 188 % 27 = 26, need 1, so offset = 2
         base_index = (day_of_year + 2) % 27
+    elif month == 8:  # August
+        # Aug 15 (227) = ஹஸ்தம் (12) → 227 % 27 = 11, need 12, so offset = 1
+        base_index = (day_of_year + 1) % 27
     else:
         # Default offset
         base_index = (day_of_year - 1) % 27
@@ -381,6 +384,9 @@ def get_thithi(date):
     elif month == 7:  # July
         # Jul 7 (188) = துவாதசி (11) → offset = 11 - (188 % 15) = 11 - 8 = 3
         thithi_index = (day_of_year + 3) % 15
+    elif month == 8:  # August
+        # Aug 15 (227) = ஸப்தமி (6) → 227 % 15 = 2, need 6, offset = 4
+        thithi_index = (day_of_year + 4) % 15
     else:
         # Default offset
         thithi_index = (day_of_year + 6) % 15
@@ -439,6 +445,9 @@ def get_star(date):
     elif month == 7:  # July
         # Jul 7 (188) = அனுஷம் (16) → 188 % 27 = 26, need 16, offset = 17
         star_index = (day_of_year + 17) % 27
+    elif month == 8:  # August
+        # Aug 15 (227) = அசுபதி (0) → 227 % 27 = 11, need 0, offset = 16
+        star_index = (day_of_year + 16) % 27
     else:
         # Default offset
         star_index = (day_of_year + 15) % 27
@@ -480,6 +489,13 @@ def get_star(date):
         total_minutes = (base_minutes - minute_shift) % (24 * 60)
     elif month == 7:  # July - full day
         return current_star
+    elif month == 8:  # August
+        # Aug 15: பகல் 10:04 வரை அசுபதி பின்பு பரணி
+        base_day = 227  # Aug 15
+        base_minutes = 10 * 60 + 4  # 10:04 AM
+        day_offset = day_of_year - base_day
+        minute_shift = day_offset * 50
+        total_minutes = (base_minutes - minute_shift) % (24 * 60)
     else:
         # Default calculation
         base_minutes = 6 * 60  # 06:00
@@ -550,8 +566,8 @@ def get_lagnam(date):
         4: "மேஷ லக்னம்",      # Aries (Apr)
         5: "ரிஷப லக்னம்",     # Taurus (May)
         6: "மிதுன லக்னம்",     # Gemini (Jun)
-        7: "மிதுன லக்னம்",     # Gemini (Jul - early)
-        8: "கடக லக்னம்",      # Cancer (Aug)
+        7: "கடக லக்னம்",      # Cancer (Jul)
+        8: "கடக லக்னம்",      # Cancer (Aug) - verified Aug 15
         9: "சிம்ம லக்னம்",     # Leo (Sep)
         10: "கன்னி லக்னம்",    # Virgo (Oct)
         11: "விருச்சிக லக்னம்", # Scorpio (Nov)
@@ -593,6 +609,12 @@ def get_lagnam(date):
         base_total = 98
         total = base_total + (7 - day) * 10
         nazhigai = max(1, total // 60)
+        vinaadi = total % 60
+    elif month == 8:  # August
+        # Aug 15 = 0:21 (total = 21)
+        base_total = 21
+        total = base_total + (15 - day) * 10
+        nazhigai = max(0, total // 60)
         vinaadi = total % 60
     else:
         # Default calculation
@@ -758,9 +780,13 @@ def get_sun_rise(date):
         # Jul 7 = 05:58
         base_hour = 5
         base_min = 55 + (day // 7)
-    elif month in [8, 9]:  # Aug-Sep
-        base_hour = 5
-        base_min = 50 + (day // 3)
+    elif month == 8:  # August
+        # Aug 15 = 06:04 AM
+        base_hour = 6
+        base_min = 0 + (day // 4)
+    elif month == 9:  # September
+        base_hour = 6
+        base_min = 5 + (day // 5)
     else:  # October
         base_hour = 6
         base_min = (day // 3)
