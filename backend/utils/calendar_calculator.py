@@ -208,6 +208,38 @@ SPECIFIC_DATE_DATA = {
         "karanam": "தைதுலை",
         "subakariyam": "குரு வழிபாடு, தான தர்மம், புதிய முயற்சிகள் தொடங்க, கல்வி கற்க சிறந்த நாள்"
     },
+    # December 3, 2025 - Wednesday (Verified from prokerala.com)
+    (2025, 12, 3): {
+        "tamil_date": "17 - கார்த்திகை - விசுவாவசு",
+        "tamil_day": "புதன்",
+        "tamil_month": "கார்த்திகை",
+        "tamil_year": "விசுவாவசு",
+        "english_day": "Wednesday",
+        "nalla_neram": {
+            "morning": "09:09 - 10:34 கா / AM",
+            "evening": "02:47 - 04:12 மா / PM"
+        },
+        "gowri_nalla_neram": {
+            "morning": "07:45 - 09:09 கா / AM",
+            "evening": "01:23 - 02:47 மா / PM"
+        },
+        "raahu_kaalam": "11:58 - 01:23",
+        "yemagandam": "07:45 - 09:09",
+        "kuligai": "10:34 - 11:58",
+        "soolam": {"tamil": "வடக்கு", "english": "Vadakku (North)"},
+        "parigaram": {"tamil": "பச்சைப்பயறு", "english": "Pachaipayaru (Green Gram)"},
+        "chandirashtamam": "உத்திரட்டாதி, ரேவதி",
+        "naal": "கீழ் நோக்கு நாள்",
+        "lagnam": "விருச்சிக லக்னம் இருப்பு நாழிகை 4 வினாடி 28",
+        "sun_rise": "06:20 கா / AM",
+        "sun_set": "05:36 மா / PM",
+        "sraardha_thithi": "திரயோதசி",
+        "thithi": "திரயோதசி மதியம் 12:26 PM வரை பின்பு சதுர்த்தசி",
+        "star": "பரணி மாலை 06:00 PM வரை பின்பு கார்த்திகை",
+        "yogam": "பரிகம் மாலை 04:57 PM வரை பின்பு சிவம்",
+        "karanam": "வணிஜை",
+        "subakariyam": "புதன் வழிபாடு, வியாபாரம் தொடங்க, கணக்கு பார்க்க, கல்வி கற்க சிறந்த நாள்"
+    },
 }
 
 

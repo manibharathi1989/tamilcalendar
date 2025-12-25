@@ -76,8 +76,9 @@ const KULIGAI = {
   6: '06:00 - 07:30 கா / AM'
 };
 
-// Specific date data for April 17, 2025 (Verified from tamilnaalkaati.com)
+// Specific date data (Verified from tamilnaalkaati.com and prokerala.com)
 const SPECIFIC_DATES = {
+  // April 17, 2025 - Thursday (Verified from tamilnaalkaati.com)
   '2025-4-17': {
     tamilDate: '04 - சித்திரை - விசுவாவசு',
     tamilDay: 'வியாழன்',
@@ -103,6 +104,33 @@ const SPECIFIC_DATES = {
     star: 'கேட்டை',
     yogam: 'வரியான்',
     subakariyam: 'குரு வழிபாடு, தான தர்மம், புதிய முயற்சிகள் தொடங்க, கல்வி கற்க சிறந்த நாள்'
+  },
+  // December 3, 2025 - Wednesday (Verified from prokerala.com)
+  '2025-12-3': {
+    tamilDate: '17 - கார்த்திகை - விசுவாவசு',
+    tamilDay: 'புதன்',
+    nallaNeram: {
+      morning: '09:09 - 10:34 கா / AM',
+      evening: '02:47 - 04:12 மா / PM'
+    },
+    gowriNallaNeram: {
+      morning: '07:45 - 09:09 கா / AM',
+      evening: '01:23 - 02:47 மா / PM'
+    },
+    raahuKaalam: '11:58 - 01:23',
+    yemagandam: '07:45 - 09:09',
+    kuligai: '10:34 - 11:58',
+    soolam: { tamil: 'வடக்கு', english: 'Vadakku (North)' },
+    parigaram: { tamil: 'பச்சைப்பயறு', english: 'Pachaipayaru (Green Gram)' },
+    chandirashtamam: 'உத்திரட்டாதி, ரேவதி',
+    naal: 'கீழ் நோக்கு நாள்',
+    lagnam: 'விருச்சிக லக்னம் இருப்பு நாழிகை 4 வினாடி 28',
+    sunRise: '06:20 கா / AM',
+    sraardhaThithi: 'திரயோதசி',
+    thithi: 'திரயோதசி மதியம் 12:26 PM வரை பின்பு சதுர்த்தசி',
+    star: 'பரணி மாலை 06:00 PM வரை பின்பு கார்த்திகை',
+    yogam: 'பரிகம் மாலை 04:57 PM வரை பின்பு சிவம்',
+    subakariyam: 'புதன் வழிபாடு, வியாபாரம் தொடங்க, கணக்கு பார்க்க, கல்வி கற்க சிறந்த நாள்'
   }
 };
 
