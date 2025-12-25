@@ -154,7 +154,15 @@ const DailyCalendarSheet = ({ date, calendarData }) => {
               <td className="py-3 px-4 text-gray-800">{calendarData.star}</td>
             </tr>
 
-            <tr className="bg-gray-50">
+            <tr className="border-b border-gray-200 bg-gray-50">
+              <td className="py-3 px-4 font-semibold text-gray-700">
+                யோகம்<br />
+                <span className="text-sm font-normal">Yogam</span>
+              </td>
+              <td className="py-3 px-4 text-gray-800">{calendarData.yogam}</td>
+            </tr>
+
+            <tr>
               <td className="py-3 px-4 font-semibold text-gray-700">
                 சுபகாரியம்<br />
                 <span className="text-sm font-normal">Subakariyam</span>
