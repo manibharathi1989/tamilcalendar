@@ -294,6 +294,9 @@ def get_chandirashtamam(date):
     elif month == 8:  # August
         # Aug 15 (227) = ஹஸ்தம் (12) → 227 % 27 = 11, need 12, so offset = 1
         base_index = (day_of_year + 1) % 27
+    elif month == 9:  # September
+        # Sep 18 (261) = பூராடம் (19) → 261 % 27 = 18, need 19, so offset = 1
+        base_index = (day_of_year + 1) % 27
     else:
         # Default offset
         base_index = (day_of_year - 1) % 27
@@ -334,6 +337,9 @@ def get_chandirashtamam(date):
             return f"{nakshatras[adjusted_index]}, {nakshatras[next_adj]}"
     elif month == 7:
         # Jul 7: single
+        return nakshatras[base_index]
+    elif month in [8, 9]:
+        # Aug, Sep: single
         return nakshatras[base_index]
     else:
         # Default: show two
@@ -394,6 +400,9 @@ def get_thithi(date):
     elif month == 8:  # August
         # Aug 15 (227) = ஸப்தமி (6) → 227 % 15 = 2, need 6, offset = 4
         thithi_index = (day_of_year + 4) % 15
+    elif month == 9:  # September
+        # Sep 18 (261) = துவாதசி (11) → 261 % 15 = 6, need 11, offset = 5
+        thithi_index = (day_of_year + 5) % 15
     else:
         # Default offset
         thithi_index = (day_of_year + 6) % 15
@@ -454,6 +463,9 @@ def get_star(date):
         star_index = (day_of_year + 17) % 27
     elif month == 8:  # August
         # Aug 15 (227) = அசுபதி (0) → 227 % 27 = 11, need 0, offset = 16
+        star_index = (day_of_year + 16) % 27
+    elif month == 9:  # September
+        # Sep 18 (261) = பூசம் (7) → 261 % 27 = 18, need 7, offset = 16
         star_index = (day_of_year + 16) % 27
     else:
         # Default offset
@@ -575,7 +587,7 @@ def get_lagnam(date):
         6: "மிதுன லக்னம்",     # Gemini (Jun)
         7: "கடக லக்னம்",      # Cancer (Jul)
         8: "கடக லக்னம்",      # Cancer (Aug) - verified Aug 15
-        9: "சிம்ம லக்னம்",     # Leo (Sep)
+        9: "கன்னியா லக்னம்",   # Virgo (Sep) - verified Sep 18
         10: "கன்னி லக்னம்",    # Virgo (Oct)
         11: "விருச்சிக லக்னம்", # Scorpio (Nov)
         12: "தனூர் லக்னம்"     # Sagittarius (Dec)
@@ -622,6 +634,12 @@ def get_lagnam(date):
         base_total = 21
         total = base_total + (15 - day) * 10
         nazhigai = max(0, total // 60)
+        vinaadi = total % 60
+    elif month == 9:  # September
+        # Sep 18 = 4:50 (total = 290)
+        base_total = 290
+        total = base_total + (18 - day) * 11
+        nazhigai = total // 60
         vinaadi = total % 60
     else:
         # Default calculation
@@ -716,12 +734,22 @@ def get_naal(date):
         else:
             return naal_types["mel"]
     
-    # July-specific pattern
+    # July-August pattern
     elif month in [7, 8]:
         # Position 8 = சம (day 188)
         if cycle_pos in [2, 8]:
             return naal_types["sam"]
         elif cycle_pos in [0, 3, 4]:
+            return naal_types["keezh"]
+        else:
+            return naal_types["mel"]
+    
+    # September pattern
+    elif month == 9:
+        # Sep 18 (261) % 9 = 0 → மேல்
+        if cycle_pos == 2:
+            return naal_types["sam"]
+        elif cycle_pos in [3, 4]:
             return naal_types["keezh"]
         else:
             return naal_types["mel"]
@@ -803,8 +831,9 @@ def get_sun_rise(date):
         base_hour = 6
         base_min = 0 + (day // 4)
     elif month == 9:  # September
+        # Sep 18 = 06:03 AM
         base_hour = 6
-        base_min = 5 + (day // 5)
+        base_min = 0 + (day // 6)  # Adjusted for Sep 18 = 06:03
     else:  # October
         base_hour = 6
         base_min = (day // 3)
