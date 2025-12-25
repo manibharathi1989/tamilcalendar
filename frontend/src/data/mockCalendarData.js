@@ -38,7 +38,7 @@ const PARIGARAM_BY_DAY = {
   1: { tamil: 'வெல்லம்', english: 'Vellam (Jaggery)' },         // Monday
   2: { tamil: 'கோதுமை', english: 'Gothumai (Wheat)' },          // Tuesday
   3: { tamil: 'பச்சைப்பயறு', english: 'Pachaipayaru (Green Gram)' }, // Wednesday
-  4: { tamil: 'எள்', english: 'El (Sesame)' },                  // Thursday
+  4: { tamil: 'தைலம்', english: 'Thailam (Oil)' },              // Thursday
   5: { tamil: 'அரிசி', english: 'Arisi (Rice)' },               // Friday
   6: { tamil: 'உளுந்து', english: 'Ulundhu (Black Gram)' }      // Saturday
 };
@@ -76,32 +76,32 @@ const KULIGAI = {
   6: '06:00 - 07:30 கா / AM'
 };
 
-// Specific date data for April 17, 2025
+// Specific date data for April 17, 2025 (Verified from tamilnaalkaati.com)
 const SPECIFIC_DATES = {
   '2025-4-17': {
-    tamilDate: '4 - சித்திரை - சுபகிருது',
+    tamilDate: '04 - சித்திரை - விசுவாவசு',
     tamilDay: 'வியாழன்',
     nallaNeram: {
-      morning: '07:30 - 09:00 கா / AM',
-      evening: '03:00 - 04:30 மா / PM'
+      morning: '----------',
+      evening: '12:00 - 01:00 ப / PM'
     },
     gowriNallaNeram: {
-      morning: '06:00 - 07:30 கா / AM',
-      evening: '01:30 - 03:00 மா / PM'
+      morning: '----------',
+      evening: '06:30 - 07:30 இ / PM'
     },
-    raahuKaalam: '01:30 - 03:00 மா / PM',
-    yemagandam: '06:00 - 07:30 கா / AM',
-    kuligai: '09:00 - 10:30 கா / AM',
+    raahuKaalam: '01:30 - 03:00',
+    yemagandam: '06:00 - 07:30',
+    kuligai: '09:00 - 10:30',
     soolam: { tamil: 'தெற்கு', english: 'Therkku (South)' },
-    parigaram: { tamil: 'எள்', english: 'El (Sesame)' },
-    chandirashtamam: 'மிருகசீரிடம், திருவாதிரை',
-    naal: 'அமிர்த நாள்',
-    lagnam: 'மேஷ லக்னம் இருப்பு நாழிகை 05 வினாடி 22',
-    sunRise: '06:02 கா / AM',
-    sraardhaThithi: 'சப்தமி',
-    thithi: 'இன்று காலை 08:45 AM வரை சஷ்டி பின்பு சப்தமி',
-    star: 'இன்று மாலை 05:18 PM வரை மிருகசீரிடம் பின்பு திருவாதிரை',
-    yogam: 'ஆயுஷ்மான் யோகம் மாலை 04:52 PM வரை பின்பு சௌபாக்யம்',
+    parigaram: { tamil: 'தைலம்', english: 'Thailam (Oil)' },
+    chandirashtamam: 'கார்த்திகை',
+    naal: 'சம நோக்கு நாள்',
+    lagnam: 'மேஷ லக்னம் இருப்பு நாழிகை 3 வினாடி 50',
+    sunRise: '06:03 கா / AM',
+    sraardhaThithi: 'பஞ்சமி',
+    thithi: 'பஞ்சமி',
+    star: 'கேட்டை',
+    yogam: 'வரியான்',
     subakariyam: 'குரு வழிபாடு, தான தர்மம், புதிய முயற்சிகள் தொடங்க, கல்வி கற்க சிறந்த நாள்'
   }
 };
@@ -129,7 +129,7 @@ export const getDailyCalendarData = (date) => {
   };
   
   const tamilMonth = tamilMonthMap[month];
-  const tamilYear = year >= 2025 ? 'சுபகிருது' : 'குரோதி';
+  const tamilYear = year >= 2025 ? 'விசுவாவசு' : 'குரோதி';
   
   return {
     date: date,

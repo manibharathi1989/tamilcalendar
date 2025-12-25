@@ -120,12 +120,17 @@ def verify_date_april_17_2025():
         ("Day of Week", date_obj.strftime('%A') == 'Thursday', "Thursday"),
         ("Tamil Day", data['tamil_day'] == 'வியாழன்', "வியாழன்"),
         ("Soolam Direction", 'தெற்கு' in data['soolam']['tamil'], "South for Thursday"),
-        ("Parigaram", 'எள்' in data['parigaram']['tamil'], "Sesame for Thursday"),
-        ("Raahu Kaalam", '01:30' in data['raahu_kaalam'] or '1:30' in data['raahu_kaalam'], "1:30-3:00 PM"),
-        ("Yemagandam", '06:00' in data['yemagandam'] or '6:00' in data['yemagandam'], "6:00-7:30 AM"),
-        ("Kuligai", '09:00' in data['kuligai'] or '9:00' in data['kuligai'], "9:00-10:30 AM"),
+        ("Parigaram", 'தைலம்' in data['parigaram']['tamil'], "Oil (தைலம்) for Thursday"),
+        ("Raahu Kaalam", '01:30' in data['raahu_kaalam'] or '1:30' in data['raahu_kaalam'], "1:30-3:00"),
+        ("Yemagandam", '06:00' in data['yemagandam'] or '6:00' in data['yemagandam'], "6:00-7:30"),
+        ("Kuligai", '09:00' in data['kuligai'] or '9:00' in data['kuligai'], "9:00-10:30"),
         ("Tamil Month", data['tamil_month'] == 'சித்திரை', "Chithirai (April)"),
-        ("Tamil Year", data['tamil_year'] == 'சுபகிருது', "Shubhakrit (2025-26)"),
+        ("Tamil Year", data['tamil_year'] == 'விசுவாவசு', "Viswavasu (விசுவாவசு)"),
+        ("Naal", data['naal'] == 'சம நோக்கு நாள்', "சம நோக்கு நாள்"),
+        ("Thithi", data['thithi'] == 'பஞ்சமி', "பஞ்சமி"),
+        ("Star", data['star'] == 'கேட்டை', "கேட்டை"),
+        ("Chandirashtamam", data['chandirashtamam'] == 'கார்த்திகை', "கார்த்திகை"),
+        ("Sun Rise", '06:03' in data['sun_rise'], "06:03 AM"),
     ]
     
     all_passed = True

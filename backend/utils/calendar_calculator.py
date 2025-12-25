@@ -75,7 +75,7 @@ PARIGARAM_BY_DAY = {
     0: {"tamil": "வெல்லம்", "english": "Vellam (Jaggery)"},       # Monday
     1: {"tamil": "கோதுமை", "english": "Gothumai (Wheat)"},        # Tuesday
     2: {"tamil": "பச்சைப்பயறு", "english": "Pachaipayaru (Green Gram)"},  # Wednesday
-    3: {"tamil": "எள்", "english": "El (Sesame)"},                # Thursday
+    3: {"tamil": "தைலம்", "english": "Thailam (Oil)"},            # Thursday
     4: {"tamil": "அரிசி", "english": "Arisi (Rice)"},             # Friday
     5: {"tamil": "உளுந்து", "english": "Ulundhu (Black Gram)"},   # Saturday
     6: {"tamil": "கடலை", "english": "Kadalai (Gram)"}             # Sunday
@@ -176,36 +176,36 @@ CHANDIRASHTAMAM = {
 
 # Predefined calendar data for specific dates
 SPECIFIC_DATE_DATA = {
-    # April 17, 2025 - Thursday
+    # April 17, 2025 - Thursday (Verified from tamilnaalkaati.com)
     (2025, 4, 17): {
-        "tamil_date": "4 - சித்திரை - சுபகிருது",
+        "tamil_date": "04 - சித்திரை - விசுவாவசு",
         "tamil_day": "வியாழன்",
         "tamil_month": "சித்திரை",
-        "tamil_year": "சுபகிருது",
+        "tamil_year": "விசுவாவசு",
         "english_day": "Thursday",
         "nalla_neram": {
-            "morning": "07:30 - 09:00 கா / AM",
-            "evening": "03:00 - 04:30 மா / PM"
+            "morning": "----------",
+            "evening": "12:00 - 01:00 ப / PM"
         },
         "gowri_nalla_neram": {
-            "morning": "06:00 - 07:30 கா / AM",
-            "evening": "01:30 - 03:00 மா / PM"
+            "morning": "----------",
+            "evening": "06:30 - 07:30 இ / PM"
         },
-        "raahu_kaalam": "01:30 - 03:00 மா / PM",
-        "yemagandam": "06:00 - 07:30 கா / AM",
-        "kuligai": "09:00 - 10:30 கா / AM",
+        "raahu_kaalam": "01:30 - 03:00",
+        "yemagandam": "06:00 - 07:30",
+        "kuligai": "09:00 - 10:30",
         "soolam": {"tamil": "தெற்கு", "english": "Therkku (South)"},
-        "parigaram": {"tamil": "எள்", "english": "El (Sesame)"},
-        "chandirashtamam": "மிருகசீரிடம், திருவாதிரை",
-        "naal": "அமிர்த நாள்",
-        "lagnam": "மேஷ லக்னம் இருப்பு நாழிகை 05 வினாடி 22",
-        "sun_rise": "06:02 கா / AM",
+        "parigaram": {"tamil": "தைலம்", "english": "Thailam (Oil)"},
+        "chandirashtamam": "கார்த்திகை",
+        "naal": "சம நோக்கு நாள்",
+        "lagnam": "மேஷ லக்னம் இருப்பு நாழிகை 3 வினாடி 50",
+        "sun_rise": "06:03 கா / AM",
         "sun_set": "06:28 மா / PM",
-        "sraardha_thithi": "சப்தமி",
-        "thithi": "இன்று காலை 08:45 AM வரை சஷ்டி பின்பு சப்தமி",
-        "star": "இன்று மாலை 05:18 PM வரை மிருகசீரிடம் பின்பு திருவாதிரை",
-        "yogam": "ஆயுஷ்மான் யோகம் மாலை 04:52 PM வரை பின்பு சௌபாக்யம்",
-        "karanam": "பவம் காலை 08:45 AM வரை பின்பு பாலவம்",
+        "sraardha_thithi": "பஞ்சமி",
+        "thithi": "பஞ்சமி",
+        "star": "கேட்டை",
+        "yogam": "வரியான்",
+        "karanam": "தைதுலை",
         "subakariyam": "குரு வழிபாடு, தான தர்மம், புதிய முயற்சிகள் தொடங்க, கல்வி கற்க சிறந்த நாள்"
     },
 }
