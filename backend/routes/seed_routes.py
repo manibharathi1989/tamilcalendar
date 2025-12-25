@@ -291,6 +291,9 @@ def get_chandirashtamam(date):
         # Apr 19 (109) = மிருகசீருஷம் (4) → 109 % 27 = 1, need 4, so offset = 3
         # Apr 28 (118) = ஹஸ்தம் (12) → 118 % 27 = 10, need 12, so offset = 2
         base_index = (day_of_year + 3) % 27
+    elif month == 5:  # May
+        # May 5 (125) = பூராடம் (19) → 125 % 27 = 17, need 19, so offset = 2
+        base_index = (day_of_year + 2) % 27
     elif month == 7:  # July
         # Jul 7 (188) = பரணி (1) → 188 % 27 = 26, need 1, so offset = 2
         base_index = (day_of_year + 2) % 27
@@ -332,6 +335,9 @@ def get_chandirashtamam(date):
     elif month == 3:
         # Mar 6: single
         return nakshatras[base_index]
+    elif month == 5:
+        # May 5: two nakshatras
+        return f"{nakshatras[base_index]}, {nakshatras[next_index]}"
     elif month == 4:
         # Apr 19: single (offset +3), Apr 28: two (offset +2)
         if day < 25:
@@ -403,6 +409,9 @@ def get_thithi(date):
         # Apr 28 (118) = பிரதமை (0) → offset = 0 - (118 % 15) = 0 - 13 = 2
         # Use average/compromise
         thithi_index = (day_of_year + 2) % 15
+    elif month == 5:  # May
+        # May 5 (125) = நவமி (8) → 125 % 15 = 5, need 8, offset = 3
+        thithi_index = (day_of_year + 3) % 15
     elif month == 7:  # July
         # Jul 7 (188) = துவாதசி (11) → offset = 11 - (188 % 15) = 11 - 8 = 3
         thithi_index = (day_of_year + 3) % 15
@@ -470,6 +479,9 @@ def get_star(date):
         # Apr 19 (109) = மூலம் (18) → 109 % 27 = 1, need 18, offset = 17
         # Apr 28 (118) = பரணி (1) → 118 % 27 = 10, need 1, offset = 18
         star_index = (day_of_year + 18) % 27
+    elif month == 5:  # May
+        # May 5 (125) = ஆயில்யம் (8) → 125 % 27 = 17, need 8, offset = 18
+        star_index = (day_of_year + 18) % 27
     elif month == 7:  # July
         # Jul 7 (188) = அனுஷம் (16) → 188 % 27 = 26, need 16, offset = 17
         star_index = (day_of_year + 17) % 27
@@ -518,6 +530,8 @@ def get_star(date):
         day_offset = day_of_year - base_day
         minute_shift = day_offset * 50
         total_minutes = (base_minutes - minute_shift) % (24 * 60)
+    elif month == 5:  # May - full day star
+        return current_star
     elif month == 7:  # July - full day
         return current_star
     elif month == 8:  # August
@@ -595,7 +609,7 @@ def get_lagnam(date):
         2: "கும்ப லக்னம்",     # Aquarius (Feb)
         3: "கும்ப லக்னம்",     # Aquarius (Mar) - verified Mar 6, 2026
         4: "மேஷ லக்னம்",      # Aries (Apr)
-        5: "ரிஷப லக்னம்",     # Taurus (May)
+        5: "மேஷ லக்னம்",      # Aries (May) - verified May 5, 2025
         6: "மிதுன லக்னம்",     # Gemini (Jun)
         7: "கடக லக்னம்",      # Cancer (Jul)
         8: "கடக லக்னம்",      # Cancer (Aug) - verified Aug 15
@@ -640,6 +654,12 @@ def get_lagnam(date):
         base_total = 140  # Apr 28
         total = base_total + (28 - day) * 8
         nazhigai = total // 60
+        vinaadi = total % 60
+    elif month == 5:  # May
+        # May 5 = 1:22 (total = 82)
+        base_total = 82
+        total = base_total + (5 - day) * 10
+        nazhigai = max(0, total // 60)
         vinaadi = total % 60
     elif month == 7:  # July
         # Jul 7 = 1:38 (total = 98)
@@ -741,13 +761,23 @@ def get_naal(date):
             return naal_types["mel"]
     
     # April-specific pattern
-    elif month in [4, 5]:
+    elif month == 4:
         # Position 1 = கீழ் (days 109, 118)
         if cycle_pos == 1:
             return naal_types["keezh"]
         elif cycle_pos == 2:
             return naal_types["sam"]
         elif cycle_pos in [0, 3, 4]:
+            return naal_types["keezh"]
+        else:
+            return naal_types["mel"]
+    
+    # May-specific pattern
+    elif month == 5:
+        # May 5 (125) % 9 = 8 → கீழ் (verified from website)
+        if cycle_pos == 2:
+            return naal_types["sam"]
+        elif cycle_pos in [0, 1, 3, 4, 8]:  # Added 8 for May 5
             return naal_types["keezh"]
         else:
             return naal_types["mel"]
@@ -836,7 +866,11 @@ def get_sun_rise(date):
         else:
             base_hour = 6 if day < 25 else 5
             base_min = 5 - ((day - 15) // 3) if day < 25 else 58
-    elif month in [5, 6]:  # May-Jun
+    elif month == 5:  # May
+        # May 5 = 05:56 AM (verified from website)
+        base_hour = 5
+        base_min = 57 - (day // 5)  # Adjusted for May 5 = 05:56
+    elif month == 6:  # June
         base_hour = 5
         base_min = 40 + (day // 5)
     elif month == 7:  # July
