@@ -284,6 +284,9 @@ def get_chandirashtamam(date):
     elif month == 2:  # February
         # Feb 28 (59) = ஆயில்யம் (8) → 59 % 27 = 5, need 8, so offset = 3
         base_index = (day_of_year + 3) % 27
+    elif month == 3:  # March
+        # Mar 6 (65) = பூரட்டாதி (24) → 65 % 27 = 11, need 24, so offset = 13
+        base_index = (day_of_year + 13) % 27
     elif month == 4:  # April
         # Apr 19 (109) = மிருகசீருஷம் (4) → 109 % 27 = 1, need 4, so offset = 3
         # Apr 28 (118) = ஹஸ்தம் (12) → 118 % 27 = 10, need 12, so offset = 2
@@ -326,6 +329,9 @@ def get_chandirashtamam(date):
     elif month == 2:
         # Feb 28 shows two
         return f"{nakshatras[base_index]}, {nakshatras[next_index]}"
+    elif month == 3:
+        # Mar 6: single
+        return nakshatras[base_index]
     elif month == 4:
         # Apr 19: single (offset +3), Apr 28: two (offset +2)
         if day < 25:
@@ -389,6 +395,9 @@ def get_thithi(date):
     elif month == 2:  # February
         # Feb 28 (59) = பிரதமை (0) → offset = 0 - (59 % 15) = 0 - 14 = 1 (mod 15)
         thithi_index = (day_of_year + 1) % 15
+    elif month == 3:  # March
+        # Mar 6 (65) = திரிதியை (2) → 65 % 15 = 5, need 2, offset = 12
+        thithi_index = (day_of_year + 12) % 15
     elif month == 4:  # April
         # Apr 19 (109) = சஷ்டி (5) → offset = 5 - (109 % 15) = 5 - 4 = 1
         # Apr 28 (118) = பிரதமை (0) → offset = 0 - (118 % 15) = 0 - 13 = 2
@@ -454,6 +463,9 @@ def get_star(date):
     elif month == 2:  # February
         # Feb 28 (59) = சதயம் (23) → 59 % 27 = 5, need 23, offset = 18
         star_index = (day_of_year + 18) % 27
+    elif month == 3:  # March
+        # Mar 6 (65) = ஹஸ்தம் (12) → 65 % 27 = 11, need 12, offset = 1
+        star_index = (day_of_year + 1) % 27
     elif month == 4:  # April
         # Apr 19 (109) = மூலம் (18) → 109 % 27 = 1, need 18, offset = 17
         # Apr 28 (118) = பரணி (1) → 118 % 27 = 10, need 1, offset = 18
@@ -581,7 +593,7 @@ def get_lagnam(date):
     lagnam_by_month = {
         1: "மகர லக்னம்",      # Capricorn (Jan)
         2: "கும்ப லக்னம்",     # Aquarius (Feb)
-        3: "மீன லக்னம்",       # Pisces (Mar)
+        3: "கும்ப லக்னம்",     # Aquarius (Mar) - verified Mar 6, 2026
         4: "மேஷ லக்னம்",      # Aries (Apr)
         5: "ரிஷப லக்னம்",     # Taurus (May)
         6: "மிதுன லக்னம்",     # Gemini (Jun)
@@ -615,6 +627,12 @@ def get_lagnam(date):
         base_total = 142
         total = base_total + (28 - day) * 11
         nazhigai = total // 60
+        vinaadi = total % 60
+    elif month == 3:  # March
+        # Mar 6 = 1:25 (total = 85)
+        base_total = 85
+        total = base_total + (6 - day) * 11
+        nazhigai = max(0, total // 60)
         vinaadi = total % 60
     elif month == 4:  # April
         # Apr 28 = 2:20 (total = 140), Apr 19 = 3:34 (total = 214)
@@ -805,12 +823,10 @@ def get_sun_rise(date):
         base_hour = 6
         base_min = 35 - (day // 5)  # Decreases ~1 min every 5 days
     elif month == 3:  # March
-        # Continues from Feb, ~06:20-06:05
+        # Mar 6 = 06:27 AM (verified from website)
+        # Early March ~06:27-06:28, decreases through month
         base_hour = 6
-        base_min = 20 - (day // 2)
-        if base_min < 0:
-            base_hour = 5
-            base_min = 60 + base_min
+        base_min = 28 - (day // 5)  # Adjusted for Mar 6 = 06:27
     elif month == 4:  # April
         # Apr 19 = 06:02, Apr 28 = 05:58
         # Apr 1 = ~06:10, decreases through month
