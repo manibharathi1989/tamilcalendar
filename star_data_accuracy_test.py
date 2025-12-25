@@ -153,7 +153,7 @@ class StarDataAccuracyTester:
             "Monday": {"soolam": "கிழக்கு", "parigaram": "தயிர்"},
             "Tuesday": {"soolam": "வடக்கு", "parigaram": "பால்"},
             "Wednesday": {"soolam": "மேற்கு", "parigaram": "தேன்"},
-            "Thursday": {"soolam": "தெற்கு", "parigaram": "நெய்"},
+            "Thursday": {"soolam": "தெற்கு", "parigaram": "தைலம்"},  # CORRECTED: தைலம் (Oil)
             "Friday": {"soolam": "வடக்கு", "parigaram": "பால்"},
             "Saturday": {"soolam": "கிழக்கு", "parigaram": "தயிர்"},
             "Sunday": {"soolam": "மேற்கு", "parigaram": "தேன்"}
