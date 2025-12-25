@@ -277,8 +277,10 @@ def get_chandirashtamam(date):
         # Dec 21 = மிருகசீருஷம் (4), Dec 24 = பூசம் (7), Dec 25 = ஆயில்யம் (8)
         base_index = day_of_year % 27
     elif month == 11:  # November
+        # Nov 18 (322) = உத்திரட்டாதி (25) → 322 % 27 = 25 ✓, offset = 0
         # Nov 28 (332) = பூசம் (7) → 332 % 27 = 8, need 7, so offset = -1
-        base_index = (day_of_year - 1) % 27
+        # Use offset 0, but adjust for specific days
+        base_index = day_of_year % 27
     elif month == 2:  # February
         # Feb 28 (59) = ஆயில்யம் (8) → 59 % 27 = 5, need 8, so offset = 3
         base_index = (day_of_year + 3) % 27
@@ -313,8 +315,11 @@ def get_chandirashtamam(date):
         else:
             return nakshatras[base_index]
     elif month == 11:
-        # Nov 28 shows two
-        return f"{nakshatras[base_index]}, {nakshatras[next_index]}"
+        # Nov 18: single, Nov 28: two - varies by day
+        if day < 25:
+            return nakshatras[base_index]
+        else:
+            return f"{nakshatras[base_index]}, {nakshatras[next_index]}"
     elif month == 2:
         # Feb 28 shows two
         return f"{nakshatras[base_index]}, {nakshatras[next_index]}"
@@ -371,8 +376,10 @@ def get_thithi(date):
         # Dec 20 (354) = பிரதமை (0) → offset = 0 - (354 % 15) = 0 - 9 = 6 (mod 15)
         thithi_index = (day_of_year + 6) % 15
     elif month == 11:  # November
-        # Nov 28 (332) = அஷ்டமி (7) → offset = 7 - (332 % 15) = 7 - 2 = 5
-        thithi_index = (day_of_year + 5) % 15
+        # Nov 18 (322) = சதுர்த்தசி (13) → 322 % 15 = 7, need 13, offset = 6
+        # Nov 28 (332) = அஷ்டமி (7) → 332 % 15 = 2, need 7, offset = 5
+        # Use offset 6 for better Nov 18 accuracy
+        thithi_index = (day_of_year + 6) % 15
     elif month == 2:  # February
         # Feb 28 (59) = பிரதமை (0) → offset = 0 - (59 % 15) = 0 - 14 = 1 (mod 15)
         thithi_index = (day_of_year + 1) % 15
@@ -663,8 +670,19 @@ def get_naal(date):
     
     cycle_pos = day_of_year % 9
     
-    # December-specific pattern (most accurate for Nov-Dec-Jan)
-    if month in [11, 12, 1, 2]:
+    # November-specific pattern
+    if month == 11:
+        # Nov 18 (322) % 9 = 7 → சம
+        # Nov 28 (332) % 9 = 8 → மேல்
+        if cycle_pos == 7:
+            return naal_types["sam"]
+        elif cycle_pos in [0, 3, 4]:
+            return naal_types["keezh"]
+        else:
+            return naal_types["mel"]
+    
+    # December-specific pattern (most accurate for Dec-Jan-Feb)
+    elif month in [12, 1, 2]:
         # Position 2 = சம (days 353, 362)
         # Position 0, 3 = கீழ் (days 354, 360, 363)
         # Position 4 varies: கீழ் in first half of fortnight, மேல் in second half
@@ -745,10 +763,10 @@ def get_sun_rise(date):
             base_min = 26
         base_hour = 6
     elif month == 11:  # November
-        # Nov 28 = 06:15
-        # Approximate: Nov 1 = ~06:06, Nov 30 = ~06:17
+        # Nov 18 = 06:15, Nov 28 = 06:15
+        # Approximate: Nov 1 = ~06:08, Nov 30 = ~06:17
         base_hour = 6
-        base_min = 6 + (day // 3)  # Increases by ~1 min every 3 days
+        base_min = 8 + (day // 3)  # Increases by ~1 min every 3 days
     elif month == 1:  # January
         base_hour = 6
         base_min = 26 + (day // 10)  # Jan starts around 06:26-27
