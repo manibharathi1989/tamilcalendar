@@ -747,11 +747,12 @@ def get_naal(date):
     # September pattern
     elif month == 9:
         # Sep 18 (261) % 9 = 0 → மேல்
+        # Sep 19 (262) % 9 = 1 → கீழ் (verified from website)
         if cycle_pos == 2:
             return naal_types["sam"]
-        elif cycle_pos in [3, 4]:
+        elif cycle_pos in [1, 3, 4]:  # Added 1 for Sep 19
             return naal_types["keezh"]
-        else:
+        else:  # 0, 5, 6, 7, 8
             return naal_types["mel"]
     
     # Default pattern for other months
