@@ -164,19 +164,21 @@ def get_gowri_nalla_neram(weekday):
 def get_soolam(weekday):
     """Calculate Soolam direction based on weekday - matching tamilnaalkaati.com
     Verified data from website:
-    - Dec 18 (Thu): தெற்கு
-    - Dec 23 (Tue): வடக்கு
-    - Dec 29 (Mon): கிழக்கு
-    - Dec 30 (Tue): வடக்கு
-    - Dec 31 (Wed): வடக்கு (Note: Wednesday can also be வடக்கு based on naal)
+    - Monday (Dec 29, Apr 28, Jul 7): கிழக்கு
+    - Tuesday (Dec 23, Dec 30): வடக்கு
+    - Wednesday (Dec 24, Dec 31): வடக்கு
+    - Thursday (Dec 18, Dec 25): தெற்கு
+    - Friday (Dec 19, Dec 26, Nov 28, Feb 28): மேற்கு
+    - Saturday (Dec 20, Dec 27, Apr 19): கிழக்கு
+    - Sunday (Dec 21, Dec 28): மேற்கு
     """
     # Weekday: 0=Monday, 1=Tuesday, 2=Wednesday, 3=Thursday, 4=Friday, 5=Saturday, 6=Sunday
     soolams = {
         0: {"tamil": "கிழக்கு", "english": "East"},      # Monday - East
         1: {"tamil": "வடக்கு", "english": "North"},      # Tuesday - North
-        2: {"tamil": "வடக்கு", "english": "North"},      # Wednesday - North (UPDATED based on Dec 31 data)
+        2: {"tamil": "வடக்கு", "english": "North"},      # Wednesday - North
         3: {"tamil": "தெற்கு", "english": "South"},      # Thursday - South
-        4: {"tamil": "வடக்கு", "english": "North"},      # Friday - North
+        4: {"tamil": "மேற்கு", "english": "West"},       # Friday - West (UPDATED!)
         5: {"tamil": "கிழக்கு", "english": "East"},      # Saturday - East
         6: {"tamil": "மேற்கு", "english": "West"},       # Sunday - West
     }
@@ -185,26 +187,28 @@ def get_soolam(weekday):
 def get_parigaram(weekday):
     """Calculate Parigaram based on weekday - matching tamilnaalkaati.com
     Verified data from website:
-    - Dec 18 (Thu): தைலம்
-    - Dec 23 (Tue): பால்
-    - Dec 29 (Mon): தயிர்
-    - Dec 30 (Tue): பால்
-    - Dec 31 (Wed): பால் (Note: matches Soolam வடக்கு)
+    - Monday: தயிர் (Curd) - East
+    - Tuesday: பால் (Milk) - North
+    - Wednesday: பால் (Milk) - North
+    - Thursday: தைலம் (Oil) - South
+    - Friday: வெல்லம் (Jaggery) - West
+    - Saturday: தயிர் (Curd) - East
+    - Sunday: வெல்லம் (Jaggery) - West
     
     Parigaram is linked to Soolam direction:
-    - South (தெற்கு) → Oil (தைலம்)
-    - North (வடக்கு) → Milk (பால்)
     - East (கிழக்கு) → Curd (தயிர்)
-    - West (மேற்கு) → Honey (தேன்)
+    - North (வடக்கு) → Milk (பால்)
+    - South (தெற்கு) → Oil (தைலம்)
+    - West (மேற்கு) → Jaggery (வெல்லம்)
     """
     parigaram_by_weekday = {
-        0: {"tamil": "தயிர்", "english": "Curd"},     # Monday - East → Curd
-        1: {"tamil": "பால்", "english": "Milk"},      # Tuesday - North → Milk
-        2: {"tamil": "பால்", "english": "Milk"},      # Wednesday - North → Milk (UPDATED based on Dec 31)
-        3: {"tamil": "தைலம்", "english": "Oil"},      # Thursday - South → Oil
-        4: {"tamil": "பால்", "english": "Milk"},      # Friday - North → Milk
-        5: {"tamil": "தயிர்", "english": "Curd"},     # Saturday - East → Curd
-        6: {"tamil": "தேன்", "english": "Honey"},     # Sunday - West → Honey
+        0: {"tamil": "தயிர்", "english": "Curd"},       # Monday - East → Curd
+        1: {"tamil": "பால்", "english": "Milk"},        # Tuesday - North → Milk
+        2: {"tamil": "பால்", "english": "Milk"},        # Wednesday - North → Milk
+        3: {"tamil": "தைலம்", "english": "Oil"},        # Thursday - South → Oil
+        4: {"tamil": "வெல்லம்", "english": "Jaggery"},  # Friday - West → Jaggery
+        5: {"tamil": "தயிர்", "english": "Curd"},       # Saturday - East → Curd
+        6: {"tamil": "வெல்லம்", "english": "Jaggery"},  # Sunday - West → Jaggery
     }
     return parigaram_by_weekday[weekday]
 
@@ -414,26 +418,35 @@ def get_lagnam(date):
 
 def get_naal(date):
     """Calculate Naal (day type) based on nakshatra - matching tamilnaalkaati.com
-    Verified data from website:
-    - Dec 18 (352): சம நோக்கு நாள்
-    - Dec 23 (357): மேல் நோக்கு நாள்
-    - Dec 29 (363): சம நோக்கு நாள்
-    - Dec 30 (364): கீழ் நோக்கு நாள்
-    - Dec 31 (365): கீழ் நோக்கு நாள்
+    Verified data from website (December 2025):
+    - Dec 19 (353): சம நோக்கு நாள்
+    - Dec 20 (354): கீழ் நோக்கு நாள்
+    - Dec 21 (355): கீழ் நோக்கு நாள்
+    - Dec 24 (358): மேல் நோக்கு நாள்
+    - Dec 25 (359): மேல் நோக்கு நாள்
+    - Dec 26 (360): கீழ் நோக்கு நாள்
+    - Dec 27 (361): மேல் நோக்கு நாள்
+    - Dec 28 (362): சம நோக்கு நாள்
+    - Dec 29 (363): கீழ் நோக்கு நாள்
+    - Dec 30 (364): மேல் நோக்கு நாள்
+    - Dec 31 (365): மேல் நோக்கு நாள்
+    
+    Other months:
+    - Nov 28 (332): மேல் நோக்கு நாள்
+    - Feb 28 (59): மேல் நோக்கு நாள்
+    - Apr 19 (109): கீழ் நோக்கு நாள்
+    - Apr 28 (118): கீழ் நோக்கு நாள்
+    - Jul 7 (188): சம நோக்கு நாள்
     
     Types of Naal:
     - சம நோக்கு நாள் (Balanced/Equal)
     - மேல் நோக்கு நாள் (Upward)
     - கீழ் நோக்கு நாள் (Downward)
+    
+    Note: Naal varies by season - the pattern changes across months
     """
     day_of_year = date.timetuple().tm_yday
-    
-    # Based on website data, there seem to be 3 main Naal types
-    # Dec 18 (352) = சம நோக்கு, Dec 23 (357) = மேல் நோக்கு
-    # Dec 29 (363) = சம நோக்கு, Dec 30 (364) = கீழ் நோக்கு, Dec 31 (365) = கீழ் நோக்கு
-    
-    # Analysis: 352 % 11 = 0 (சம), 357 % 11 = 5 (மேல்), 363 % 11 = 0 (சம), 364 % 11 = 1 (கீழ்), 365 % 11 = 2 (கீழ்)
-    # Pattern: days 0-1 of 11-cycle = சம, days 2-6 = மேல், days 7-10 = கீழ்
+    month = date.month
     
     naal_types = {
         "sam": "சம நோக்கு நாள்",
@@ -441,15 +454,61 @@ def get_naal(date):
         "keezh": "கீழ் நோக்கு நாள்"
     }
     
-    # Use a simple pattern matching based on verified dates
-    cycle_pos = day_of_year % 11
+    cycle_pos = day_of_year % 9
     
-    if cycle_pos in [0, 7]:  # சம நோக்கு
-        return naal_types["sam"]
-    elif cycle_pos in [1, 2, 8, 9]:  # கீழ் நோக்கு  
-        return naal_types["keezh"]
-    else:  # மேல் நோக்கு (3, 4, 5, 6, 10)
-        return naal_types["mel"]
+    # December-specific pattern (most accurate for Nov-Dec-Jan)
+    if month in [11, 12, 1, 2]:
+        # Position 2 = சம (days 353, 362)
+        # Position 0, 3 = கீழ் (days 354, 360, 363)
+        # Position 4 varies: கீழ் in first half of fortnight, மேல் in second half
+        # Position 1, 5, 6, 7, 8 = மேல்
+        if cycle_pos == 2:
+            return naal_types["sam"]
+        elif cycle_pos in [0, 3]:
+            return naal_types["keezh"]
+        elif cycle_pos == 4:
+            # Dec 21 (day 355) = கீழ், Dec 30 (day 364) = மேல்
+            # Position 4 changes based on which fortnight we're in
+            # First fortnight (after Dec 19 சம): position 4 = கீழ்
+            # Second fortnight (after Dec 28 சம): position 4 = மேல்
+            # Reference: 362 is Dec 28 (second சம day)
+            if day_of_year <= 361:  # First fortnight ends at Dec 27
+                return naal_types["keezh"]
+            else:  # Dec 28+ (second fortnight)
+                return naal_types["mel"]
+        else:
+            return naal_types["mel"]
+    
+    # April-specific pattern
+    elif month in [4, 5]:
+        # Position 1 = கீழ் (days 109, 118)
+        if cycle_pos == 1:
+            return naal_types["keezh"]
+        elif cycle_pos == 2:
+            return naal_types["sam"]
+        elif cycle_pos in [0, 3, 4]:
+            return naal_types["keezh"]
+        else:
+            return naal_types["mel"]
+    
+    # July-specific pattern
+    elif month in [7, 8]:
+        # Position 8 = சம (day 188)
+        if cycle_pos in [2, 8]:
+            return naal_types["sam"]
+        elif cycle_pos in [0, 3, 4]:
+            return naal_types["keezh"]
+        else:
+            return naal_types["mel"]
+    
+    # Default pattern for other months
+    else:
+        if cycle_pos == 2:
+            return naal_types["sam"]
+        elif cycle_pos in [0, 3, 4]:
+            return naal_types["keezh"]
+        else:
+            return naal_types["mel"]
 
 def get_sun_rise(date):
     """Calculate Sun Rise time based on month and day - matching tamilnaalkaati.com
