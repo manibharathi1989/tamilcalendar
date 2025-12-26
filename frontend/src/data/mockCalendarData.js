@@ -105,32 +105,32 @@ const SPECIFIC_DATES = {
     yogam: 'வரியான்',
     subakariyam: 'குரு வழிபாடு, தான தர்மம், புதிய முயற்சிகள் தொடங்க, கல்வி கற்க சிறந்த நாள்'
   },
-  // January 1, 2026 - Thursday (New Year's Day)
+  // January 1, 2026 - Thursday (Verified from tamilnaalkaati.com)
   '2026-1-1': {
     tamilDate: '17 - மார்கழி - விசுவாவசு',
     tamilDay: 'வியாழன்',
     nallaNeram: {
-      morning: '07:30 - 09:00 கா / AM',
-      evening: '01:30 - 03:00 மா / PM'
+      morning: '10:30 - 11:30 கா / AM, 12:30 - 01:30 ப / PM',
+      evening: '----------'
     },
     gowriNallaNeram: {
-      morning: '06:00 - 07:30 கா / AM',
-      evening: '03:00 - 04:30 மா / PM'
+      morning: '----------',
+      evening: '06:30 - 07:30 இ / PM'
     },
     raahuKaalam: '01:30 - 03:00',
     yemagandam: '06:00 - 07:30',
     kuligai: '09:00 - 10:30',
     soolam: { tamil: 'தெற்கு', english: 'Therkku (South)' },
     parigaram: { tamil: 'தைலம்', english: 'Thailam (Oil)' },
-    chandirashtamam: 'புனர்பூசம், பூசம்',
-    naal: 'அமிர்த நாள்',
-    lagnam: 'தனுர் லக்னம் இருப்பு நாழிகை 4 வினாடி 35',
-    sunRise: '06:28 கா / AM',
-    sraardhaThithi: 'துவாதசி',
-    thithi: 'துவாதசி காலை 09:15 AM வரை பின்பு திரயோதசி',
-    star: 'மூலம் மாலை 04:45 PM வரை பின்பு பூராடம்',
-    yogam: 'சித்தி யோகம் மாலை 03:20 PM வரை பின்பு சாத்தியம்',
-    subakariyam: 'புத்தாண்டு நாள், குரு வழிபாடு, தான தர்மம், புதிய முயற்சிகள் தொடங்க சிறந்த நாள்'
+    chandirashtamam: 'சுவாதி, விசாகம்',
+    naal: 'மேல் நோக்கு நாள்',
+    lagnam: 'தனூர் லக்னம் இருப்பு நாழிகை 2 வினாடி 34',
+    sunRise: '06:30 கா / AM',
+    sraardhaThithi: 'திரயோதசி',
+    thithi: 'திரயோதசி',
+    star: 'இன்று இரவு 09:48 PM வரை ரோகிணி பின்பு மிருகசீருஷம்',
+    yogam: 'சூலம் யோகம்',
+    subakariyam: 'ஆங்கில வருடப்பிறப்பு, குரு வழிபாடு, தான தர்மம், புதிய முயற்சிகள் தொடங்க சிறந்த நாள்'
   },
   // December 3, 2025 - Wednesday (Verified from prokerala.com)
   '2025-12-3': {

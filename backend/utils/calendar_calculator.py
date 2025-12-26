@@ -208,7 +208,7 @@ SPECIFIC_DATE_DATA = {
         "karanam": "தைதுலை",
         "subakariyam": "குரு வழிபாடு, தான தர்மம், புதிய முயற்சிகள் தொடங்க, கல்வி கற்க சிறந்த நாள்"
     },
-    # January 1, 2026 - Thursday (New Year's Day)
+    # January 1, 2026 - Thursday (Verified from tamilnaalkaati.com)
     (2026, 1, 1): {
         "tamil_date": "17 - மார்கழி - விசுவாவசு",
         "tamil_day": "வியாழன்",
@@ -216,29 +216,29 @@ SPECIFIC_DATE_DATA = {
         "tamil_year": "விசுவாவசு",
         "english_day": "Thursday",
         "nalla_neram": {
-            "morning": "07:30 - 09:00 கா / AM",
-            "evening": "01:30 - 03:00 மா / PM"
+            "morning": "10:30 - 11:30 கா / AM, 12:30 - 01:30 ப / PM",
+            "evening": "----------"
         },
         "gowri_nalla_neram": {
-            "morning": "06:00 - 07:30 கா / AM",
-            "evening": "03:00 - 04:30 மா / PM"
+            "morning": "----------",
+            "evening": "06:30 - 07:30 இ / PM"
         },
         "raahu_kaalam": "01:30 - 03:00",
         "yemagandam": "06:00 - 07:30",
         "kuligai": "09:00 - 10:30",
         "soolam": {"tamil": "தெற்கு", "english": "Therkku (South)"},
         "parigaram": {"tamil": "தைலம்", "english": "Thailam (Oil)"},
-        "chandirashtamam": "புனர்பூசம், பூசம்",
-        "naal": "அமிர்த நாள்",
-        "lagnam": "தனுர் லக்னம் இருப்பு நாழிகை 4 வினாடி 35",
-        "sun_rise": "06:28 கா / AM",
+        "chandirashtamam": "சுவாதி, விசாகம்",
+        "naal": "மேல் நோக்கு நாள்",
+        "lagnam": "தனூர் லக்னம் இருப்பு நாழிகை 2 வினாடி 34",
+        "sun_rise": "06:30 கா / AM",
         "sun_set": "05:47 மா / PM",
-        "sraardha_thithi": "துவாதசி",
-        "thithi": "துவாதசி காலை 09:15 AM வரை பின்பு திரயோதசி",
-        "star": "மூலம் மாலை 04:45 PM வரை பின்பு பூராடம்",
-        "yogam": "சித்தி யோகம் மாலை 03:20 PM வரை பின்பு சாத்தியம்",
-        "karanam": "பாலவம்",
-        "subakariyam": "புத்தாண்டு நாள், குரு வழிபாடு, தான தர்மம், புதிய முயற்சிகள் தொடங்க சிறந்த நாள்"
+        "sraardha_thithi": "திரயோதசி",
+        "thithi": "திரயோதசி",
+        "star": "இன்று இரவு 09:48 PM வரை ரோகிணி பின்பு மிருகசீருஷம்",
+        "yogam": "சூலம் யோகம்",
+        "karanam": "கௌலவம்",
+        "subakariyam": "ஆங்கில வருடப்பிறப்பு, குரு வழிபாடு, தான தர்மம், புதிய முயற்சிகள் தொடங்க சிறந்த நாள்"
     },
     # December 3, 2025 - Wednesday (Verified from prokerala.com)
     (2025, 12, 3): {
