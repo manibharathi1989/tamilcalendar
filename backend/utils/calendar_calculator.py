@@ -546,3 +546,139 @@ def get_subakariyam(weekday: int, nakshatra_index: int) -> str:
         6: "சூரிய வழிபாடு, புதிய வேலை தொடங்க, அரசு காரியம் செய்ய சிறந்த நாள்"
     }
     return activities.get(weekday, "சிறந்த நாள்")
+
+
+def get_chandirashtamam_rasi(nakshatra: str) -> str:
+    """
+    Calculate Chandirashtamam - the Rasi for which today is inauspicious
+    Based on Moon's current position, count 8 signs back
+    
+    Args:
+        nakshatra: Current nakshatra name in Tamil
+        
+    Returns:
+        Chandirashtamam rasi with its inauspicious stars
+    """
+    # Get Moon's current Rasi from nakshatra
+    moon_rasi = NAKSHATRA_TO_RASI.get(nakshatra)
+    if not moon_rasi:
+        return "துலாம் - பரணி, கிருத்திகை"  # Default
+    
+    # Find the index of moon's rasi
+    try:
+        moon_rasi_index = RASIS.index(moon_rasi)
+    except ValueError:
+        return "துலாம் - பரணி, கிருத்திகை"
+    
+    # Count 8 signs back (or forward 4 signs, same result)
+    # Chandirashtamam is the 8th sign FROM the Moon's rasi
+    chandirashtamam_index = (moon_rasi_index + 7) % 12  # +7 because we count from 1
+    
+    # Actually, we need to find which rasi is affected
+    # If Moon is in Taurus, count back 8: Taurus(1)->Aries(2)->Pisces(3)->Aquarius(4)->Capricorn(5)->Sagittarius(6)->Scorpio(7)->Libra(8)
+    # So we go backwards: (moon_rasi_index - 7) % 12
+    # Or equivalently: (moon_rasi_index + 5) % 12 (going forward 5 = going back 7)
+    
+    chandirashtamam_index = (moon_rasi_index - 7) % 12
+    chandirashtamam_rasi = RASIS[chandirashtamam_index]
+    
+    # Get the inauspicious stars for this rasi
+    inauspicious_stars = CHANDIRASHTAMAM_STARS.get(chandirashtamam_rasi, "")
+    
+    return f"{chandirashtamam_rasi} - {inauspicious_stars}"
+
+
+def get_naal_type(nakshatra: str) -> str:
+    """
+    Get the Naal (day type) based on the nakshatra
+    
+    Args:
+        nakshatra: Current nakshatra name in Tamil
+        
+    Returns:
+        Naal type (Mel Nokku, Keel Nokku, or Sama Nokku)
+    """
+    if nakshatra in MEL_NOKKU_STARS:
+        return "மேல் நோக்கு நாள்"
+    elif nakshatra in KEEL_NOKKU_STARS:
+        return "கீழ் நோக்கு நாள்"
+    elif nakshatra in SAMA_NOKKU_STARS:
+        return "சம நோக்கு நாள்"
+    else:
+        return "சம நோக்கு நாள்"  # Default
+
+
+def get_special_yogam(weekday: int, nakshatra: str) -> str:
+    """
+    Get special Yogam based on Day + Star combination
+    
+    Args:
+        weekday: 0=Monday, 1=Tuesday, ..., 6=Sunday
+        nakshatra: Current nakshatra name in Tamil
+        
+    Returns:
+        Special yogam name if applicable, otherwise None
+    """
+    return SPECIAL_YOGAM.get((weekday, nakshatra))
+
+
+def get_lagnam_at_sunrise(tamil_month: str) -> str:
+    """
+    Get the Lagnam (Ascendant) at sunrise based on Tamil month
+    At sunrise, the Lagnam is the same as the Sun's zodiac sign
+    
+    Args:
+        tamil_month: Tamil month name
+        
+    Returns:
+        Lagnam rasi name with format
+    """
+    lagnam_rasi = SOLAR_MONTH_LAGNAM.get(tamil_month, "தனுசு")
+    return f"{lagnam_rasi} லக்னம்"
+
+
+def get_sunrise_time(month: int, day: int, latitude: float = 13.0827) -> str:
+    """
+    Calculate approximate sunrise time based on date and latitude (Chennai default)
+    Uses simplified calculation for Tamil Nadu region
+    
+    Args:
+        month: Gregorian month (1-12)
+        day: Day of month
+        latitude: Latitude (default Chennai: 13.0827)
+        
+    Returns:
+        Sunrise time string in format "HH:MM கா / AM"
+    """
+    import math
+    
+    # Day of year approximation
+    day_of_year = (month - 1) * 30 + day
+    
+    # Earth's axial tilt effect on sunrise
+    # Simplified formula for tropical regions
+    declination = 23.45 * math.sin(math.radians((360 / 365) * (day_of_year - 81)))
+    
+    # Hour angle at sunrise
+    cos_hour_angle = -math.tan(math.radians(latitude)) * math.tan(math.radians(declination))
+    cos_hour_angle = max(-1, min(1, cos_hour_angle))  # Clamp to valid range
+    
+    hour_angle = math.degrees(math.acos(cos_hour_angle))
+    
+    # Convert to sunrise time (solar noon is approximately 12:00)
+    sunrise_hours = 12 - (hour_angle / 15)
+    
+    # Adjust for Chennai's longitude (80.27°E) vs IST (82.5°E)
+    # IST is based on 82.5°E, Chennai is at 80.27°E
+    # Difference: (82.5 - 80.27) / 15 = 0.149 hours = ~9 minutes earlier
+    sunrise_hours += 0.15
+    
+    # Add equation of time correction (simplified)
+    b = 2 * math.pi * (day_of_year - 81) / 365
+    eot = 9.87 * math.sin(2 * b) - 7.53 * math.cos(b) - 1.5 * math.sin(b)
+    sunrise_hours -= eot / 60
+    
+    hours = int(sunrise_hours)
+    minutes = int((sunrise_hours - hours) * 60)
+    
+    return f"{hours:02d}:{minutes:02d} கா / AM"
