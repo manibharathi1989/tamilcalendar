@@ -1,4 +1,19 @@
 backend:
+  - task: "Tamil Calendar Calculation Logic - User's Rules Implementation"
+    implemented: true
+    working: true
+    file: "/app/backend/utils/calendar_calculator.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Implementing user's calculation rules for 10 Tamil calendar features: Soolam, Parigaram, Chandirashtamam, Naal/Nokku, Lagnam, Sunrise, Sraardha Thithi, Thithi, Star, Yogam"
+      - working: true
+        agent: "main"
+        comment: "✅ IMPLEMENTED ALL 10 CALCULATION RULES: (1) Soolam based on weekday - Thu=South ✓, (2) Parigaram based on Soolam direction - Thu=Oil ✓, (3) Chandirashtamam shows both Rasi and Stars (e.g., துலாம் - பரணி, கிருத்திகை) ✓, (4) Naal/Nokku based on star classification (Mel/Keel/Sama) ✓, (5) Lagnam at sunrise based on Tamil month (Margazhi=Dhanushu) ✓, (6) Sunrise calculation for Chennai latitude ✓, (7-9) Thithi, Star, Sraardha Thithi preserved, (10) Yogam based on Day+Star lookup table (Thu+Rohini=Marana Yogam) ✓. All Jan 1, 2026 values match user's expected results exactly."
+
   - task: "Data Accuracy - Parigaram Fix Verification"
     implemented: true
     working: true
