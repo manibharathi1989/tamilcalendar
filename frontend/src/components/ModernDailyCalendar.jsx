@@ -161,6 +161,13 @@ const ModernDailyCalendar = ({ date, calendarData }) => {
             englishLabel="Star"
             value={calendarData.star || ''}
           />
+          <InfoCard
+            icon={Star}
+            tamilLabel="யோகம்"
+            englishLabel="Yogam"
+            value={calendarData.yogam || ''}
+            bgColor="bg-gradient-to-br from-purple-50 to-indigo-50"
+          />
         </div>
       </div>
 

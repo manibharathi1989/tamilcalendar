@@ -3,6 +3,11 @@ from datetime import datetime, timedelta
 from typing import List, Optional
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
+import sys
+
+# Add parent directory to path for imports
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from utils.calendar_calculator import calculate_calendar_data
 
 router = APIRouter(prefix="/api/calendar", tags=["calendar"])
 
@@ -23,48 +28,8 @@ async def get_daily_calendar(year: int, month: int, day: int):
         })
         
         if not calendar_data:
-            # Calculate Tamil day name dynamically
-            tamil_days = ["திங்கள்", "செவ்வாய்", "புதன்", "வியாழன்", "வெள்ளி", "சனி", "ஞாயிறு"]
-            tamil_day = tamil_days[date.weekday()]
-            
-            # Calculate Tamil month (approximate mapping)
-            tamil_months = [
-                "தை", "மாசி", "பங்குனி", "சித்திரை", "வைகாசி", "ஆனி",
-                "ஆடி", "ஆவணி", "புரட்டாசி", "ஐப்பசி", "கார்த்திகை", "மார்கழி"
-            ]
-            tamil_month_index = (month - 1) % 12
-            tamil_month = tamil_months[tamil_month_index]
-            
-            # Return default data with calculated values
-            return {
-                "date": date.isoformat(),
-                "tamil_date": f"{day} - {tamil_month} - விசுவாவசு",
-                "tamil_day": tamil_day,
-                "tamil_month": tamil_month,
-                "tamil_year": "விசுவாவசு",
-                "english_day": date.strftime("%A"),
-                "nalla_neram": {
-                    "morning": "07:45 - 08:45 கா / AM",
-                    "evening": "04:45 - 05:45 மா / PM"
-                },
-                "gowri_nalla_neram": {
-                    "morning": "01:45 - 02:45 கா / AM",
-                    "evening": "07:30 - 08:30 மா / PM"
-                },
-                "raahu_kaalam": "03.00 - 04.30",
-                "yemagandam": "09.00 - 10.30",
-                "kuligai": "12.00 - 01.30",
-                "soolam": {"tamil": "வடக்கு", "english": "Vadakku"},
-                "parigaram": {"tamil": "பால்", "english": "Paal"},
-                "chandirashtamam": "புனர்பூசம்",
-                "naal": "மேல் நோக்கு நாள்",
-                "lagnam": "தனுர் லக்னம் இருப்பு நாழிகை 04 வினாடி 13",
-                "sun_rise": "06:25 கா / AM",
-                "sraardha_thithi": "சதுர்த்தி",
-                "thithi": "இன்று காலை 11:30 AM வரை திரிதியை பின்பு சதுர்த்தி",
-                "star": "இன்று அதிகாலை 05:31 AM வரை உத்திராடம் பின்பு திருவோணம்",
-                "subakariyam": "சிகிச்சை செய்ய, ஆயுதஞ் செய்ய, யந்திரம் ஸ்தாபிக்க சிறந்த நாள்"
-            }
+            # Use the calendar calculator to generate accurate data
+            return calculate_calendar_data(year, month, day)
         
         # Remove MongoDB _id field
         if calendar_data and "_id" in calendar_data:

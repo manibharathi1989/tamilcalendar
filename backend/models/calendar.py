@@ -33,6 +33,7 @@ class DailyCalendar(BaseModel):
     sraardha_thithi: str
     thithi: str
     star: str
+    yogam: str
     subakariyam: str
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
