@@ -17,8 +17,8 @@ def get_backend_url():
                 if line.startswith('REACT_APP_BACKEND_URL='):
                     return line.split('=', 1)[1].strip()
     except FileNotFoundError:
-        return "https://tamilmanai.preview.emergentagent.com"
-    return "https://tamilmanai.preview.emergentagent.com"
+        return "https://astro-planner-1.preview.emergentagent.com"
+    return "https://astro-planner-1.preview.emergentagent.com"
 
 BASE_URL = get_backend_url()
 

@@ -107,7 +107,7 @@ A full-stack application with a React frontend and FastAPI backend. The database
 10. Daily Details still all datas are wrongly shown check it and do calculation accurately. if u need calculation then see for full reference https://www.tamilcalendarz.com/tamilcalendar.php, https://www.omtamilcalendar.com/, https://www.tamildailycalendar.com/
 9.  All backend tests passed! The data now matches the reference website accurately. Let me provide a summary:
 8.  Daily Details section, North→Milk, East→Curd, South→Ghee, West→Honey this above is not a pattern, most of the time all changes for example மேற்கு->வெல்லம், வடக்கு->பால் randomly changing. so check clearly for all the dates randomly and do the calculations.
-7.  https://tamilmanai.preview.emergentagent.com/monthly this page all dates shows same message Star இன்று அதிகாலை 05:31 AM வரை உத்திரட்டாதி பின்பு ரேவதி
+7.  https://astro-planner-1.preview.emergentagent.com/monthly this page all dates shows same message Star இன்று அதிகாலை 05:31 AM வரை உத்திரட்டாதி பின்பு ரேவதி
 6.  All data is now correct and matches the reference website (tamilnaalkaati.com). Let me provide a summary of what was accomplished:
 5.  do all things and correct data
 4.  take reference this website data https://www.omtamilcalendar.com/
