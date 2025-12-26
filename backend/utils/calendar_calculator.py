@@ -351,7 +351,7 @@ SPECIFIC_DATE_DATA = {
         "karanam": "தைதுலை",
         "subakariyam": "குரு வழிபாடு, தான தர்மம், புதிய முயற்சிகள் தொடங்க, கல்வி கற்க சிறந்த நாள்"
     },
-    # January 1, 2026 - Thursday (Verified from tamilnaalkaati.com)
+    # January 1, 2026 - Thursday (Verified with user's calculation rules)
     (2026, 1, 1): {
         "tamil_date": "17 - மார்கழி - விசுவாவசு",
         "tamil_day": "வியாழன்",
@@ -371,15 +371,15 @@ SPECIFIC_DATE_DATA = {
         "kuligai": "09:00 - 10:30",
         "soolam": {"tamil": "தெற்கு", "english": "Therkku (South)"},
         "parigaram": {"tamil": "தைலம்", "english": "Thailam (Oil)"},
-        "chandirashtamam": "சுவாதி, விசாகம்",
+        "chandirashtamam": "துலாம் - பரணி, கிருத்திகை",
         "naal": "மேல் நோக்கு நாள்",
-        "lagnam": "தனூர் லக்னம் இருப்பு நாழிகை 2 வினாடி 34",
+        "lagnam": "தனுசு லக்னம் இருப்பு நாழிகை 2 வினாடி 34",
         "sun_rise": "06:30 கா / AM",
         "sun_set": "05:47 மா / PM",
         "sraardha_thithi": "திரயோதசி",
-        "thithi": "திரயோதசி",
-        "star": "இன்று இரவு 09:48 PM வரை ரோகிணி பின்பு மிருகசீருஷம்",
-        "yogam": "சூலம் யோகம்",
+        "thithi": "இன்று மாலை 05:54 PM வரை திரயோதசி பின்பு சதுர்த்தசி",
+        "star": "இன்று இரவு 10:48 PM வரை ரோகிணி பின்பு மிருகசீரிடம்",
+        "yogam": "மரண யோகம்",
         "karanam": "கௌலவம்",
         "subakariyam": "ஆங்கில வருடப்பிறப்பு, குரு வழிபாடு, தான தர்மம், புதிய முயற்சிகள் தொடங்க சிறந்த நாள்"
     },
