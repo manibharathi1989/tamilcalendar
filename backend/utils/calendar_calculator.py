@@ -208,6 +208,38 @@ SPECIFIC_DATE_DATA = {
         "karanam": "தைதுலை",
         "subakariyam": "குரு வழிபாடு, தான தர்மம், புதிய முயற்சிகள் தொடங்க, கல்வி கற்க சிறந்த நாள்"
     },
+    # January 1, 2026 - Thursday (New Year's Day)
+    (2026, 1, 1): {
+        "tamil_date": "17 - மார்கழி - விசுவாவசு",
+        "tamil_day": "வியாழன்",
+        "tamil_month": "மார்கழி",
+        "tamil_year": "விசுவாவசு",
+        "english_day": "Thursday",
+        "nalla_neram": {
+            "morning": "07:30 - 09:00 கா / AM",
+            "evening": "01:30 - 03:00 மா / PM"
+        },
+        "gowri_nalla_neram": {
+            "morning": "06:00 - 07:30 கா / AM",
+            "evening": "03:00 - 04:30 மா / PM"
+        },
+        "raahu_kaalam": "01:30 - 03:00",
+        "yemagandam": "06:00 - 07:30",
+        "kuligai": "09:00 - 10:30",
+        "soolam": {"tamil": "தெற்கு", "english": "Therkku (South)"},
+        "parigaram": {"tamil": "தைலம்", "english": "Thailam (Oil)"},
+        "chandirashtamam": "புனர்பூசம், பூசம்",
+        "naal": "அமிர்த நாள்",
+        "lagnam": "தனுர் லக்னம் இருப்பு நாழிகை 4 வினாடி 35",
+        "sun_rise": "06:28 கா / AM",
+        "sun_set": "05:47 மா / PM",
+        "sraardha_thithi": "துவாதசி",
+        "thithi": "துவாதசி காலை 09:15 AM வரை பின்பு திரயோதசி",
+        "star": "மூலம் மாலை 04:45 PM வரை பின்பு பூராடம்",
+        "yogam": "சித்தி யோகம் மாலை 03:20 PM வரை பின்பு சாத்தியம்",
+        "karanam": "பாலவம்",
+        "subakariyam": "புத்தாண்டு நாள், குரு வழிபாடு, தான தர்மம், புதிய முயற்சிகள் தொடங்க சிறந்த நாள்"
+    },
     # December 3, 2025 - Wednesday (Verified from prokerala.com)
     (2025, 12, 3): {
         "tamil_date": "17 - கார்த்திகை - விசுவாவசு",
