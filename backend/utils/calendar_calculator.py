@@ -498,8 +498,26 @@ def calculate_calendar_data(year: int, month: int, day: int) -> Dict[str, Any]:
     # Calculate lagnam (simplified - changes every ~2 hours)
     lagnam_index = (day_of_year + month) % 12
     
-    # Naal type based on various factors
-    naal_index = (weekday + nakshatra_index) % 5
+    # Naal type based on nakshatra (using proper Nokku classification)
+    current_nakshatra = NAKSHATRAS[nakshatra_index]
+    naal_type = get_naal_type(current_nakshatra)
+    
+    # Chandirashtamam based on Moon's Rasi (8th sign back)
+    chandirashtamam = get_chandirashtamam_rasi(current_nakshatra)
+    
+    # Lagnam at sunrise based on Tamil month
+    lagnam = get_lagnam_at_sunrise(tamil_month)
+    
+    # Sunrise time based on date and Chennai latitude
+    sunrise = get_sunrise_time(month, day)
+    
+    # Calculate special yogam based on Day + Star
+    special_yogam = get_special_yogam(weekday, current_nakshatra)
+    if special_yogam:
+        yogam_display = special_yogam
+    else:
+        # Use regular yogam calculation
+        yogam_display = f"{YOGAMS[yogam_index]} யோகம் மாலை 05:00 PM வரை பின்பு {YOGAMS[next_yogam_index]}"
     
     return {
         "date": dt.isoformat(),
@@ -521,15 +539,15 @@ def calculate_calendar_data(year: int, month: int, day: int) -> Dict[str, Any]:
         "kuligai": KULIGAI[weekday],
         "soolam": SOOLAM_BY_DAY[weekday],
         "parigaram": PARIGARAM_BY_DAY[weekday],
-        "chandirashtamam": NAKSHATRAS[(nakshatra_index + 8) % 27],
-        "naal": NAAL_TYPES[naal_index],
-        "lagnam": f"{LAGNAMS[lagnam_index]} இருப்பு நாழிகை 04 வினாடி 15",
-        "sun_rise": "06:05 கா / AM",
+        "chandirashtamam": chandirashtamam,
+        "naal": naal_type,
+        "lagnam": f"{lagnam} இருப்பு நாழிகை 04 வினாடி 15",
+        "sun_rise": sunrise,
         "sun_set": "06:25 மா / PM",
         "sraardha_thithi": TITHIS[thithi_index],
         "thithi": f"இன்று காலை 10:30 AM வரை {TITHIS[thithi_index]} பின்பு {TITHIS[next_thithi_index]}",
         "star": f"இன்று மாலை 04:30 PM வரை {NAKSHATRAS[nakshatra_index]} பின்பு {NAKSHATRAS[next_nakshatra_index]}",
-        "yogam": f"{YOGAMS[yogam_index]} யோகம் மாலை 05:00 PM வரை பின்பு {YOGAMS[next_yogam_index]}",
+        "yogam": yogam_display,
         "subakariyam": get_subakariyam(weekday, nakshatra_index)
     }
 
