@@ -70,15 +70,16 @@ SOOLAM_BY_DAY = {
     6: {"tamil": "மேற்கு", "english": "Merkku (West)"}            # Sunday
 }
 
-# Parigaram (remedy) based on day of week
+# Parigaram (remedy) based on Soolam direction / day of week
+# User's rule: Sun/Thu/Fri = Oil, Mon/Sat = Milk, Tue/Wed = Jaggery/Rice
 PARIGARAM_BY_DAY = {
-    0: {"tamil": "வெல்லம்", "english": "Vellam (Jaggery)"},       # Monday
-    1: {"tamil": "கோதுமை", "english": "Gothumai (Wheat)"},        # Tuesday
-    2: {"tamil": "பச்சைப்பயறு", "english": "Pachaipayaru (Green Gram)"},  # Wednesday
-    3: {"tamil": "தைலம்", "english": "Thailam (Oil)"},            # Thursday
-    4: {"tamil": "அரிசி", "english": "Arisi (Rice)"},             # Friday
-    5: {"tamil": "உளுந்து", "english": "Ulundhu (Black Gram)"},   # Saturday
-    6: {"tamil": "கடலை", "english": "Kadalai (Gram)"}             # Sunday
+    0: {"tamil": "பால்", "english": "Paal (Milk)"},               # Monday - Mon/Sat = Milk
+    1: {"tamil": "வெல்லம்", "english": "Vellam (Jaggery)"},       # Tuesday - Tue/Wed = Jaggery/Rice
+    2: {"tamil": "அரிசி", "english": "Arisi (Rice)"},             # Wednesday - Tue/Wed = Jaggery/Rice
+    3: {"tamil": "தைலம்", "english": "Thailam (Oil)"},            # Thursday - Sun/Thu/Fri = Oil
+    4: {"tamil": "தைலம்", "english": "Thailam (Oil)"},            # Friday - Sun/Thu/Fri = Oil
+    5: {"tamil": "பால்", "english": "Paal (Milk)"},               # Saturday - Mon/Sat = Milk
+    6: {"tamil": "தைலம்", "english": "Thailam (Oil)"}             # Sunday - Sun/Thu/Fri = Oil
 }
 
 # Raahu Kaalam timings by day
