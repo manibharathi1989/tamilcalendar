@@ -495,9 +495,6 @@ def calculate_calendar_data(year: int, month: int, day: int) -> Dict[str, Any]:
     yogam_index = (day_of_year * 27 // 365 + 3) % 27
     next_yogam_index = (yogam_index + 1) % 27
     
-    # Calculate lagnam (simplified - changes every ~2 hours)
-    lagnam_index = (day_of_year + month) % 12
-    
     # Naal type based on nakshatra (using proper Nokku classification)
     current_nakshatra = NAKSHATRAS[nakshatra_index]
     naal_type = get_naal_type(current_nakshatra)
