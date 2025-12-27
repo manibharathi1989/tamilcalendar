@@ -468,7 +468,7 @@ def calculate_calendar_data(year: int, month: int, day: int, lat: str = '28.6139
             
             chandirashtamam = f"{panchang['chandrashtamam_ta']} - {panchang['chandrashtamam_stars']}"
             
-            lagnam = f"{panchang['lagnam_ta']} லக்னம்"
+            lagnam = panchang['lagnam_eng']
             
             naal_type = panchang["nokku_ta"]
             
@@ -512,7 +512,7 @@ def calculate_calendar_data(year: int, month: int, day: int, lat: str = '28.6139
                 "parigaram": PARIGARAM_BY_DAY[weekday],
                 "chandirashtamam": chandirashtamam,
                 "naal": naal_type,
-                "lagnam": f"{lagnam} இருப்பு நாழிகை 04 வினாடி 15",
+                "lagnam": lagnam,
                 "sun_rise": sunrise,
                 "sun_set": sunset,
                 "tithi_index": panchang["tithi_index"],
