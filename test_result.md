@@ -349,11 +349,8 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Search Page - Search by Date"
-    - "Search Page - Search by Range & Type"
-  stuck_tasks:
-    - "Search Page - Search by Date"
-    - "Search Page - Search by Range & Type"
+    - "Rasi Palan Functionality"
+  stuck_tasks: []
   test_all: false
   test_priority: "high_first"
   critical_issue: "React 19 initialization failure - requires WEBSEARCH for React 19 specific solutions"
