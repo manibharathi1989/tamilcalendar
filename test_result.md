@@ -1,4 +1,19 @@
 backend:
+  - task: "Tamil Calendar Calculation Logic - Reference Script Match"
+    implemented: true
+    working: true
+    file: "/app/backend/utils/calendar_calculator.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Implementing user's calculation rules for 11 Tamil calendar features matching reference HTML script"
+      - working: true
+        agent: "main"
+        comment: "✅ ALL 11 FEATURES NOW MATCH REFERENCE SCRIPT: (1) Soolam - weekday based, (2) Parigaram - Mon/Sat=Curd, Tue/Wed=Milk, Thu=Oil, Fri/Sun=Jaggery, (3) Chandirashtamam - (rasiIndex+5)%12 formula, (4) Naal - Mel/Keel/Sama Nokku star classification, (5) Lagnam - Sun's Rasi at sunrise, (6) Sunrise - astronomical calc for Chennai, (7) Sraardha Thithi, (8) Thithi with paksha, (9) Star with end time, (10) Yogam - Thu+Rohini=Marana, Fri+Ashwini/Revathi=Amrita, default=Siddha, (11) Sunset - astronomical calc for Chennai. All values verified against reference WEEK_DATA."
+
   - task: "Tamil Calendar Calculation Logic - User's Rules Implementation"
     implemented: true
     working: true
