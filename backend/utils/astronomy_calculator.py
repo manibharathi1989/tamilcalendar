@@ -332,6 +332,21 @@ def calculate_panchangam(date: datetime, lat: str = DEFAULT_LAT, lon: str = DEFA
     # Get sunrise and sunset
     sunrise, sunset = get_sunrise_sunset(calc_date_utc, lat, lon)
     
+    # Calculate Next Thithi Name
+    next_tithi_index = (tithi_index + 1) % 30
+    next_t_index = next_tithi_index % 15
+    if next_t_index == 14:
+        next_thithi_name_ta = "பௌர்ணமி" if next_tithi_index < 15 else "அமாவாசை"
+        next_thithi_name_eng = "Pournami" if next_tithi_index < 15 else "Amavasya"
+    else:
+        next_thithi_name_ta = TITHIS_TA[next_t_index]
+        next_thithi_name_eng = TITHIS_ENG[next_t_index]
+
+    # Calculate Next Star Name
+    next_star_index = (star_index + 1) % 27
+    next_star_ta = STARS_TA[next_star_index]
+    next_star_eng = STARS_ENG[next_star_index]
+    
     return {
         "tamil_month": tamil_month,
         "tamil_date": tamil_date,
@@ -339,10 +354,14 @@ def calculate_panchangam(date: datetime, lat: str = DEFAULT_LAT, lon: str = DEFA
         "star_ta": STARS_TA[star_index],
         "star_eng": STARS_ENG[star_index],
         "star_end_time": star_end_time,
+        "next_star_ta": next_star_ta,
+        "next_star_eng": next_star_eng,
         "tithi_index": tithi_index,
         "thithi_ta": f"{paksha_ta} {thithi_name_ta}",
         "thithi_eng": f"{paksha_eng} {thithi_name_eng}",
         "thithi_end_time": tithi_end_time,
+        "next_thithi_ta": next_thithi_name_ta,
+        "next_thithi_eng": next_thithi_name_eng,
         "sraardha_ta": thithi_name_ta,
         "sraardha_eng": thithi_name_eng,
         "rasi_index": rasi_index,
