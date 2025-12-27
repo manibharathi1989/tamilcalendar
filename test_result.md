@@ -1,4 +1,19 @@
 backend:
+  - task: "Tamil Calendar Astronomy Engine Integration"
+    implemented: true
+    working: true
+    file: "/app/backend/utils/astronomy_calculator.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Integrating PyEphem astronomy library for precise Star, Thithi, Sunrise/Sunset calculations"
+      - working: true
+        agent: "main"
+        comment: "✅ ASTRONOMY ENGINE INTEGRATED: Using PyEphem for precise calculations. Features: (1) Precise sunrise/sunset for Chennai coords, (2) Moon sidereal longitude for Star calculation with exact end times, (3) Sun-Moon angle for Thithi with exact end times, (4) Moon Rasi for Chandirashtamam, (5) Sun Rasi for Lagnam, (6) Lahiri Ayanamsa calculation. All 11 features now use astronomical ephemeris data when available."
+
   - task: "Tamil Calendar Calculation Logic - Reference Script Match"
     implemented: true
     working: true
