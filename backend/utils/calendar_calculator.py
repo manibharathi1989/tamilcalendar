@@ -506,7 +506,7 @@ def calculate_calendar_data(year: int, month: int, day: int) -> Dict[str, Any]:
         "naal": naal_type,
         "lagnam": f"{lagnam} இருப்பு நாழிகை 04 வினாடி 15",
         "sun_rise": sunrise,
-        "sun_set": "06:25 மா / PM",
+        "sun_set": sunset,
         "sraardha_thithi": TITHIS[thithi_index],
         "thithi": f"இன்று காலை 10:30 AM வரை {TITHIS[thithi_index]} பின்பு {TITHIS[next_thithi_index]}",
         "star": f"இன்று மாலை 04:30 PM வரை {NAKSHATRAS[nakshatra_index]} பின்பு {NAKSHATRAS[next_nakshatra_index]}",
