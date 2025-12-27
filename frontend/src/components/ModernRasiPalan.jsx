@@ -1,75 +1,96 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Star, TrendingUp, Calendar, Sparkles } from 'lucide-react';
-import { rasiPalanLinks } from '../data/mockCalendarData';
+import React, { useState, useEffect } from 'react';
+import { Sparkles } from 'lucide-react';
+import { calendarAPI } from '../services/calendarAPI';
+import { useNavigate } from 'react-router-dom';
 
 const ModernRasiPalan = () => {
-  const getIcon = (index) => {
-    const icons = [Star, TrendingUp, Calendar, Sparkles, Star, TrendingUp, Calendar];
-    return icons[index % icons.length];
-  };
+  const [rasiData, setRasiData] = useState([]);
+  const [selectedRasi, setSelectedRasi] = useState('mesham');
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
-  const getGradient = (index) => {
-    const gradients = [
-      'from-purple-500 to-pink-500',
-      'from-blue-500 to-cyan-500',
-      'from-orange-500 to-red-500',
-      'from-green-500 to-teal-500',
-      'from-yellow-500 to-orange-500',
-      'from-pink-500 to-rose-500',
-      'from-indigo-500 to-purple-500'
-    ];
-    return gradients[index % gradients.length];
-  };
+  const rasiList = [
+    { id: 'mesham', label: 'மேஷம்', icon: '♈' },
+    { id: 'rishabam', label: 'ரிஷபம்', icon: '♉' },
+    { id: 'mithunam', label: 'மிதுனம்', icon: '♊' },
+    { id: 'kadagam', label: 'கடகம்', icon: '♋' },
+    { id: 'simmam', label: 'சிம்மம்', icon: '♌' },
+    { id: 'kanni', label: 'கன்னி', icon: '♍' },
+    { id: 'thulam', label: 'துலாம்', icon: '♎' },
+    { id: 'vrichikam', label: 'விருச்சிகம்', icon: '♏' },
+    { id: 'dhanusu', label: 'தனுசு', icon: '♐' },
+    { id: 'makaram', label: 'மகரம்', icon: '♑' },
+    { id: 'kumbam', label: 'கும்பம்', icon: '♒' },
+    { id: 'meenam', label: 'மீனம்', icon: '♓' },
+  ];
+
+  useEffect(() => {
+    const fetchRasiPalan = async () => {
+      setLoading(true);
+      try {
+        const data = await calendarAPI.getRasiPalan('daily');
+        setRasiData(data);
+      } catch (error) {
+        console.error("Failed to fetch daily rasi palan", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchRasiPalan();
+  }, []);
+
+  const currentData = rasiData.find(r => r.rasi === selectedRasi);
 
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6">
-      <div className="flex items-center justify-center gap-2 mb-6">
-        <Star className="w-7 h-7 text-purple-500" />
-        <h3 className="text-2xl font-bold text-gray-800 text-center">
-          Rasi Palan
-        </h3>
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-xl font-bold text-gray-800">இன்றைய ராசி பலன்</h3>
+        <Sparkles className="w-5 h-5 text-purple-500" />
       </div>
-      <p className="text-center text-lg text-purple-600 font-semibold mb-6">
-        தமிழ் ராசி பலன்
-      </p>
-      
-      <div className="space-y-3">
-        {rasiPalanLinks.map((link, index) => {
-          const Icon = getIcon(index);
-          const gradient = getGradient(index);
-          
-          return (
-            <Link
-              key={index}
-              to={link.link}
-              className="group block"
-            >
-              <div className={`bg-gradient-to-r ${gradient} rounded-xl p-4 hover:shadow-xl transition-all transform hover:scale-105`}>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-white/20 rounded-lg">
-                      <Icon className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-white font-semibold">{link.english}</p>
-                      <p className="text-white/80 text-sm">{link.tamil}</p>
-                    </div>
-                  </div>
-                  <svg
-                    className="w-5 h-5 text-white transform group-hover:translate-x-1 transition-transform"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </div>
-            </Link>
-          );
-        })}
+
+      {/* Rasi Selector Grid */}
+      <div className="grid grid-cols-4 gap-2 mb-4">
+        {rasiList.map((rasi) => (
+          <button
+            key={rasi.id}
+            onClick={() => setSelectedRasi(rasi.id)}
+            className={`p-2 rounded-lg text-center transition-all ${
+              selectedRasi === rasi.id
+                ? 'bg-purple-100 text-purple-700 font-bold border-2 border-purple-200'
+                : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+            }`}
+          >
+            <div className="text-xl mb-1">{rasi.icon}</div>
+            <div className="text-[10px]">{rasi.label}</div>
+          </button>
+        ))}
       </div>
+
+      {/* Prediction */}
+      <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-4 border border-purple-100 min-h-[120px]">
+        {loading ? (
+          <p className="text-gray-500 text-center text-sm py-4">Loading...</p>
+        ) : currentData ? (
+          <>
+            <h4 className="font-bold text-purple-800 mb-2">{rasiList.find(r => r.id === selectedRasi)?.label}</h4>
+            <p className="text-gray-700 text-sm leading-relaxed mb-2">
+              {currentData.prediction_tamil}
+            </p>
+             <p className="text-gray-600 text-xs italic">
+              {currentData.prediction_english}
+            </p>
+          </>
+        ) : (
+          <p className="text-gray-500 text-center text-sm py-4">No data available.</p>
+        )}
+      </div>
+
+      <button 
+        onClick={() => navigate('/rasi-palan/daily')}
+        className="w-full mt-4 py-2 text-purple-600 font-medium text-sm hover:text-purple-700 hover:bg-purple-50 rounded-lg transition-colors"
+      >
+        View Full Rasi Palan →
+      </button>
     </div>
   );
 };
