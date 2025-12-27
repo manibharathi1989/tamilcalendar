@@ -453,9 +453,8 @@ def calculate_calendar_data(year: int, month: int, day: int) -> Dict[str, Any]:
     thithi_index = (day_of_year * 30 // 365) % 15
     next_thithi_index = (thithi_index + 1) % 15
     
-    # Calculate yogam (simplified)
+    # Calculate yogam (simplified - not used since we default to Siddha Yogam)
     yogam_index = (day_of_year * 27 // 365 + 3) % 27
-    next_yogam_index = (yogam_index + 1) % 27
     
     # Naal type based on nakshatra (using proper Nokku classification)
     current_nakshatra = NAKSHATRAS[nakshatra_index]
