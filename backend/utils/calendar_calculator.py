@@ -437,6 +437,7 @@ def get_tamil_month_from_date(dt: datetime) -> tuple:
 def calculate_calendar_data(year: int, month: int, day: int) -> Dict[str, Any]:
     """
     Calculate Tamil calendar data for a given date
+    Uses precise astronomical calculations when available
     """
     # Check if we have specific data for this date
     date_key = (year, month, day)
@@ -448,11 +449,80 @@ def calculate_calendar_data(year: int, month: int, day: int) -> Dict[str, Any]:
     # Calculate dynamically
     dt = datetime(year, month, day)
     weekday = dt.weekday()
-    
-    tamil_month, tamil_date = get_tamil_month_from_date(dt)
     tamil_year = get_tamil_year(year)
     
-    # Calculate nakshatra index (simplified - actual calculation requires astronomical data)
+    # Use astronomy calculator for precise calculations if available
+    if ASTRONOMY_AVAILABLE:
+        try:
+            panchang = calculate_panchangam(dt)
+            
+            # Get precise values from astronomy calculator
+            tamil_month = panchang["tamil_month"]
+            tamil_date = panchang["tamil_date"]
+            
+            star_ta = panchang["star_ta"]
+            star_eng = panchang["star_eng"]
+            star_end = panchang["star_end_time"]
+            star_index = panchang["star_index"]
+            next_star_index = (star_index + 1) % 27
+            
+            thithi_ta = panchang["thithi_ta"]
+            thithi_eng = panchang["thithi_eng"]
+            thithi_end = panchang["thithi_end_time"]
+            
+            sraardha_ta = panchang["sraardha_ta"]
+            
+            chandirashtamam = f"{panchang['chandrashtamam_ta']} - {panchang['chandrashtamam_stars']}"
+            
+            lagnam = f"{panchang['lagnam_ta']} லக்னம்"
+            
+            naal_type = panchang["nokku_ta"]
+            
+            yogam_display = panchang["yoga_ta"]
+            
+            sunrise = panchang["sunrise"]
+            sunset = panchang["sunset"]
+            
+            return {
+                "date": dt.isoformat(),
+                "tamil_date": f"{tamil_date} - {tamil_month} - {tamil_year}",
+                "tamil_day": TAMIL_DAYS[weekday],
+                "tamil_month": tamil_month,
+                "tamil_year": tamil_year,
+                "english_day": ENGLISH_DAYS[weekday],
+                "nalla_neram": {
+                    "morning": "07:30 - 09:00 கா / AM",
+                    "evening": "03:00 - 04:30 மா / PM"
+                },
+                "gowri_nalla_neram": {
+                    "morning": "06:00 - 07:30 கா / AM", 
+                    "evening": "01:30 - 03:00 மா / PM"
+                },
+                "raahu_kaalam": RAAHU_KAALAM[weekday],
+                "yemagandam": YEMAGANDAM[weekday],
+                "kuligai": KULIGAI[weekday],
+                "soolam": SOOLAM_BY_DAY[weekday],
+                "parigaram": PARIGARAM_BY_DAY[weekday],
+                "chandirashtamam": chandirashtamam,
+                "naal": naal_type,
+                "lagnam": f"{lagnam} இருப்பு நாழிகை 04 வினாடி 15",
+                "sun_rise": sunrise,
+                "sun_set": sunset,
+                "sraardha_thithi": sraardha_ta,
+                "thithi": f"{thithi_ta} ({star_end})",
+                "star": f"{star_ta} ({star_end})",
+                "yogam": yogam_display,
+                "subakariyam": get_subakariyam(weekday, star_index)
+            }
+        except Exception as e:
+            # Fall back to simplified calculation if astronomy fails
+            print(f"Astronomy calculation failed: {e}")
+            pass
+    
+    # Fallback to simplified calculation
+    tamil_month, tamil_date = get_tamil_month_from_date(dt)
+    
+    # Calculate nakshatra index (simplified)
     day_of_year = dt.timetuple().tm_yday
     nakshatra_index = (day_of_year * 27 // 365) % 27
     next_nakshatra_index = (nakshatra_index + 1) % 27
@@ -461,30 +531,23 @@ def calculate_calendar_data(year: int, month: int, day: int) -> Dict[str, Any]:
     thithi_index = (day_of_year * 30 // 365) % 15
     next_thithi_index = (thithi_index + 1) % 15
     
-    # Naal type based on nakshatra (using proper Nokku classification)
+    # Naal type based on nakshatra
     current_nakshatra = NAKSHATRAS[nakshatra_index]
     naal_type = get_naal_type(current_nakshatra)
     
     # Chandirashtamam based on Moon's Rasi
     chandirashtamam = get_chandirashtamam_rasi(current_nakshatra)
     
-    # Lagnam at sunrise based on Tamil month (Sun's Rasi)
+    # Lagnam at sunrise based on Tamil month
     lagnam = get_lagnam_at_sunrise(tamil_month)
     
-    # Sunrise time based on date and Chennai latitude
+    # Sunrise/Sunset times
     sunrise = get_sunrise_time(month, day)
-    
-    # Sunset time (approximate - 12 hours after sunrise with seasonal adjustment)
     sunset = get_sunset_time(month, day)
     
     # Calculate special yogam based on Day + Star
-    # Reference: Default is "Siddha Yogam" unless special combination
     special_yogam = get_special_yogam(weekday, current_nakshatra)
-    if special_yogam:
-        yogam_display = special_yogam
-    else:
-        # Default to Siddha Yogam as per reference
-        yogam_display = "சித்த யோகம்"
+    yogam_display = special_yogam if special_yogam else "சித்த யோகம்"
     
     return {
         "date": dt.isoformat(),
