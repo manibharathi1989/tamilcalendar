@@ -8,10 +8,10 @@ from datetime import datetime, timedelta
 from typing import Dict, Any, Tuple, Optional
 import math
 
-# Chennai coordinates (same as reference script)
-CHENNAI_LAT = '13.0827'
-CHENNAI_LON = '80.2707'
-CHENNAI_ELEV = 10  # meters
+# Default New Delhi coordinates
+DEFAULT_LAT = '28.6139'
+DEFAULT_LON = '77.2090'
+DEFAULT_ELEV = 216  # meters
 
 # 27 Nakshatras (Stars) in order
 STARS_TA = [
@@ -84,12 +84,12 @@ MEL_NOKKU_INDICES = [3, 5, 7, 11, 20, 21, 22, 23, 25, 0]
 KEEL_NOKKU_INDICES = [1, 2, 8, 9, 10, 15, 18, 19, 24]
 
 
-def get_observer(date: datetime) -> ephem.Observer:
-    """Create an observer at Chennai for the given date"""
+def get_observer(date: datetime, lat: str = DEFAULT_LAT, lon: str = DEFAULT_LON) -> ephem.Observer:
+    """Create an observer at specified location (default New Delhi) for the given date"""
     observer = ephem.Observer()
-    observer.lat = CHENNAI_LAT
-    observer.lon = CHENNAI_LON
-    observer.elevation = CHENNAI_ELEV
+    observer.lat = lat
+    observer.lon = lon
+    observer.elevation = DEFAULT_ELEV
     observer.date = ephem.Date(date)
     return observer
 
@@ -113,12 +113,12 @@ def normalize_degrees(deg: float) -> float:
     return deg if deg >= 0 else deg + 360
 
 
-def get_sidereal_longitude(body: str, date: datetime) -> float:
+def get_sidereal_longitude(body: str, date: datetime, lat: str = DEFAULT_LAT, lon: str = DEFAULT_LON) -> float:
     """
     Get sidereal longitude of a celestial body
     Sidereal = Tropical - Ayanamsa
     """
-    observer = get_observer(date)
+    observer = get_observer(date, lat, lon)
     
     if body == 'sun':
         obj = ephem.Sun(observer)
@@ -137,9 +137,9 @@ def get_sidereal_longitude(body: str, date: datetime) -> float:
     return sidereal_lon
 
 
-def get_sunrise_sunset(date: datetime) -> Tuple[datetime, datetime]:
-    """Get precise sunrise and sunset times for Chennai"""
-    observer = get_observer(date)
+def get_sunrise_sunset(date: datetime, lat: str = DEFAULT_LAT, lon: str = DEFAULT_LON) -> Tuple[datetime, datetime]:
+    """Get precise sunrise and sunset times for specified location"""
+    observer = get_observer(date, lat, lon)
     observer.horizon = '0'  # Standard horizon
     
     sun = ephem.Sun()
@@ -154,6 +154,7 @@ def get_sunrise_sunset(date: datetime) -> Tuple[datetime, datetime]:
         sunset = ephem.Date(sunset_ephem).datetime()
         
         # Adjust for IST (UTC+5:30)
+        # PyEphem returns UTC dates
         sunrise = sunrise + timedelta(hours=5, minutes=30)
         sunset = sunset + timedelta(hours=5, minutes=30)
         
@@ -181,7 +182,7 @@ def format_time_tamil(dt: datetime) -> str:
     return f"{display_hour:02d}:{minute:02d} {ampm}"
 
 
-def find_end_time(current_value: int, calc_type: str, start_date: datetime) -> str:
+def find_end_time(current_value: int, calc_type: str, start_date: datetime, lat: str = DEFAULT_LAT, lon: str = DEFAULT_LON) -> str:
     """
     Find when the current star or thithi ends
     Similar to findEndTime() in reference script
@@ -193,8 +194,8 @@ def find_end_time(current_value: int, calc_type: str, start_date: datetime) -> s
     for i in range(36 * 4):
         time = time + timedelta(minutes=15)
         
-        sun_lon = get_sidereal_longitude('sun', time)
-        moon_lon = get_sidereal_longitude('moon', time)
+        sun_lon = get_sidereal_longitude('sun', time, lat, lon)
+        moon_lon = get_sidereal_longitude('moon', time, lat, lon)
         
         if calc_type == 'star':
             new_value = int(moon_lon / 13.333333)
@@ -210,8 +211,8 @@ def find_end_time(current_value: int, calc_type: str, start_date: datetime) -> s
             for m in range(16):
                 time = time + timedelta(minutes=1)
                 
-                sun_lon = get_sidereal_longitude('sun', time)
-                moon_lon = get_sidereal_longitude('moon', time)
+                sun_lon = get_sidereal_longitude('sun', time, lat, lon)
+                moon_lon = get_sidereal_longitude('moon', time, lat, lon)
                 
                 if calc_type == 'star':
                     precise_val = int(moon_lon / 13.333333)
@@ -247,7 +248,7 @@ def format_time_short(dt: datetime) -> str:
     return f"{display_hour}:{minute:02d} {ampm}"
 
 
-def calculate_panchangam(date: datetime) -> Dict[str, Any]:
+def calculate_panchangam(date: datetime, lat: str = DEFAULT_LAT, lon: str = DEFAULT_LON) -> Dict[str, Any]:
     """
     Calculate complete panchangam using precise astronomical calculations
     Matches the reference HTML script calculations
@@ -258,17 +259,17 @@ def calculate_panchangam(date: datetime) -> Dict[str, Any]:
     calc_date_utc = calc_date - timedelta(hours=5, minutes=30)
     
     # Get sidereal longitudes
-    sun_lon = get_sidereal_longitude('sun', calc_date_utc)
-    moon_lon = get_sidereal_longitude('moon', calc_date_utc)
+    sun_lon = get_sidereal_longitude('sun', calc_date_utc, lat, lon)
+    moon_lon = get_sidereal_longitude('moon', calc_date_utc, lat, lon)
     
     # Star (Nakshatra) - Moon's position in 27 divisions
     star_index = int(moon_lon / 13.333333) % 27
-    star_end_time = find_end_time(star_index, 'star', calc_date_utc)
+    star_end_time = find_end_time(star_index, 'star', calc_date_utc, lat, lon)
     
     # Thithi - Angular difference between Moon and Sun
     tithi_diff = normalize_degrees(moon_lon - sun_lon)
     tithi_index = int(tithi_diff / 12)
-    tithi_end_time = find_end_time(tithi_index, 'tithi', calc_date_utc)
+    tithi_end_time = find_end_time(tithi_index, 'tithi', calc_date_utc, lat, lon)
     
     # Rasi - Moon's zodiac sign
     rasi_index = int(moon_lon / 30) % 12
@@ -329,7 +330,7 @@ def calculate_panchangam(date: datetime) -> Dict[str, Any]:
         yoga_eng = "Amrita Yogam"
     
     # Get sunrise and sunset
-    sunrise, sunset = get_sunrise_sunset(calc_date_utc)
+    sunrise, sunset = get_sunrise_sunset(calc_date_utc, lat, lon)
     
     return {
         "tamil_month": tamil_month,
