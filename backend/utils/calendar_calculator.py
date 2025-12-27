@@ -224,13 +224,17 @@ NAKSHATRA_TO_RASI = {
     "ரேவதி": "மீனம்"           # Pisces
 }
 
-# Mel Nokku (Upward Looking) Stars
+# Mel Nokku (Upward Looking) Stars - indices from reference
+# Reference: [3, 5, 7, 11, 20, 21, 22, 23, 25, 0]
+# Stars: Rohini(3), Thiruvadirai(5), Poosam(7), Uthiram(11), Uthiradam(20), Thiruvonam(21), Avittam(22), Sathayam(23), Uthirattathi(25), Ashwini(0)
 MEL_NOKKU_STARS = [
-    "ரோகிணி", "திருவாதிரை", "பூசம்", "உத்திரம்", 
+    "அஸ்வினி", "ரோகிணி", "திருவாதிரை", "பூசம்", "உத்திரம்",
     "உத்திராடம்", "திருவோணம்", "அவிட்டம்", "சதயம்", "உத்திரட்டாதி"
 ]
 
-# Keel Nokku (Downward Looking) Stars
+# Keel Nokku (Downward Looking) Stars - indices from reference
+# Reference: [1, 2, 8, 9, 10, 15, 18, 19, 24]
+# Stars: Bharani(1), Krithigai(2), Ayilyam(8), Magam(9), Pooram(10), Visakam(15), Moolam(18), Pooradam(19), Poorattathi(24)
 KEEL_NOKKU_STARS = [
     "பரணி", "கிருத்திகை", "ஆயில்யம்", "மகம்", "பூரம்",
     "விசாகம்", "மூலம்", "பூராடம்", "பூரட்டாதி"
@@ -238,8 +242,8 @@ KEEL_NOKKU_STARS = [
 
 # Sama Nokku (Level Looking) Stars - remaining stars
 SAMA_NOKKU_STARS = [
-    "அஸ்வினி", "மிருகசீரிடம்", "புனர்பூசம்", "அஸ்தம்", 
-    "சித்திரை", "சுவாதி", "அனுஷம்", "கேட்டை", "ரேவதி"
+    "மிருகசீரிடம்", "புனர்பூசம்", "அஸ்தம்", "சித்திரை", 
+    "சுவாதி", "அனுஷம்", "கேட்டை", "ரேவதி"
 ]
 
 # Special Yogam based on Day + Star combination
