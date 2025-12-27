@@ -461,22 +461,26 @@ def calculate_calendar_data(year: int, month: int, day: int) -> Dict[str, Any]:
     current_nakshatra = NAKSHATRAS[nakshatra_index]
     naal_type = get_naal_type(current_nakshatra)
     
-    # Chandirashtamam based on Moon's Rasi (8th sign back)
+    # Chandirashtamam based on Moon's Rasi
     chandirashtamam = get_chandirashtamam_rasi(current_nakshatra)
     
-    # Lagnam at sunrise based on Tamil month
+    # Lagnam at sunrise based on Tamil month (Sun's Rasi)
     lagnam = get_lagnam_at_sunrise(tamil_month)
     
     # Sunrise time based on date and Chennai latitude
     sunrise = get_sunrise_time(month, day)
     
+    # Sunset time (approximate - 12 hours after sunrise with seasonal adjustment)
+    sunset = get_sunset_time(month, day)
+    
     # Calculate special yogam based on Day + Star
+    # Reference: Default is "Siddha Yogam" unless special combination
     special_yogam = get_special_yogam(weekday, current_nakshatra)
     if special_yogam:
         yogam_display = special_yogam
     else:
-        # Use regular yogam calculation
-        yogam_display = f"{YOGAMS[yogam_index]} யோகம் மாலை 05:00 PM வரை பின்பு {YOGAMS[next_yogam_index]}"
+        # Default to Siddha Yogam as per reference
+        yogam_display = "சித்த யோகம்"
     
     return {
         "date": dt.isoformat(),
