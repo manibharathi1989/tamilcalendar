@@ -515,6 +515,8 @@ def calculate_calendar_data(year: int, month: int, day: int, lat: str = '28.6139
                 "lagnam": f"{lagnam} இருப்பு நாழிகை 04 வினாடி 15",
                 "sun_rise": sunrise,
                 "sun_set": sunset,
+                "tithi_index": panchang["tithi_index"],
+                "star_index": panchang["star_index"],
                 "sraardha_thithi": sraardha_ta,
                 "thithi": thithi_display,
                 "star": star_display,
