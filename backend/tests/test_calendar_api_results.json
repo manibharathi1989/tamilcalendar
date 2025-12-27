@@ -1,0 +1,237 @@
+[
+  {
+    "test": "Daily Calendar Endpoint - Basic",
+    "success": true,
+    "message": "All required Tamil calendar fields present",
+    "timestamp": "2025-12-27T08:35:24.842763",
+    "response_data": {
+      "fields_count": 12,
+      "sample_data": {
+        "tamil_date": "10 - \u0bae\u0bbe\u0bb0\u0bcd\u0b95\u0bb4\u0bbf - \u0b9a\u0bcb\u0baa\u0b95\u0bbf\u0bb0\u0bc1\u0ba4\u0bc1",
+        "thithi": "\u0bb5\u0bb3\u0bb0\u0bcd\u0baa\u0bbf\u0bb1\u0bc8 \u0baa\u0b9e\u0bcd\u0b9a\u0bae\u0bbf (till 1:44 PM)",
+        "star": "\u0b9a\u0ba4\u0baf\u0bae\u0bcd (Next Day (9:01 AM))",
+        "yogam": "\u0b9a\u0bbf\u0ba4\u0bcd\u0ba4 \u0baf\u0bcb\u0b95\u0bae\u0bcd",
+        "sun_rise": "07:11 \u0b95\u0bbe / AM",
+        "sun_set": "05:31 \u0bae\u0bbe / PM"
+      }
+    }
+  },
+  {
+    "test": "Daily Calendar Endpoint - With Location Parameters",
+    "success": true,
+    "message": "Location parameters accepted, sunrise/sunset data returned",
+    "timestamp": "2025-12-27T08:35:24.888151",
+    "response_data": {
+      "location": "Chennai (13.0827, 80.2707)",
+      "sun_rise": "06:28 \u0b95\u0bbe / AM",
+      "sun_set": "05:50 \u0bae\u0bbe / PM",
+      "thithi": "\u0bb5\u0bb3\u0bb0\u0bcd\u0baa\u0bbf\u0bb1\u0bc8 \u0baa\u0b9e\u0bcd\u0b9a\u0bae\u0bbf (till 1:44 PM)",
+      "star": "\u0b9a\u0ba4\u0baf\u0bae\u0bcd (Next Day (9:01 AM))"
+    }
+  },
+  {
+    "test": "Location Impact on Sunrise/Sunset Times",
+    "success": true,
+    "message": "Location affects sunrise/sunset times - 4 unique sunrise, 4 unique sunset times",
+    "timestamp": "2025-12-27T08:35:25.066580",
+    "response_data": {
+      "sunrise_times": {
+        "Chennai": "06:28 \u0b95\u0bbe / AM",
+        "Delhi": "07:11 \u0b95\u0bbe / AM",
+        "Mumbai": "07:09 \u0b95\u0bbe / AM",
+        "Kolkata": "06:14 \u0b95\u0bbe / AM"
+      },
+      "sunset_times": {
+        "Chennai": "05:50 \u0bae\u0bbe / PM",
+        "Delhi": "05:31 \u0bae\u0bbe / PM",
+        "Mumbai": "06:08 \u0bae\u0bbe / PM",
+        "Kolkata": "04:59 \u0bae\u0bbe / PM"
+      }
+    }
+  },
+  {
+    "test": "Response Structure Completeness",
+    "success": true,
+    "message": "All 17 required fields present with correct structure",
+    "timestamp": "2025-12-27T08:35:25.109086",
+    "response_data": {
+      "total_fields": 17,
+      "sample_structure": {
+        "soolam": {
+          "tamil": "\u0ba4\u0bc6\u0bb1\u0bcd\u0b95\u0bc1",
+          "english": "South"
+        },
+        "nalla_neram": {
+          "morning": "07:30 - 09:00 \u0b95\u0bbe / AM",
+          "evening": "03:00 - 04:30 \u0bae\u0bbe / PM"
+        },
+        "thithi": "\u0bb5\u0bb3\u0bb0\u0bcd\u0baa\u0bbf\u0bb1\u0bc8 \u0baa\u0b9e\u0bcd\u0b9a\u0bae\u0bbf (till 1:44 PM)",
+        "star": "\u0b9a\u0ba4\u0baf\u0bae\u0bcd (Next Day (9:01 AM))"
+      }
+    }
+  },
+  {
+    "test": "Edge Cases and Error Conditions",
+    "success": false,
+    "message": "1 edge cases not handled properly",
+    "timestamp": "2025-12-27T08:35:25.332509",
+    "response_data": {
+      "failed_cases": [
+        {
+          "case": "Invalid Date - Feb 30",
+          "status_code": 520,
+          "expected_status": [
+            400,
+            422,
+            500
+          ],
+          "handled_properly": false,
+          "response_preview": "{\"detail\":\"day is out of range for month\"}"
+        }
+      ],
+      "all_results": [
+        {
+          "case": "Invalid Date - Feb 30",
+          "status_code": 520,
+          "expected_status": [
+            400,
+            422,
+            500
+          ],
+          "handled_properly": false,
+          "response_preview": "{\"detail\":\"day is out of range for month\"}"
+        },
+        {
+          "case": "Future Date - Year 2030",
+          "status_code": 200,
+          "expected_status": [
+            200,
+            500
+          ],
+          "handled_properly": true,
+          "response_preview": "{\"date\":\"2030-06-15T00:00:00\",\"tamil_date\":\"30 - \u0bb5\u0bc8\u0b95\u0bbe\u0b9a\u0bbf - \u0b95\u0bc0\u0bb2\u0b95\",\"tamil_day\":\"\u0b9a\u0ba9\u0bbf\",\"tamil_month\":\"\u0bb5\u0bc8\u0b95\u0bbe\u0b9a\u0bbf\",\"tamil_year\":\"\u0b95\u0bc0\u0bb2\u0b95\",\"english_day\":\"Saturday\",\"nalla_neram\":{\"morning\":\"07:30 - 09:00 \u0b95\u0bbe / AM\",\""
+        },
+        {
+          "case": "Very Old Date - Year 1900",
+          "status_code": 200,
+          "expected_status": [
+            200,
+            500
+          ],
+          "handled_properly": true,
+          "response_preview": "{\"date\":\"1900-01-01T00:00:00\",\"tamil_date\":\"18 - \u0bae\u0bbe\u0bb0\u0bcd\u0b95\u0bb4\u0bbf - \u0bb5\u0bbf\u0bb3\u0bae\u0bcd\u0baa\u0bbf\",\"tamil_day\":\"\u0ba4\u0bbf\u0b99\u0bcd\u0b95\u0bb3\u0bcd\",\"tamil_month\":\"\u0bae\u0bbe\u0bb0\u0bcd\u0b95\u0bb4\u0bbf\",\"tamil_year\":\"\u0bb5\u0bbf\u0bb3\u0bae\u0bcd\u0baa\u0bbf\",\"english_day\":\"Monday\",\"nalla_neram\":{\"morning\":\"07:30 - 09:00 "
+        },
+        {
+          "case": "Invalid Location - Out of Range Lat",
+          "status_code": 200,
+          "expected_status": [
+            200,
+            400,
+            422,
+            500
+          ],
+          "handled_properly": true,
+          "response_preview": "{\"date\":\"2025-12-25T00:00:00\",\"tamil_date\":\"10 - \u0bae\u0bbe\u0bb0\u0bcd\u0b95\u0bb4\u0bbf - \u0b9a\u0bcb\u0baa\u0b95\u0bbf\u0bb0\u0bc1\u0ba4\u0bc1\",\"tamil_day\":\"\u0bb5\u0bbf\u0baf\u0bbe\u0bb4\u0ba9\u0bcd\",\"tamil_month\":\"\u0bae\u0bbe\u0bb0\u0bcd\u0b95\u0bb4\u0bbf\",\"tamil_year\":\"\u0b9a\u0bcb\u0baa\u0b95\u0bbf\u0bb0\u0bc1\u0ba4\u0bc1\",\"english_day\":\"Thursday\",\"nalla_neram\":{\"morning\":\"07:30 - "
+        },
+        {
+          "case": "Invalid Location - Out of Range Lon",
+          "status_code": 200,
+          "expected_status": [
+            200,
+            400,
+            422,
+            500
+          ],
+          "handled_properly": true,
+          "response_preview": "{\"date\":\"2025-12-25T00:00:00\",\"tamil_date\":\"10 - \u0bae\u0bbe\u0bb0\u0bcd\u0b95\u0bb4\u0bbf - \u0b9a\u0bcb\u0baa\u0b95\u0bbf\u0bb0\u0bc1\u0ba4\u0bc1\",\"tamil_day\":\"\u0bb5\u0bbf\u0baf\u0bbe\u0bb4\u0ba9\u0bcd\",\"tamil_month\":\"\u0bae\u0bbe\u0bb0\u0bcd\u0b95\u0bb4\u0bbf\",\"tamil_year\":\"\u0b9a\u0bcb\u0baa\u0b95\u0bbf\u0bb0\u0bc1\u0ba4\u0bc1\",\"english_day\":\"Thursday\",\"nalla_neram\":{\"morning\":\"07:30 - "
+        }
+      ]
+    }
+  },
+  {
+    "test": "Data Consistency Across Dates",
+    "success": true,
+    "message": "Data structure consistent across 5 dates",
+    "timestamp": "2025-12-27T08:35:25.551857",
+    "response_data": {
+      "dates_tested": 5,
+      "total_fields": 23,
+      "sample_results": [
+        {
+          "date": "2025/12/20",
+          "status": "success",
+          "keys_count": 23,
+          "has_thithi": true,
+          "has_star": true,
+          "has_sunrise": true,
+          "thithi_value": "\u0bb5\u0bb3\u0bb0\u0bcd\u0baa\u0bbf\u0bb1\u0bc8 \u0baa\u0bbf\u0bb0\u0ba4\u0bae\u0bc8 (Next Day (9:13 AM))",
+          "star_value": "\u0bae\u0bc2\u0bb2\u0bae\u0bcd (Next Day (1:23 AM))"
+        },
+        {
+          "date": "2025/12/21",
+          "status": "success",
+          "keys_count": 23,
+          "has_thithi": true,
+          "has_star": true,
+          "has_sunrise": true,
+          "thithi_value": "\u0bb5\u0bb3\u0bb0\u0bcd\u0baa\u0bbf\u0bb1\u0bc8 \u0ba4\u0bc1\u0bb5\u0bbf\u0ba4\u0bbf\u0baf\u0bc8 (Next Day (10:53 AM))",
+          "star_value": "\u0baa\u0bc2\u0bb0\u0bbe\u0b9f\u0bae\u0bcd (Next Day (3:37 AM))"
+        },
+        {
+          "date": "2025/12/22",
+          "status": "success",
+          "keys_count": 23,
+          "has_thithi": true,
+          "has_star": true,
+          "has_sunrise": true,
+          "thithi_value": "\u0bb5\u0bb3\u0bb0\u0bcd\u0baa\u0bbf\u0bb1\u0bc8 \u0ba4\u0bbf\u0bb0\u0bc1\u0ba4\u0bbf\u0baf\u0bc8 (Next Day (12:14 PM))",
+          "star_value": "\u0b89\u0ba4\u0bcd\u0ba4\u0bbf\u0bb0\u0bbe\u0b9f\u0bae\u0bcd (Next Day (5:33 AM))"
+        }
+      ]
+    }
+  },
+  {
+    "test": "Tamil Calendar Calculation Accuracy",
+    "success": true,
+    "message": "All 5 Tamil calendar calculations accurate",
+    "timestamp": "2025-12-27T08:35:25.635372",
+    "response_data": {
+      "soolam_direction": {
+        "field": "soolam",
+        "expected": "\u0ba4\u0bc6\u0bb1\u0bcd\u0b95\u0bc1",
+        "actual": {
+          "tamil": "\u0ba4\u0bc6\u0bb1\u0bcd\u0b95\u0bc1",
+          "english": "South"
+        },
+        "accurate": true
+      },
+      "parigaram_item": {
+        "field": "parigaram",
+        "expected": "\u0ba8\u0bc6\u0baf\u0bcd",
+        "actual": {
+          "tamil": "\u0ba4\u0bc8\u0bb2\u0bae\u0bcd",
+          "english": "Oil"
+        },
+        "accurate": true
+      },
+      "thithi_present": {
+        "field": "thithi",
+        "expected": "Contains Tamil thithi name",
+        "actual": "\u0bb5\u0bb3\u0bb0\u0bcd\u0baa\u0bbf\u0bb1\u0bc8 \u0baa\u0b9e\u0bcd\u0b9a\u0bae\u0bbf (till 1:44 PM)",
+        "accurate": true
+      },
+      "star_present": {
+        "field": "star",
+        "expected": "Contains Tamil star name",
+        "actual": "\u0b9a\u0ba4\u0baf\u0bae\u0bcd (Next Day (9:01 AM))",
+        "accurate": true
+      },
+      "sunrise_format": {
+        "field": "sun_rise",
+        "expected": "Time format with AM/PM",
+        "actual": "07:11 \u0b95\u0bbe / AM",
+        "accurate": true
+      }
+    }
+  }
+]
