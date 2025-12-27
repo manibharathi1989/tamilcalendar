@@ -94,6 +94,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ DAILY CALENDAR API WORKING: GET /api/calendar/daily/{year}/{month}/{day} returns correct data structure with tamil_date, nalla_neram, raahu_kaalam, soolam, parigaram and all required fields. Tested with Dec 25, 2025 - returns proper Tamil calendar data."
+      - working: true
+        agent: "testing"
+        comment: "🎯 COMPREHENSIVE TAMIL CALENDAR API TESTING COMPLETED: ✅ Test 1 - Basic endpoint: All 12 required Tamil calendar fields present (thithi, star, yogam, soolam, parigaram, chandirashtamam, sun_rise, sun_set, lagnam, etc.). ✅ Test 2 - Location parameters: lat/lon parameters accepted, Chennai coordinates (13.0827, 80.2707) work correctly. ✅ Test 3 - Location impact: Verified sunrise/sunset times change with location - 4 unique sunrise times (Chennai: 06:28 AM, Delhi: 07:11 AM, Mumbai: 07:09 AM, Kolkata: 06:14 AM) and 4 unique sunset times across different cities. ✅ Test 4 - Response structure: All 17 required fields present with correct data types (dict for soolam/parigaram with tamil/english, dict for nalla_neram with morning/evening). ✅ Test 5 - Data consistency: Structure consistent across 5 test dates with 23 total fields. ✅ Test 6 - Tamil calculations: Soolam (தெற்கு for Thursday), Parigaram (தைலம் for oil), proper Tamil text in thithi/star fields, correct sunrise format. Minor: One edge case (invalid date Feb 30) returns 520 instead of expected 400/422 status code. API endpoint fully functional with location support and accurate Tamil calendar calculations."
 
   - task: "Special Days API"
     implemented: true
