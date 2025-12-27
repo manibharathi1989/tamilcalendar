@@ -18,24 +18,38 @@ def get_db():
     return client[os.environ.get('DB_NAME', 'test_database')]
 
 @router.get("/daily/{year}/{month}/{day}")
-async def get_daily_calendar(year: int, month: int, day: int):
+async def get_daily_calendar(
+    year: int, 
+    month: int, 
+    day: int,
+    lat: Optional[str] = "28.6139",
+    lon: Optional[str] = "77.2090"
+):
     """Get daily calendar data for a specific date"""
     try:
         db = get_db()
-        date = datetime(year, month, day)
-        calendar_data = await db.daily_calendars.find_one({
-            "date": date
-        })
+        # For now, skip DB lookup if we want dynamic location support, or include location in query
+        # But since we are focusing on calculation, let's call calculator directly for non-default locations or just always for now
         
-        if not calendar_data:
-            # Use the calendar calculator to generate accurate data
-            return calculate_calendar_data(year, month, day)
+        # If default location, check DB (assuming DB stores default location data)
+        # But since we changed logic, let's just calculate dynamically for now to ensure location support works
+        return calculate_calendar_data(year, month, day, lat, lon)
         
-        # Remove MongoDB _id field
-        if calendar_data and "_id" in calendar_data:
-            calendar_data.pop("_id")
+        # Original DB logic commented out for dynamic location support
+        # date = datetime(year, month, day)
+        # calendar_data = await db.daily_calendars.find_one({
+        #     "date": date
+        # })
         
-        return calendar_data
+        # if not calendar_data:
+        #     # Use the calendar calculator to generate accurate data
+        #     return calculate_calendar_data(year, month, day)
+        
+        # # Remove MongoDB _id field
+        # if calendar_data and "_id" in calendar_data:
+        #     calendar_data.pop("_id")
+        
+        # return calendar_data
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
