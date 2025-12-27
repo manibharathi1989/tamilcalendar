@@ -1,10 +1,18 @@
 """
 Tamil Calendar Calculator Module
 Provides calculations for Tamil calendar data including Panchang elements
+Uses PyEphem for precise astronomical calculations
 """
 
 from datetime import datetime, date
 from typing import Dict, Any
+
+# Import astronomy calculator for precise calculations
+try:
+    from utils.astronomy_calculator import calculate_panchangam
+    ASTRONOMY_AVAILABLE = True
+except ImportError:
+    ASTRONOMY_AVAILABLE = False
 
 # Tamil day names
 TAMIL_DAYS = {
