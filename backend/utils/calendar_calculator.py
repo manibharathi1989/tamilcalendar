@@ -461,13 +461,10 @@ def calculate_calendar_data(year: int, month: int, day: int) -> Dict[str, Any]:
             tamil_date = panchang["tamil_date"]
             
             star_ta = panchang["star_ta"]
-            star_eng = panchang["star_eng"]
             star_end = panchang["star_end_time"]
             star_index = panchang["star_index"]
-            next_star_index = (star_index + 1) % 27
             
             thithi_ta = panchang["thithi_ta"]
-            thithi_eng = panchang["thithi_eng"]
             thithi_end = panchang["thithi_end_time"]
             
             sraardha_ta = panchang["sraardha_ta"]
