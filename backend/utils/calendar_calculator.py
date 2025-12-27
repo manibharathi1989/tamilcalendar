@@ -528,13 +528,14 @@ def get_subakariyam(weekday: int, nakshatra_index: int) -> str:
 def get_chandirashtamam_rasi(nakshatra: str) -> str:
     """
     Calculate Chandirashtamam - the Rasi for which today is inauspicious
-    Based on Moon's current position, count 8 signs back
+    Based on Moon's current Rasi position
+    Reference formula: chandrashtamamIndex = (rasiIndex + 5) % 12
     
     Args:
         nakshatra: Current nakshatra name in Tamil
         
     Returns:
-        Chandirashtamam rasi with its inauspicious stars
+        Chandirashtamam rasi with its associated stars
     """
     # Get Moon's current Rasi from nakshatra
     moon_rasi = NAKSHATRA_TO_RASI.get(nakshatra)
@@ -547,16 +548,8 @@ def get_chandirashtamam_rasi(nakshatra: str) -> str:
     except ValueError:
         return "துலாம் - பரணி, கிருத்திகை"
     
-    # Count 8 signs back (or forward 4 signs, same result)
-    # Chandirashtamam is the 8th sign FROM the Moon's rasi
-    chandirashtamam_index = (moon_rasi_index + 7) % 12  # +7 because we count from 1
-    
-    # Actually, we need to find which rasi is affected
-    # If Moon is in Taurus, count back 8: Taurus(1)->Aries(2)->Pisces(3)->Aquarius(4)->Capricorn(5)->Sagittarius(6)->Scorpio(7)->Libra(8)
-    # So we go backwards: (moon_rasi_index - 7) % 12
-    # Or equivalently: (moon_rasi_index + 5) % 12 (going forward 5 = going back 7)
-    
-    chandirashtamam_index = (moon_rasi_index - 7) % 12
+    # Reference formula: chandrashtamamIndex = (rasiIndex + 5) % 12
+    chandirashtamam_index = (moon_rasi_index + 5) % 12
     chandirashtamam_rasi = RASIS[chandirashtamam_index]
     
     # Get the inauspicious stars for this rasi
