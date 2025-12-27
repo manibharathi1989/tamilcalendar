@@ -4,10 +4,16 @@ const API_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
 
 export const calendarAPI = {
   // Get daily calendar data
-  getDailyCalendar: async (year, month, day) => {
+  getDailyCalendar: async (year, month, day, location = null) => {
     try {
+      const params = {};
+      if (location) {
+        params.lat = location.lat;
+        params.lon = location.lon;
+      }
       const response = await axios.get(
-        `${API_URL}/api/calendar/daily/${year}/${month}/${day}`
+        `${API_URL}/api/calendar/daily/${year}/${month}/${day}`,
+        { params }
       );
       return response.data;
     } catch (error) {
