@@ -60,37 +60,39 @@ TAMIL_YEARS = [
 ]
 
 # Soolam (direction) based on day of week
+# Reference: JS dayOfWeek where 0=Sunday, but Python weekday() gives 0=Monday
+# Converting to Python weekday: Mon=0, Tue=1, Wed=2, Thu=3, Fri=4, Sat=5, Sun=6
 SOOLAM_BY_DAY = {
-    0: {"tamil": "கிழக்கு", "english": "Kizhakku (East)"},        # Monday
-    1: {"tamil": "வடக்கு", "english": "Vadakku (North)"},         # Tuesday
-    2: {"tamil": "வடக்கு", "english": "Vadakku (North)"},         # Wednesday
-    3: {"tamil": "தெற்கு", "english": "Therkku (South)"},         # Thursday
-    4: {"tamil": "மேற்கு", "english": "Merkku (West)"},           # Friday
-    5: {"tamil": "கிழக்கு", "english": "Kizhakku (East)"},        # Saturday
-    6: {"tamil": "மேற்கு", "english": "Merkku (West)"}            # Sunday
+    0: {"tamil": "கிழக்கு", "english": "East"},        # Monday
+    1: {"tamil": "வடக்கு", "english": "North"},        # Tuesday
+    2: {"tamil": "வடக்கு", "english": "North"},        # Wednesday
+    3: {"tamil": "தெற்கு", "english": "South"},        # Thursday
+    4: {"tamil": "மேற்கு", "english": "West"},         # Friday
+    5: {"tamil": "கிழக்கு", "english": "East"},        # Saturday
+    6: {"tamil": "மேற்கு", "english": "West"}          # Sunday
 }
 
-# Parigaram (remedy) based on Soolam direction / day of week
-# User's rule: Sun/Thu/Fri = Oil, Mon/Sat = Milk, Tue/Wed = Jaggery/Rice
+# Parigaram (remedy) based on day of week - from reference WEEK_DATA
+# Mon=Curd, Tue=Milk, Wed=Milk, Thu=Oil, Fri=Jaggery, Sat=Curd, Sun=Jaggery
 PARIGARAM_BY_DAY = {
-    0: {"tamil": "பால்", "english": "Paal (Milk)"},               # Monday - Mon/Sat = Milk
-    1: {"tamil": "வெல்லம்", "english": "Vellam (Jaggery)"},       # Tuesday - Tue/Wed = Jaggery/Rice
-    2: {"tamil": "அரிசி", "english": "Arisi (Rice)"},             # Wednesday - Tue/Wed = Jaggery/Rice
-    3: {"tamil": "தைலம்", "english": "Thailam (Oil)"},            # Thursday - Sun/Thu/Fri = Oil
-    4: {"tamil": "தைலம்", "english": "Thailam (Oil)"},            # Friday - Sun/Thu/Fri = Oil
-    5: {"tamil": "பால்", "english": "Paal (Milk)"},               # Saturday - Mon/Sat = Milk
-    6: {"tamil": "தைலம்", "english": "Thailam (Oil)"}             # Sunday - Sun/Thu/Fri = Oil
+    0: {"tamil": "தயிர்", "english": "Curd"},          # Monday
+    1: {"tamil": "பால்", "english": "Milk"},           # Tuesday
+    2: {"tamil": "பால்", "english": "Milk"},           # Wednesday
+    3: {"tamil": "தைலம்", "english": "Oil"},           # Thursday
+    4: {"tamil": "வெல்லம்", "english": "Jaggery"},     # Friday
+    5: {"tamil": "தயிர்", "english": "Curd"},          # Saturday
+    6: {"tamil": "வெல்லம்", "english": "Jaggery"}      # Sunday
 }
 
-# Raahu Kaalam timings by day
+# Raahu Kaalam timings by day (Python weekday)
 RAAHU_KAALAM = {
     0: "07:30 - 09:00",   # Monday
-    1: "15:00 - 16:30",   # Tuesday
-    2: "12:00 - 13:30",   # Wednesday
-    3: "13:30 - 15:00",   # Thursday
+    1: "03:00 - 04:30",   # Tuesday
+    2: "12:00 - 01:30",   # Wednesday
+    3: "01:30 - 03:00",   # Thursday
     4: "10:30 - 12:00",   # Friday
     5: "09:00 - 10:30",   # Saturday
-    6: "16:30 - 18:00"    # Sunday
+    6: "04:30 - 06:00"    # Sunday
 }
 
 # Yemagandam timings by day
@@ -99,20 +101,20 @@ YEMAGANDAM = {
     1: "09:00 - 10:30",   # Tuesday
     2: "07:30 - 09:00",   # Wednesday
     3: "06:00 - 07:30",   # Thursday
-    4: "15:00 - 16:30",   # Friday
-    5: "13:30 - 15:00",   # Saturday
-    6: "12:00 - 13:30"    # Sunday
+    4: "03:00 - 04:30",   # Friday
+    5: "01:30 - 03:00",   # Saturday
+    6: "12:00 - 01:30"    # Sunday
 }
 
 # Kuligai timings by day
 KULIGAI = {
-    0: "13:30 - 15:00",   # Monday
-    1: "12:00 - 13:30",   # Tuesday
+    0: "01:30 - 03:00",   # Monday
+    1: "12:00 - 01:30",   # Tuesday
     2: "10:30 - 12:00",   # Wednesday
     3: "09:00 - 10:30",   # Thursday
     4: "07:30 - 09:00",   # Friday
     5: "06:00 - 07:30",   # Saturday
-    6: "15:00 - 16:30"    # Sunday
+    6: "03:00 - 04:30"    # Sunday
 }
 
 # 27 Nakshatras (Stars)
