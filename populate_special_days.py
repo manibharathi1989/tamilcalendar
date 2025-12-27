@@ -21,7 +21,12 @@ async def populate_special_days():
     targets = [(2025, 12), (2026, 1)]
     
     fixed_events = {
+        (2025, 12, 1): [("wedding", "சுப முகூர்த்தம்", "Wedding Date")],
         (2025, 12, 3): [("festival", "கார்த்திகை தீபம்", "Karthigai Deepam")],
+        (2025, 12, 8): [("wedding", "சுப முகூர்த்தம்", "Wedding Date")],
+        (2025, 12, 10): [("wedding", "சுப முகூர்த்தம்", "Wedding Date")],
+        (2025, 12, 14): [("wedding", "சுப முகூர்த்தம்", "Wedding Date")],
+        (2025, 12, 15): [("wedding", "சுப முகூர்த்தம்", "Wedding Date")],
         (2025, 12, 19): [("festival", "ஹனுமன் ஜெயந்தி", "Hanumath Jayanthi")],
         (2025, 12, 25): [("govt_holiday", "கிறிஸ்துமஸ்", "Christmas"), ("festival", "கிறிஸ்துமஸ்", "Christmas")],
         (2025, 12, 30): [("festival", "வைகுண்ட ஏகாதசி", "Vaikunta Ekadasi")],
@@ -30,7 +35,10 @@ async def populate_special_days():
         (2026, 1, 14): [("govt_holiday", "பொங்கல்", "Pongal"), ("festival", "பொங்கல்", "Pongal")],
         (2026, 1, 15): [("govt_holiday", "மாட்டு பொங்கல்", "Mattu Pongal"), ("festival", "மாட்டு பொங்கல்", "Mattu Pongal")],
         (2026, 1, 16): [("govt_holiday", "காணும் பொங்கல்", "Kaanum Pongal"), ("festival", "காணும் பொங்கல்", "Kaanum Pongal")],
-        (2026, 1, 26): [("govt_holiday", "குடியரசு தினம்", "Republic Day")]
+        (2026, 1, 23): [("wedding", "சுப முகூர்த்தம்", "Wedding Date")],
+        (2026, 1, 25): [("wedding", "சுப முகூர்த்தம்", "Wedding Date")],
+        (2026, 1, 26): [("govt_holiday", "குடியரசு தினம்", "Republic Day")],
+        (2026, 1, 28): [("wedding", "சுப முகூர்த்தம்", "Wedding Date")]
     }
 
     for year, month in targets:
