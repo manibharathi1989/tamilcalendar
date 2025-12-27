@@ -1,9 +1,247 @@
 [
   {
+    "test": "January 1, 2026 - User's Calculation Rules",
+    "success": false,
+    "message": "Mismatch in 2 features: chandirashtamam, sun_rise",
+    "timestamp": "2025-12-27T08:35:36.099673",
+    "response_data": {
+      "soolam": {
+        "expected": "\u0ba4\u0bc6\u0bb1\u0bcd\u0b95\u0bc1",
+        "actual": "\u0ba4\u0bc6\u0bb1\u0bcd\u0b95\u0bc1",
+        "pass": true
+      },
+      "parigaram": {
+        "expected": "\u0ba4\u0bc8\u0bb2\u0bae\u0bcd",
+        "actual": "\u0ba4\u0bc8\u0bb2\u0bae\u0bcd",
+        "pass": true
+      },
+      "chandirashtamam": {
+        "expected": "\u0ba4\u0bc1\u0bb2\u0bbe\u0bae\u0bcd - \u0baa\u0bb0\u0ba3\u0bbf, \u0b95\u0bbf\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bbf\u0b95\u0bc8",
+        "actual": "\u0ba4\u0bc1\u0bb2\u0bbe\u0bae\u0bcd - \u0b9a\u0bbf\u0ba4\u0bcd\u0ba4\u0bbf\u0bb0\u0bc8 (3,4), \u0b9a\u0bc1\u0bb5\u0bbe\u0ba4\u0bbf, \u0bb5\u0bbf\u0b9a\u0bbe\u0b95\u0bae\u0bcd (1-3)",
+        "pass": false
+      },
+      "naal": {
+        "expected": "\u0bae\u0bc7\u0bb2\u0bcd \u0ba8\u0bcb\u0b95\u0bcd\u0b95\u0bc1 \u0ba8\u0bbe\u0bb3\u0bcd",
+        "actual": "\u0bae\u0bc7\u0bb2\u0bcd \u0ba8\u0bcb\u0b95\u0bcd\u0b95\u0bc1 \u0ba8\u0bbe\u0bb3\u0bcd",
+        "pass": true
+      },
+      "lagnam": {
+        "expected": "Contains \u0ba4\u0ba9\u0bc1\u0b9a\u0bc1",
+        "actual": "\u0ba4\u0ba9\u0bc1\u0b9a\u0bc1 \u0bb2\u0b95\u0bcd\u0ba9\u0bae\u0bcd \u0b87\u0bb0\u0bc1\u0baa\u0bcd\u0baa\u0bc1 \u0ba8\u0bbe\u0bb4\u0bbf\u0b95\u0bc8 04 \u0bb5\u0bbf\u0ba9\u0bbe\u0b9f\u0bbf 15",
+        "pass": true
+      },
+      "sun_rise": {
+        "expected": "06:30 \u0b95\u0bbe / AM",
+        "actual": "07:13 \u0b95\u0bbe / AM",
+        "pass": false
+      },
+      "sraardha_thithi": {
+        "expected": "\u0ba4\u0bbf\u0bb0\u0baf\u0bcb\u0ba4\u0b9a\u0bbf",
+        "actual": "\u0ba4\u0bbf\u0bb0\u0baf\u0bcb\u0ba4\u0b9a\u0bbf",
+        "pass": true
+      },
+      "thithi": {
+        "expected": "Contains \u0ba4\u0bbf\u0bb0\u0baf\u0bcb\u0ba4\u0b9a\u0bbf",
+        "actual": "\u0bb5\u0bb3\u0bb0\u0bcd\u0baa\u0bbf\u0bb1\u0bc8 \u0ba4\u0bbf\u0bb0\u0baf\u0bcb\u0ba4\u0b9a\u0bbf (till 10:24 PM)",
+        "pass": true
+      },
+      "star": {
+        "expected": "Contains \u0bb0\u0bcb\u0b95\u0bbf\u0ba3\u0bbf",
+        "actual": "\u0bb0\u0bcb\u0b95\u0bbf\u0ba3\u0bbf (till 10:49 PM)",
+        "pass": true
+      },
+      "yogam": {
+        "expected": "\u0bae\u0bb0\u0ba3 \u0baf\u0bcb\u0b95\u0bae\u0bcd",
+        "actual": "\u0bae\u0bb0\u0ba3 \u0baf\u0bcb\u0b95\u0bae\u0bcd",
+        "pass": true
+      }
+    }
+  },
+  {
+    "test": "Weekday Soolam Pattern Jan 1-7, 2026",
+    "success": true,
+    "message": "All weekday Soolam patterns match user's rules",
+    "timestamp": "2025-12-27T08:35:36.434169",
+    "response_data": [
+      {
+        "date": "2026-01-01",
+        "weekday": "Thursday",
+        "expected_soolam": "\u0ba4\u0bc6\u0bb1\u0bcd\u0b95\u0bc1",
+        "actual_soolam": "\u0ba4\u0bc6\u0bb1\u0bcd\u0b95\u0bc1",
+        "pass": true
+      },
+      {
+        "date": "2026-01-02",
+        "weekday": "Friday",
+        "expected_soolam": "\u0bae\u0bc7\u0bb1\u0bcd\u0b95\u0bc1",
+        "actual_soolam": "\u0bae\u0bc7\u0bb1\u0bcd\u0b95\u0bc1",
+        "pass": true
+      },
+      {
+        "date": "2026-01-03",
+        "weekday": "Saturday",
+        "expected_soolam": "\u0b95\u0bbf\u0bb4\u0b95\u0bcd\u0b95\u0bc1",
+        "actual_soolam": "\u0b95\u0bbf\u0bb4\u0b95\u0bcd\u0b95\u0bc1",
+        "pass": true
+      },
+      {
+        "date": "2026-01-04",
+        "weekday": "Sunday",
+        "expected_soolam": "\u0bae\u0bc7\u0bb1\u0bcd\u0b95\u0bc1",
+        "actual_soolam": "\u0bae\u0bc7\u0bb1\u0bcd\u0b95\u0bc1",
+        "pass": true
+      },
+      {
+        "date": "2026-01-05",
+        "weekday": "Monday",
+        "expected_soolam": "\u0b95\u0bbf\u0bb4\u0b95\u0bcd\u0b95\u0bc1",
+        "actual_soolam": "\u0b95\u0bbf\u0bb4\u0b95\u0bcd\u0b95\u0bc1",
+        "pass": true
+      },
+      {
+        "date": "2026-01-06",
+        "weekday": "Tuesday",
+        "expected_soolam": "\u0bb5\u0b9f\u0b95\u0bcd\u0b95\u0bc1",
+        "actual_soolam": "\u0bb5\u0b9f\u0b95\u0bcd\u0b95\u0bc1",
+        "pass": true
+      },
+      {
+        "date": "2026-01-07",
+        "weekday": "Wednesday",
+        "expected_soolam": "\u0bb5\u0b9f\u0b95\u0bcd\u0b95\u0bc1",
+        "actual_soolam": "\u0bb5\u0b9f\u0b95\u0bcd\u0b95\u0bc1",
+        "pass": true
+      }
+    ]
+  },
+  {
+    "test": "Parigaram Based on Soolam Direction",
+    "success": false,
+    "message": "Parigaram mismatch in 6 dates",
+    "timestamp": "2025-12-27T08:35:36.761063",
+    "response_data": {
+      "failed_dates": [
+        {
+          "date": "2026-01-05",
+          "weekday": "Monday",
+          "expected_parigaram": "\u0baa\u0bbe\u0bb2\u0bcd",
+          "actual_parigaram": "\u0ba4\u0baf\u0bbf\u0bb0\u0bcd",
+          "pass": false
+        },
+        {
+          "date": "2026-01-03",
+          "weekday": "Saturday",
+          "expected_parigaram": "\u0baa\u0bbe\u0bb2\u0bcd",
+          "actual_parigaram": "\u0ba4\u0baf\u0bbf\u0bb0\u0bcd",
+          "pass": false
+        },
+        {
+          "date": "2026-01-06",
+          "weekday": "Tuesday",
+          "expected_parigaram": "\u0bb5\u0bc6\u0bb2\u0bcd\u0bb2\u0bae\u0bcd",
+          "actual_parigaram": "\u0baa\u0bbe\u0bb2\u0bcd",
+          "pass": false
+        },
+        {
+          "date": "2026-01-07",
+          "weekday": "Wednesday",
+          "expected_parigaram": "\u0b85\u0bb0\u0bbf\u0b9a\u0bbf",
+          "actual_parigaram": "\u0baa\u0bbe\u0bb2\u0bcd",
+          "pass": false
+        },
+        {
+          "date": "2026-01-04",
+          "weekday": "Sunday",
+          "expected_parigaram": "\u0ba4\u0bc8\u0bb2\u0bae\u0bcd",
+          "actual_parigaram": "\u0bb5\u0bc6\u0bb2\u0bcd\u0bb2\u0bae\u0bcd",
+          "pass": false
+        },
+        {
+          "date": "2026-01-02",
+          "weekday": "Friday",
+          "expected_parigaram": "\u0ba4\u0bc8\u0bb2\u0bae\u0bcd",
+          "actual_parigaram": "\u0bb5\u0bc6\u0bb2\u0bcd\u0bb2\u0bae\u0bcd",
+          "pass": false
+        }
+      ],
+      "all_results": [
+        {
+          "date": "2026-01-05",
+          "weekday": "Monday",
+          "expected_parigaram": "\u0baa\u0bbe\u0bb2\u0bcd",
+          "actual_parigaram": "\u0ba4\u0baf\u0bbf\u0bb0\u0bcd",
+          "pass": false
+        },
+        {
+          "date": "2026-01-03",
+          "weekday": "Saturday",
+          "expected_parigaram": "\u0baa\u0bbe\u0bb2\u0bcd",
+          "actual_parigaram": "\u0ba4\u0baf\u0bbf\u0bb0\u0bcd",
+          "pass": false
+        },
+        {
+          "date": "2026-01-06",
+          "weekday": "Tuesday",
+          "expected_parigaram": "\u0bb5\u0bc6\u0bb2\u0bcd\u0bb2\u0bae\u0bcd",
+          "actual_parigaram": "\u0baa\u0bbe\u0bb2\u0bcd",
+          "pass": false
+        },
+        {
+          "date": "2026-01-07",
+          "weekday": "Wednesday",
+          "expected_parigaram": "\u0b85\u0bb0\u0bbf\u0b9a\u0bbf",
+          "actual_parigaram": "\u0baa\u0bbe\u0bb2\u0bcd",
+          "pass": false
+        },
+        {
+          "date": "2026-01-04",
+          "weekday": "Sunday",
+          "expected_parigaram": "\u0ba4\u0bc8\u0bb2\u0bae\u0bcd",
+          "actual_parigaram": "\u0bb5\u0bc6\u0bb2\u0bcd\u0bb2\u0bae\u0bcd",
+          "pass": false
+        },
+        {
+          "date": "2026-01-01",
+          "weekday": "Thursday",
+          "expected_parigaram": "\u0ba4\u0bc8\u0bb2\u0bae\u0bcd",
+          "actual_parigaram": "\u0ba4\u0bc8\u0bb2\u0bae\u0bcd",
+          "pass": true
+        },
+        {
+          "date": "2026-01-02",
+          "weekday": "Friday",
+          "expected_parigaram": "\u0ba4\u0bc8\u0bb2\u0bae\u0bcd",
+          "actual_parigaram": "\u0bb5\u0bc6\u0bb2\u0bcd\u0bb2\u0bae\u0bcd",
+          "pass": false
+        }
+      ]
+    }
+  },
+  {
+    "test": "Special Yogam Day+Star Combinations",
+    "success": true,
+    "message": "All special Day+Star Yogam combinations match user's rules",
+    "timestamp": "2025-12-27T08:35:36.801617",
+    "response_data": [
+      {
+        "date": "2026-01-01",
+        "weekday": "Thursday",
+        "description": "Thursday + Rohini = Marana Yogam",
+        "expected_star": "\u0bb0\u0bcb\u0b95\u0bbf\u0ba3\u0bbf",
+        "actual_star": "\u0bb0\u0bcb\u0b95\u0bbf\u0ba3\u0bbf (till 10:49 PM)",
+        "star_match": true,
+        "expected_yogam": "\u0bae\u0bb0\u0ba3 \u0baf\u0bcb\u0b95\u0bae\u0bcd",
+        "actual_yogam": "\u0bae\u0bb0\u0ba3 \u0baf\u0bcb\u0b95\u0bae\u0bcd",
+        "yogam_match": true,
+        "overall_pass": true
+      }
+    ]
+  },
+  {
     "test": "Parigaram Accuracy Test",
     "success": false,
-    "message": "Parigaram mismatch found in 1 dates",
-    "timestamp": "2025-12-24T13:23:16.075810",
+    "message": "Parigaram mismatch found in 4 dates",
+    "timestamp": "2025-12-27T08:35:37.099558",
     "response_data": {
       "failed_dates": [
         {
@@ -14,6 +252,39 @@
           "soolam_match": false,
           "parigaram_expected": "\u0ba4\u0bc7\u0ba9\u0bcd",
           "parigaram_actual": "\u0baa\u0bbe\u0bb2\u0bcd",
+          "parigaram_match": false,
+          "overall_pass": false
+        },
+        {
+          "date": "2025-12-25",
+          "weekday": "Thursday",
+          "soolam_expected": "\u0ba4\u0bc6\u0bb1\u0bcd\u0b95\u0bc1",
+          "soolam_actual": "\u0ba4\u0bc6\u0bb1\u0bcd\u0b95\u0bc1",
+          "soolam_match": true,
+          "parigaram_expected": "\u0ba8\u0bc6\u0baf\u0bcd",
+          "parigaram_actual": "\u0ba4\u0bc8\u0bb2\u0bae\u0bcd",
+          "parigaram_match": false,
+          "overall_pass": false
+        },
+        {
+          "date": "2025-12-26",
+          "weekday": "Friday",
+          "soolam_expected": "\u0bb5\u0b9f\u0b95\u0bcd\u0b95\u0bc1",
+          "soolam_actual": "\u0bae\u0bc7\u0bb1\u0bcd\u0b95\u0bc1",
+          "soolam_match": false,
+          "parigaram_expected": "\u0baa\u0bbe\u0bb2\u0bcd",
+          "parigaram_actual": "\u0bb5\u0bc6\u0bb2\u0bcd\u0bb2\u0bae\u0bcd",
+          "parigaram_match": false,
+          "overall_pass": false
+        },
+        {
+          "date": "2025-12-28",
+          "weekday": "Sunday",
+          "soolam_expected": "\u0bae\u0bc7\u0bb1\u0bcd\u0b95\u0bc1",
+          "soolam_actual": "\u0bae\u0bc7\u0bb1\u0bcd\u0b95\u0bc1",
+          "soolam_match": true,
+          "parigaram_expected": "\u0ba4\u0bc7\u0ba9\u0bcd",
+          "parigaram_actual": "\u0bb5\u0bc6\u0bb2\u0bcd\u0bb2\u0bae\u0bcd",
           "parigaram_match": false,
           "overall_pass": false
         }
@@ -59,20 +330,20 @@
           "soolam_actual": "\u0ba4\u0bc6\u0bb1\u0bcd\u0b95\u0bc1",
           "soolam_match": true,
           "parigaram_expected": "\u0ba8\u0bc6\u0baf\u0bcd",
-          "parigaram_actual": "\u0ba8\u0bc6\u0baf\u0bcd",
-          "parigaram_match": true,
-          "overall_pass": true
+          "parigaram_actual": "\u0ba4\u0bc8\u0bb2\u0bae\u0bcd",
+          "parigaram_match": false,
+          "overall_pass": false
         },
         {
           "date": "2025-12-26",
           "weekday": "Friday",
           "soolam_expected": "\u0bb5\u0b9f\u0b95\u0bcd\u0b95\u0bc1",
-          "soolam_actual": "\u0bb5\u0b9f\u0b95\u0bcd\u0b95\u0bc1",
-          "soolam_match": true,
+          "soolam_actual": "\u0bae\u0bc7\u0bb1\u0bcd\u0b95\u0bc1",
+          "soolam_match": false,
           "parigaram_expected": "\u0baa\u0bbe\u0bb2\u0bcd",
-          "parigaram_actual": "\u0baa\u0bbe\u0bb2\u0bcd",
-          "parigaram_match": true,
-          "overall_pass": true
+          "parigaram_actual": "\u0bb5\u0bc6\u0bb2\u0bcd\u0bb2\u0bae\u0bcd",
+          "parigaram_match": false,
+          "overall_pass": false
         },
         {
           "date": "2025-12-27",
@@ -92,152 +363,125 @@
           "soolam_actual": "\u0bae\u0bc7\u0bb1\u0bcd\u0b95\u0bc1",
           "soolam_match": true,
           "parigaram_expected": "\u0ba4\u0bc7\u0ba9\u0bcd",
-          "parigaram_actual": "\u0ba4\u0bc7\u0ba9\u0bcd",
-          "parigaram_match": true,
-          "overall_pass": true
+          "parigaram_actual": "\u0bb5\u0bc6\u0bb2\u0bcd\u0bb2\u0bae\u0bcd",
+          "parigaram_match": false,
+          "overall_pass": false
         }
       ]
     }
   },
   {
     "test": "Search by Event Type",
-    "success": true,
-    "message": "All search functionality tests passed",
-    "timestamp": "2025-12-24T13:23:16.277941",
-    "response_data": [
-      {
-        "test_name": "Pournami Search December 2025",
-        "params": {
-          "start_date": "2025-12-01",
-          "end_date": "2025-12-31",
-          "event_type": "pournami"
-        },
-        "results_count": 1,
-        "result_dates": [
-          "2025-12-04"
-        ],
-        "raw_results": [
-          {
-            "date": "2025-12-04T00:00:00",
-            "type": "pournami",
-            "tamil_name": "\u0baa\u0bcc\u0bb0\u0bcd\u0ba3\u0bae\u0bbf",
-            "english_name": "Pournami",
-            "month": 12,
-            "year": 2025
-          }
-        ],
-        "expected_dates": [
-          "2025-12-04"
-        ],
-        "expected_found": true,
-        "pass": true
-      },
-      {
-        "test_name": "Amavasai Search December 2025",
-        "params": {
-          "start_date": "2025-12-01",
-          "end_date": "2025-12-31",
-          "event_type": "amavasai"
-        },
-        "results_count": 1,
-        "result_dates": [
-          "2025-12-19"
-        ],
-        "raw_results": [
-          {
-            "date": "2025-12-19T00:00:00",
-            "type": "amavasai",
-            "tamil_name": "\u0b85\u0bae\u0bbe\u0bb5\u0bbe\u0b9a\u0bc8",
-            "english_name": "Amavasai",
-            "month": 12,
-            "year": 2025
-          }
-        ],
-        "expected_dates": [
-          "2025-12-19"
-        ],
-        "expected_found": true,
-        "pass": true
-      },
-      {
-        "test_name": "All Events December 2025",
-        "params": {
-          "start_date": "2025-12-01",
-          "end_date": "2025-12-31"
-        },
-        "results_count": 28,
-        "result_dates": [
-          "2025-12-19",
-          "2025-12-04",
-          "2025-12-03",
-          "2025-12-31",
-          "2025-12-25",
-          "2025-12-08",
-          "2025-12-24",
-          "2025-12-02",
-          "2025-12-17",
-          "2025-12-23",
-          "2025-12-18",
-          "2025-12-01",
-          "2025-12-15",
-          "2025-12-30",
-          "2025-12-12",
-          "2025-12-27",
-          "2025-12-13",
-          "2025-12-28",
-          "2025-12-25",
-          "2025-12-01",
-          "2025-12-08",
-          "2025-12-10",
-          "2025-12-14",
-          "2025-12-15",
-          "2025-12-03",
-          "2025-12-19",
-          "2025-12-25",
-          "2025-12-30"
-        ],
-        "raw_results": [
-          {
-            "date": "2025-12-19T00:00:00",
-            "type": "amavasai",
-            "tamil_name": "\u0b85\u0bae\u0bbe\u0bb5\u0bbe\u0b9a\u0bc8",
-            "english_name": "Amavasai",
-            "month": 12,
-            "year": 2025
+    "success": false,
+    "message": "Search functionality issues found in 3 tests",
+    "timestamp": "2025-12-27T08:35:37.260923",
+    "response_data": {
+      "failed_tests": [
+        {
+          "test_name": "Pournami Search December 2025",
+          "params": {
+            "start_date": "2025-12-01",
+            "end_date": "2025-12-31",
+            "event_type": "pournami"
           },
-          {
-            "date": "2025-12-04T00:00:00",
-            "type": "pournami",
-            "tamil_name": "\u0baa\u0bcc\u0bb0\u0bcd\u0ba3\u0bae\u0bbf",
-            "english_name": "Pournami",
-            "month": 12,
-            "year": 2025
+          "results_count": 0,
+          "result_dates": [],
+          "raw_results": [],
+          "expected_dates": [
+            "2025-12-04"
+          ],
+          "expected_found": false,
+          "pass": false
+        },
+        {
+          "test_name": "Amavasai Search December 2025",
+          "params": {
+            "start_date": "2025-12-01",
+            "end_date": "2025-12-31",
+            "event_type": "amavasai"
           },
-          {
-            "date": "2025-12-03T00:00:00",
-            "type": "karthigai",
-            "tamil_name": "\u0b95\u0bbe\u0bb0\u0bcd\u0ba4\u0bcd\u0ba4\u0bbf\u0b95\u0bc8",
-            "english_name": "Karthigai",
-            "month": 12,
-            "year": 2025
-          }
-        ],
-        "min_expected": 2,
-        "meets_minimum": true,
-        "pass": true
-      }
-    ]
+          "results_count": 0,
+          "result_dates": [],
+          "raw_results": [],
+          "expected_dates": [
+            "2025-12-19"
+          ],
+          "expected_found": false,
+          "pass": false
+        },
+        {
+          "test_name": "All Events December 2025",
+          "params": {
+            "start_date": "2025-12-01",
+            "end_date": "2025-12-31"
+          },
+          "results_count": 0,
+          "result_dates": [],
+          "raw_results": [],
+          "min_expected": 2,
+          "meets_minimum": false,
+          "pass": false
+        }
+      ],
+      "all_results": [
+        {
+          "test_name": "Pournami Search December 2025",
+          "params": {
+            "start_date": "2025-12-01",
+            "end_date": "2025-12-31",
+            "event_type": "pournami"
+          },
+          "results_count": 0,
+          "result_dates": [],
+          "raw_results": [],
+          "expected_dates": [
+            "2025-12-04"
+          ],
+          "expected_found": false,
+          "pass": false
+        },
+        {
+          "test_name": "Amavasai Search December 2025",
+          "params": {
+            "start_date": "2025-12-01",
+            "end_date": "2025-12-31",
+            "event_type": "amavasai"
+          },
+          "results_count": 0,
+          "result_dates": [],
+          "raw_results": [],
+          "expected_dates": [
+            "2025-12-19"
+          ],
+          "expected_found": false,
+          "pass": false
+        },
+        {
+          "test_name": "All Events December 2025",
+          "params": {
+            "start_date": "2025-12-01",
+            "end_date": "2025-12-31"
+          },
+          "results_count": 0,
+          "result_dates": [],
+          "raw_results": [],
+          "min_expected": 2,
+          "meets_minimum": false,
+          "pass": false
+        }
+      ]
+    }
   },
   {
     "test": "Daily Calendar Endpoint",
     "success": true,
     "message": "Daily calendar data returned with correct structure",
-    "timestamp": "2025-12-24T13:23:16.361044",
+    "timestamp": "2025-12-27T08:35:37.303563",
     "response_data": {
-      "tamil_date": "10 - \u0bae\u0bbe\u0bb0\u0bcd\u0b95\u0bb4\u0bbf - \u0bb5\u0bbf\u0b9a\u0bc1\u0bb5\u0bbe\u0bb5\u0b9a\u0bc1",
+      "tamil_date": "10 - \u0bae\u0bbe\u0bb0\u0bcd\u0b95\u0bb4\u0bbf - \u0b9a\u0bcb\u0baa\u0b95\u0bbf\u0bb0\u0bc1\u0ba4\u0bc1",
       "nalla_neram": {
         "morning": "07:30 - 09:00 \u0b95\u0bbe / AM",
-        "evening": "01:30 - 03:00 \u0bae\u0bbe / PM"
+        "evening": "03:00 - 04:30 \u0bae\u0bbe / PM"
       },
       "raahu_kaalam": "01:30 - 03:00"
     }
@@ -245,25 +489,18 @@
   {
     "test": "Search Endpoint",
     "success": true,
-    "message": "Search returned 28 results",
-    "timestamp": "2025-12-24T13:23:16.429045",
+    "message": "Search returned 0 results",
+    "timestamp": "2025-12-27T08:35:37.349280",
     "response_data": {
-      "results_count": 28,
-      "sample_result": {
-        "date": "2025-12-19T00:00:00",
-        "type": "amavasai",
-        "tamil_name": "\u0b85\u0bae\u0bbe\u0bb5\u0bbe\u0b9a\u0bc8",
-        "english_name": "Amavasai",
-        "month": 12,
-        "year": 2025
-      }
+      "results_count": 0,
+      "sample_result": null
     }
   },
   {
     "test": "Special Days Endpoint",
     "success": true,
-    "message": "Special days data returned with 28 total events",
-    "timestamp": "2025-12-24T13:23:16.495571",
+    "message": "Special days data returned with 0 total events",
+    "timestamp": "2025-12-27T08:35:37.430808",
     "response_data": {
       "categories": [
         "amavasai",
@@ -282,14 +519,14 @@
         "weddingDays",
         "festivals"
       ],
-      "total_events": 28
+      "total_events": 0
     }
   },
   {
     "test": "Admin Login Endpoint",
     "success": true,
     "message": "Admin login successful, token received",
-    "timestamp": "2025-12-24T13:23:16.608133",
+    "timestamp": "2025-12-27T08:35:37.502224",
     "response_data": {
       "success": true,
       "message": "Login successful",
@@ -300,24 +537,24 @@
     "test": "Admin Analytics Endpoint",
     "success": true,
     "message": "Analytics data returned successfully",
-    "timestamp": "2025-12-24T13:23:16.711531",
+    "timestamp": "2025-12-27T08:35:37.630897",
     "response_data": {
-      "totalDays": 8035,
-      "totalSpecialDays": 28,
-      "yearsAvailable": 22,
-      "monthsWithData": 264
+      "totalDays": 0,
+      "totalSpecialDays": 0,
+      "yearsAvailable": 0,
+      "monthsWithData": 0
     }
   },
   {
     "test": "Root API Endpoint",
     "success": true,
     "message": "Root endpoint accessible",
-    "timestamp": "2025-12-24T13:23:16.778862"
+    "timestamp": "2025-12-27T08:35:37.665974"
   },
   {
     "test": "Available Years Endpoint",
     "success": true,
     "message": "Years available: 22",
-    "timestamp": "2025-12-24T13:23:16.832146"
+    "timestamp": "2025-12-27T08:35:37.702621"
   }
 ]
