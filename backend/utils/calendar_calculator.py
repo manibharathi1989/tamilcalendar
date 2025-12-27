@@ -434,17 +434,13 @@ def get_tamil_month_from_date(dt: datetime) -> tuple:
     return tamil_month, tamil_date
 
 
-def calculate_calendar_data(year: int, month: int, day: int) -> Dict[str, Any]:
+def calculate_calendar_data(year: int, month: int, day: int, lat: str = '28.6139', lon: str = '77.2090') -> Dict[str, Any]:
     """
     Calculate Tamil calendar data for a given date
     Uses precise astronomical calculations when available
     """
-    # Check if we have specific data for this date
-    date_key = (year, month, day)
-    if date_key in SPECIFIC_DATE_DATA:
-        data = SPECIFIC_DATE_DATA[date_key].copy()
-        data["date"] = datetime(year, month, day).isoformat()
-        return data
+    # Check if we have specific data for this date - ONLY use if location is default (Chennai/New Delhi mixed up in current code, but let's skip specific data if we want dynamic location accuracy)
+    # Actually, specific data was for testing. Let's prioritize dynamic calculation if astronomy is available.
     
     # Calculate dynamically
     dt = datetime(year, month, day)
@@ -454,7 +450,7 @@ def calculate_calendar_data(year: int, month: int, day: int) -> Dict[str, Any]:
     # Use astronomy calculator for precise calculations if available
     if ASTRONOMY_AVAILABLE:
         try:
-            panchang = calculate_panchangam(dt)
+            panchang = calculate_panchangam(dt, lat, lon)
             
             # Get precise values from astronomy calculator
             tamil_month = panchang["tamil_month"]
