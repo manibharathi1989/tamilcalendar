@@ -1,12 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ModernHeader from '../components/ModernHeader';
 import ModernFooter from '../components/ModernFooter';
 import { Star, Sparkles } from 'lucide-react';
 import { useParams } from 'react-router-dom';
+import { calendarAPI } from '../services/calendarAPI';
 
 const RasiPalan = () => {
   const { type } = useParams();
   const [selectedRasi, setSelectedRasi] = useState('mesham');
+  const [rasiData, setRasiData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchRasiPalan = async () => {
+        setLoading(true);
+        try {
+            const data = await calendarAPI.getRasiPalan(type || 'daily');
+            setRasiData(data);
+        } catch (error) {
+            console.error("Failed to fetch rasi palan", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    fetchRasiPalan();
+  }, [type]);
+
+  const currentRasiData = rasiData.find(r => r.rasi === selectedRasi);
 
   const rasiList = [
     { id: 'mesham', tamil: 'மேஷம்', english: 'Aries (Mesham)', icon: '♈' },
@@ -16,7 +36,7 @@ const RasiPalan = () => {
     { id: 'simmam', tamil: 'சிம்மம்', english: 'Leo (Simmam)', icon: '♌' },
     { id: 'kanni', tamil: 'கன்னி', english: 'Virgo (Kanni)', icon: '♍' },
     { id: 'thulam', tamil: 'துலாம்', english: 'Libra (Thulam)', icon: '♎' },
-    { id: 'viruchagam', tamil: 'விருச்சகம்', english: 'Scorpio (Viruchagam)', icon: '♏' },
+    { id: 'vrichikam', tamil: 'விருச்சிகம்', english: 'Scorpio (Vrichikam)', icon: '♏' },
     { id: 'dhanusu', tamil: 'தனுசு', english: 'Sagittarius (Dhanusu)', icon: '♐' },
     { id: 'makaram', tamil: 'மகரம்', english: 'Capricorn (Makaram)', icon: '♑' },
     { id: 'kumbam', tamil: 'கும்பம்', english: 'Aquarius (Kumbam)', icon: '♒' },
@@ -30,7 +50,7 @@ const RasiPalan = () => {
     { id: 'yearly', tamil: 'ஆண்டு ராசி பலன்', english: 'Yearly Rasi Palan' },
   ];
 
-  const currentType = palanTypes.find(t => t.id === type) || palanTypes[0];
+  const currentType = palanTypes.find(t => t.id === (type || 'daily')) || palanTypes[0];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50">
@@ -75,65 +95,45 @@ const RasiPalan = () => {
             </h2>
           </div>
 
-          {/* Palan Content */}
-          <div className="space-y-6">
-            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border-2 border-purple-200">
-              <h3 className="text-lg font-bold text-purple-800 mb-3">பொது பலன் / General Prediction</h3>
-              <p className="text-gray-700 leading-relaxed">
-                This is a favorable period for you. Your efforts will bring good results. Financial gains are indicated. 
-                Be careful in communication with others. Health will be good overall. This is an auspicious time for 
-                starting new ventures and making important decisions.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-green-50 rounded-xl p-4 border-2 border-green-200">
-                <h4 className="font-bold text-green-800 mb-2">வேலை / Career</h4>
-                <p className="text-gray-700 text-sm">
-                  Good progress in career. New opportunities may come your way. Recognition for your work is likely.
+          {loading ? (
+             <div className="text-center py-12">Loading...</div>
+          ) : currentRasiData ? (
+            <div className="space-y-6">
+                <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border-2 border-purple-200">
+                <h3 className="text-lg font-bold text-purple-800 mb-3">Prediction (Tamil / English)</h3>
+                <p className="text-gray-800 text-lg font-medium leading-relaxed mb-4">
+                    {currentRasiData.prediction_tamil}
                 </p>
-              </div>
-
-              <div className="bg-yellow-50 rounded-xl p-4 border-2 border-yellow-200">
-                <h4 className="font-bold text-yellow-800 mb-2">பணம் / Finance</h4>
-                <p className="text-gray-700 text-sm">
-                  Financial situation improves. Good time for investments. Unexpected gains possible.
+                 <p className="text-gray-700 leading-relaxed italic">
+                    {currentRasiData.prediction_english}
                 </p>
-              </div>
-
-              <div className="bg-pink-50 rounded-xl p-4 border-2 border-pink-200">
-                <h4 className="font-bold text-pink-800 mb-2">கல்யாணம் / Marriage</h4>
-                <p className="text-gray-700 text-sm">
-                  Harmony in relationships. Good time for marriage proposals. Understanding with partner increases.
-                </p>
-              </div>
-
-              <div className="bg-blue-50 rounded-xl p-4 border-2 border-blue-200">
-                <h4 className="font-bold text-blue-800 mb-2">ஆரோக்கியம் / Health</h4>
-                <p className="text-gray-700 text-sm">
-                  Overall health will be good. Take care of diet. Regular exercise recommended.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-6 border-2 border-orange-200">
-              <h3 className="text-lg font-bold text-orange-800 mb-3">நல்ல நேரம் / Lucky Time</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <p className="text-sm text-gray-600 mb-1">Lucky Number</p>
-                  <p className="text-2xl font-bold text-orange-600">7</p>
                 </div>
-                <div>
-                  <p className="text-sm text-gray-600 mb-1">Lucky Color</p>
-                  <p className="text-2xl font-bold text-orange-600">Green</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600 mb-1">Lucky Day</p>
-                  <p className="text-2xl font-bold text-orange-600">Wednesday</p>
-                </div>
-              </div>
+
+                {currentType.id === 'daily' && (
+                    <div className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-6 border-2 border-orange-200">
+                        <h3 className="text-lg font-bold text-orange-800 mb-3">Lucky Factors</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p className="text-sm text-gray-600 mb-1">Lucky Number</p>
+                                <p className="text-2xl font-bold text-orange-600">{currentRasiData.lucky_number}</p>
+                            </div>
+                            <div>
+                                <p className="text-sm text-gray-600 mb-1">Lucky Color</p>
+                                <p className="text-2xl font-bold text-orange-600">{currentRasiData.lucky_color}</p>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                 {currentType.id === 'weekly' && (
+                    <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 border-2 border-blue-200">
+                        <h3 className="text-lg font-bold text-blue-800 mb-3">Weekly Lucky Days</h3>
+                        <p className="text-xl font-bold text-blue-600">{currentRasiData.lucky_days}</p>
+                    </div>
+                )}
             </div>
-          </div>
+          ) : (
+             <div className="text-center py-12 text-gray-500">No data available for this Rasi.</div>
+          )}
         </div>
 
         {/* Disclaimer */}
