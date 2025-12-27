@@ -506,7 +506,7 @@ def calculate_calendar_data(year: int, month: int, day: int) -> Dict[str, Any]:
                 "sun_rise": sunrise,
                 "sun_set": sunset,
                 "sraardha_thithi": sraardha_ta,
-                "thithi": f"{thithi_ta} ({star_end})",
+                "thithi": f"{thithi_ta} ({thithi_end})",
                 "star": f"{star_ta} ({star_end})",
                 "yogam": yogam_display,
                 "subakariyam": get_subakariyam(weekday, star_index)
