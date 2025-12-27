@@ -656,3 +656,50 @@ def get_sunrise_time(month: int, day: int, latitude: float = 13.0827) -> str:
     minutes = int((sunrise_hours - hours) * 60)
     
     return f"{hours:02d}:{minutes:02d} கா / AM"
+
+
+def get_sunset_time(month: int, day: int, latitude: float = 13.0827) -> str:
+    """
+    Calculate approximate sunset time based on date and latitude (Chennai default)
+    Uses simplified calculation for Tamil Nadu region
+    
+    Args:
+        month: Gregorian month (1-12)
+        day: Day of month
+        latitude: Latitude (default Chennai: 13.0827)
+        
+    Returns:
+        Sunset time string in format "HH:MM மா / PM"
+    """
+    import math
+    
+    # Day of year approximation
+    day_of_year = (month - 1) * 30 + day
+    
+    # Earth's axial tilt effect
+    declination = 23.45 * math.sin(math.radians((360 / 365) * (day_of_year - 81)))
+    
+    # Hour angle at sunset
+    cos_hour_angle = -math.tan(math.radians(latitude)) * math.tan(math.radians(declination))
+    cos_hour_angle = max(-1, min(1, cos_hour_angle))
+    
+    hour_angle = math.degrees(math.acos(cos_hour_angle))
+    
+    # Convert to sunset time (solar noon is approximately 12:00)
+    sunset_hours = 12 + (hour_angle / 15)
+    
+    # Adjust for Chennai's longitude
+    sunset_hours += 0.15
+    
+    # Add equation of time correction
+    b = 2 * math.pi * (day_of_year - 81) / 365
+    eot = 9.87 * math.sin(2 * b) - 7.53 * math.cos(b) - 1.5 * math.sin(b)
+    sunset_hours -= eot / 60
+    
+    hours = int(sunset_hours)
+    minutes = int((sunset_hours - hours) * 60)
+    
+    # Convert to 12-hour format for PM
+    display_hours = hours if hours <= 12 else hours - 12
+    
+    return f"{display_hours:02d}:{minutes:02d} மா / PM"
