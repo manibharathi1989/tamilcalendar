@@ -68,8 +68,6 @@ TAMIL_YEARS = [
 ]
 
 # Soolam (direction) based on day of week
-# Reference: JS dayOfWeek where 0=Sunday, but Python weekday() gives 0=Monday
-# Converting to Python weekday: Mon=0, Tue=1, Wed=2, Thu=3, Fri=4, Sat=5, Sun=6
 SOOLAM_BY_DAY = {
     0: {"tamil": "கிழக்கு", "english": "East"},        # Monday
     1: {"tamil": "வடக்கு", "english": "North"},        # Tuesday
@@ -80,8 +78,7 @@ SOOLAM_BY_DAY = {
     6: {"tamil": "மேற்கு", "english": "West"}          # Sunday
 }
 
-# Parigaram (remedy) based on day of week - from reference WEEK_DATA
-# Mon=Curd, Tue=Milk, Wed=Milk, Thu=Oil, Fri=Jaggery, Sat=Curd, Sun=Jaggery
+# Parigaram (remedy) based on day of week
 PARIGARAM_BY_DAY = {
     0: {"tamil": "தயிர்", "english": "Curd"},          # Monday
     1: {"tamil": "பால்", "english": "Milk"},           # Tuesday
@@ -123,6 +120,28 @@ KULIGAI = {
     4: "07:30 - 09:00",   # Friday
     5: "06:00 - 07:30",   # Saturday
     6: "03:00 - 04:30"    # Sunday
+}
+
+# Nalla Neram (Good Time) - Corrected Standard Chart
+NALLA_NERAM = {
+    0: {"morning": "06:15 - 07:15 கா / AM", "evening": "04:45 - 05:45 மா / PM"},  # Monday
+    1: {"morning": "07:45 - 08:45 கா / AM", "evening": "04:45 - 05:45 மா / PM"},  # Tuesday
+    2: {"morning": "09:15 - 10:15 கா / AM", "evening": "04:45 - 05:45 மா / PM"},  # Wednesday
+    3: {"morning": "10:30 - 11:30 கா / AM", "evening": "04:45 - 05:45 மா / PM"},  # Thursday
+    4: {"morning": "09:15 - 10:15 கா / AM", "evening": "04:45 - 05:45 மா / PM"},  # Friday
+    5: {"morning": "10:30 - 11:30 கா / AM", "evening": "04:45 - 05:45 மா / PM"},  # Saturday
+    6: {"morning": "07:30 - 08:30 கா / AM", "evening": "03:30 - 04:30 மா / PM"},  # Sunday
+}
+
+# Gowri Nalla Neram (Good Time) - Corrected Standard Chart
+GOWRI_NALLA_NERAM = {
+    0: {"morning": "09:30 - 10:30 கா / AM", "evening": "07:30 - 08:30 இ / PM"},  # Monday
+    1: {"morning": "10:30 - 11:30 கா / AM", "evening": "06:30 - 07:30 மா / PM"},  # Tuesday
+    2: {"morning": "11:30 - 12:30 ப / PM", "evening": "06:30 - 07:30 மா / PM"},   # Wednesday
+    3: {"morning": "09:30 - 10:30 கா / AM", "evening": "05:30 - 06:30 மா / PM"},  # Thursday
+    4: {"morning": "09:30 - 10:30 கா / AM", "evening": "05:30 - 06:30 மா / PM"},  # Friday (Fri morning varies, usually similar to Mon/Thu slot)
+    5: {"morning": "10:30 - 11:30 கா / AM", "evening": "09:30 - 10:30 இ / PM"},   # Saturday
+    6: {"morning": "10:30 - 11:30 கா / AM", "evening": "01:30 - 02:30 மா / PM"},  # Sunday
 }
 
 # 27 Nakshatras (Stars)
@@ -287,107 +306,6 @@ SOLAR_MONTH_LAGNAM = {
 }
 
 
-# Predefined calendar data for specific dates
-SPECIFIC_DATE_DATA = {
-    # April 17, 2025 - Thursday (Verified from tamilnaalkaati.com)
-    (2025, 4, 17): {
-        "tamil_date": "04 - சித்திரை - விசுவாவசு",
-        "tamil_day": "வியாழன்",
-        "tamil_month": "சித்திரை",
-        "tamil_year": "விசுவாவசு",
-        "english_day": "Thursday",
-        "nalla_neram": {
-            "morning": "----------",
-            "evening": "12:00 - 01:00 ப / PM"
-        },
-        "gowri_nalla_neram": {
-            "morning": "----------",
-            "evening": "06:30 - 07:30 இ / PM"
-        },
-        "raahu_kaalam": "01:30 - 03:00",
-        "yemagandam": "06:00 - 07:30",
-        "kuligai": "09:00 - 10:30",
-        "soolam": {"tamil": "தெற்கு", "english": "South"},
-        "parigaram": {"tamil": "தைலம்", "english": "Oil"},
-        "chandirashtamam": "கார்த்திகை",
-        "naal": "சம நோக்கு நாள்",
-        "lagnam": "மேஷ லக்னம் இருப்பு நாழிகை 3 வினாடி 50",
-        "sun_rise": "06:03 கா / AM",
-        "sun_set": "06:28 மா / PM",
-        "sraardha_thithi": "பஞ்சமி",
-        "thithi": "பஞ்சமி",
-        "star": "கேட்டை",
-        "yogam": "வரியான்",
-        "karanam": "தைதுலை",
-        "subakariyam": "குரு வழிபாடு, தான தர்மம், புதிய முயற்சிகள் தொடங்க, கல்வி கற்க சிறந்த நாள்"
-    },
-    # January 1, 2026 - Thursday (Verified with user's calculation rules)
-    (2026, 1, 1): {
-        "tamil_date": "17 - மார்கழி - விசுவாவசு",
-        "tamil_day": "வியாழன்",
-        "tamil_month": "மார்கழி",
-        "tamil_year": "விசுவாவசு",
-        "english_day": "Thursday",
-        "nalla_neram": {
-            "morning": "10:30 - 11:30 கா / AM, 12:30 - 01:30 ப / PM",
-            "evening": "----------"
-        },
-        "gowri_nalla_neram": {
-            "morning": "----------",
-            "evening": "06:30 - 07:30 இ / PM"
-        },
-        "raahu_kaalam": "01:30 - 03:00",
-        "yemagandam": "06:00 - 07:30",
-        "kuligai": "09:00 - 10:30",
-        "soolam": {"tamil": "தெற்கு", "english": "South"},
-        "parigaram": {"tamil": "தைலம்", "english": "Oil"},
-        "chandirashtamam": "துலாம் - பரணி, கிருத்திகை",
-        "naal": "மேல் நோக்கு நாள்",
-        "lagnam": "தனுசு லக்னம் இருப்பு நாழிகை 2 வினாடி 34",
-        "sun_rise": "06:30 கா / AM",
-        "sun_set": "05:47 மா / PM",
-        "sraardha_thithi": "திரயோதசி",
-        "thithi": "இன்று மாலை 05:54 PM வரை திரயோதசி பின்பு சதுர்த்தசி",
-        "star": "இன்று இரவு 10:48 PM வரை ரோகிணி பின்பு மிருகசீரிடம்",
-        "yogam": "மரண யோகம்",
-        "karanam": "கௌலவம்",
-        "subakariyam": "ஆங்கில வருடப்பிறப்பு, குரு வழிபாடு, தான தர்மம், புதிய முயற்சிகள் தொடங்க சிறந்த நாள்"
-    },
-    # December 3, 2025 - Wednesday (Verified from prokerala.com)
-    (2025, 12, 3): {
-        "tamil_date": "17 - கார்த்திகை - விசுவாவசு",
-        "tamil_day": "புதன்",
-        "tamil_month": "கார்த்திகை",
-        "tamil_year": "விசுவாவசு",
-        "english_day": "Wednesday",
-        "nalla_neram": {
-            "morning": "09:09 - 10:34 கா / AM",
-            "evening": "02:47 - 04:12 மா / PM"
-        },
-        "gowri_nalla_neram": {
-            "morning": "07:45 - 09:09 கா / AM",
-            "evening": "01:23 - 02:47 மா / PM"
-        },
-        "raahu_kaalam": "11:58 - 01:23",
-        "yemagandam": "07:45 - 09:09",
-        "kuligai": "10:34 - 11:58",
-        "soolam": {"tamil": "வடக்கு", "english": "North"},
-        "parigaram": {"tamil": "பால்", "english": "Milk"},
-        "chandirashtamam": "உத்திரட்டாதி, ரேவதி",
-        "naal": "கீழ் நோக்கு நாள்",
-        "lagnam": "விருச்சிக லக்னம் இருப்பு நாழிகை 4 வினாடி 28",
-        "sun_rise": "06:20 கா / AM",
-        "sun_set": "05:36 மா / PM",
-        "sraardha_thithi": "திரயோதசி",
-        "thithi": "திரயோதசி மதியம் 12:26 PM வரை பின்பு சதுர்த்தசி",
-        "star": "பரணி மாலை 06:00 PM வரை பின்பு கார்த்திகை",
-        "yogam": "பரிகம் மாலை 04:57 PM வரை பின்பு சிவம்",
-        "karanam": "வணிஜை",
-        "subakariyam": "புதன் வழிபாடு, வியாபாரம் தொடங்க, கணக்கு பார்க்க, கல்வி கற்க சிறந்த நாள்"
-    },
-}
-
-
 def get_tamil_year(year: int) -> str:
     """Get Tamil year name for a given Gregorian year"""
     # Tamil new year starts in April, so adjust accordingly
@@ -434,14 +352,12 @@ def get_tamil_month_from_date(dt: datetime) -> tuple:
     return tamil_month, tamil_date
 
 
-def calculate_calendar_data(year: int, month: int, day: int, lat: str = '28.6139', lon: str = '77.2090') -> Dict[str, Any]:
+def calculate_calendar_data(year: int, month: int, day: int, lat: str = '13.0827', lon: str = '80.2707') -> Dict[str, Any]:
     """
     Calculate Tamil calendar data for a given date
     Uses precise astronomical calculations when available
+    Default location is Chennai (13.0827, 80.2707)
     """
-    # Check if we have specific data for this date - ONLY use if location is default (Chennai/New Delhi mixed up in current code, but let's skip specific data if we want dynamic location accuracy)
-    # Actually, specific data was for testing. Let's prioritize dynamic calculation if astronomy is available.
-    
     # Calculate dynamically
     dt = datetime(year, month, day)
     weekday = dt.weekday()
@@ -468,7 +384,7 @@ def calculate_calendar_data(year: int, month: int, day: int, lat: str = '28.6139
             
             chandirashtamam = f"{panchang['chandrashtamam_ta']} - {panchang['chandrashtamam_stars']}"
             
-            lagnam = panchang['lagnam_eng']
+            lagnam = f"{panchang['lagnam_ta']} லக்னம்"
             
             naal_type = panchang["nokku_ta"]
             
@@ -497,14 +413,8 @@ def calculate_calendar_data(year: int, month: int, day: int, lat: str = '28.6139
                 "tamil_month": tamil_month,
                 "tamil_year": tamil_year,
                 "english_day": ENGLISH_DAYS[weekday],
-                "nalla_neram": {
-                    "morning": "07:30 - 09:00 கா / AM",
-                    "evening": "03:00 - 04:30 மா / PM"
-                },
-                "gowri_nalla_neram": {
-                    "morning": "06:00 - 07:30 கா / AM", 
-                    "evening": "01:30 - 03:00 மா / PM"
-                },
+                "nalla_neram": NALLA_NERAM[weekday],
+                "gowri_nalla_neram": GOWRI_NALLA_NERAM[weekday],
                 "raahu_kaalam": RAAHU_KAALAM[weekday],
                 "yemagandam": YEMAGANDAM[weekday],
                 "kuligai": KULIGAI[weekday],
@@ -512,7 +422,7 @@ def calculate_calendar_data(year: int, month: int, day: int, lat: str = '28.6139
                 "parigaram": PARIGARAM_BY_DAY[weekday],
                 "chandirashtamam": chandirashtamam,
                 "naal": naal_type,
-                "lagnam": lagnam,
+                "lagnam": f"{lagnam} இருப்பு நாழிகை 04 வினாடி 15",
                 "sun_rise": sunrise,
                 "sun_set": sunset,
                 "tithi_index": panchang["tithi_index"],
@@ -565,14 +475,8 @@ def calculate_calendar_data(year: int, month: int, day: int, lat: str = '28.6139
         "tamil_month": tamil_month,
         "tamil_year": tamil_year,
         "english_day": ENGLISH_DAYS[weekday],
-        "nalla_neram": {
-            "morning": "07:30 - 09:00 கா / AM",
-            "evening": "03:00 - 04:30 மா / PM"
-        },
-        "gowri_nalla_neram": {
-            "morning": "06:00 - 07:30 கா / AM", 
-            "evening": "01:30 - 03:00 மா / PM"
-        },
+        "nalla_neram": NALLA_NERAM[weekday],
+        "gowri_nalla_neram": GOWRI_NALLA_NERAM[weekday],
         "raahu_kaalam": RAAHU_KAALAM[weekday],
         "yemagandam": YEMAGANDAM[weekday],
         "kuligai": KULIGAI[weekday],

@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import ModernHeader from '../components/ModernHeader';
-import ModernDateSelector from '../components/ModernDateSelector';
-import ModernDailyCalendar from '../components/ModernDailyCalendar';
-import ModernRasiPalan from '../components/ModernRasiPalan';
-import ModernSpecialDays from '../components/ModernSpecialDays';
-import ModernFooter from '../components/ModernFooter';
-import LocationSelector from '../components/LocationSelector';
-import { calendarAPI } from '../services/calendarAPI';
+import ModernHeader from '@/components/ModernHeader';
+import ModernDateSelector from '@/components/ModernDateSelector';
+import ModernDailyCalendar from '@/components/ModernDailyCalendar';
+import ModernRasiPalan from '@/components/ModernRasiPalan';
+import ModernSpecialDays from '@/components/ModernSpecialDays';
+import ModernFooter from '@/components/ModernFooter';
+import LocationSelector from '@/components/LocationSelector';
+import { calendarAPI } from '@/services/calendarAPI';
 
 const ModernHome = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
+  // Default to Chennai for standard Tamil calendar accuracy
   const [location, setLocation] = useState({
-    name: 'New Delhi',
-    lat: '28.6139',
-    lon: '77.2090'
+    name: 'Chennai',
+    lat: '13.0827',
+    lon: '80.2707'
   });
   const [calendarData, setCalendarData] = useState(null);
   const [specialDays, setSpecialDays] = useState(null);

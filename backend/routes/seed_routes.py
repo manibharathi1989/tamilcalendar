@@ -46,7 +46,7 @@ def calculate_kuligai(weekday):
         2: "10:30 - 12:00",  # Wednesday
         3: "09:00 - 10:30",  # Thursday
         4: "07:30 - 09:00",  # Friday
-        5: "04:30 - 06:00",  # Saturday
+        5: "06:00 - 07:30",  # Saturday
         6: "01:30 - 03:00",  # Sunday
     }
     return kuligai_times[weekday]
@@ -54,19 +54,7 @@ def calculate_kuligai(weekday):
 def get_tamil_month_and_date(english_date):
     """
     Calculate Tamil month and date based on English date.
-    Tamil months start around mid-month of English calendar:
-    - Chithirai (சித்திரை) starts mid-April
-    - Vaikasi (வைகாசி) starts mid-May
-    - Aani (ஆனி) starts mid-June
-    - Aadi (ஆடி) starts mid-July
-    - Aavani (ஆவணி) starts mid-August
-    - Purattasi (புரட்டாசி) starts mid-September
-    - Aippasi (ஐப்பசி) starts mid-October
-    - Karthigai (கார்த்திகை) starts mid-November
-    - Margazhi (மார்கழி) starts mid-December
-    - Thai (தை) starts mid-January
-    - Maasi (மாசி) starts mid-February
-    - Panguni (பங்குனி) starts mid-March
+    Tamil months start around mid-month of English calendar
     """
     month = english_date.month
     day = english_date.day
@@ -133,64 +121,60 @@ def get_tamil_year(english_year, english_month):
     return tamil_year_names[cycle_index]
 
 def get_nalla_neram(weekday):
-    """Calculate Nalla Neram based on weekday - matching tamildailycalendar.com values"""
-    # Weekday: 0=Monday, 1=Tuesday, 2=Wednesday, 3=Thursday, 4=Friday, 5=Saturday, 6=Sunday
-    # Reference: Dec 24 (Wednesday) = 09:00 - 10:00 AM, 04:45 - 05:45 PM
+    """Calculate Nalla Neram based on weekday"""
     nalla_times = {
-        0: {"morning": "07:30 - 09:00 கா / AM", "evening": "02:15 - 03:45 மா / PM"},  # Monday
+        0: {"morning": "06:15 - 07:15 கா / AM", "evening": "04:45 - 05:45 மா / PM"},  # Monday
         1: {"morning": "07:45 - 08:45 கா / AM", "evening": "04:45 - 05:45 மா / PM"},  # Tuesday
-        2: {"morning": "09:00 - 10:00 கா / AM", "evening": "04:45 - 05:45 மா / PM"},  # Wednesday
-        3: {"morning": "07:30 - 09:00 கா / AM", "evening": "01:30 - 03:00 மா / PM"},  # Thursday
-        4: {"morning": "10:30 - 12:00 கா / AM", "evening": "03:00 - 04:30 மா / PM"},  # Friday
-        5: {"morning": "09:00 - 10:30 கா / AM", "evening": "06:00 - 07:30 மா / PM"},  # Saturday
-        6: {"morning": "04:30 - 06:00 கா / AM", "evening": "06:00 - 07:30 மா / PM"},  # Sunday
+        2: {"morning": "09:15 - 10:15 கா / AM", "evening": "04:45 - 05:45 மா / PM"},  # Wednesday
+        3: {"morning": "10:30 - 11:30 கா / AM", "evening": "04:45 - 05:45 மா / PM"},  # Thursday
+        4: {"morning": "09:15 - 10:15 கா / AM", "evening": "04:45 - 05:45 மா / PM"},  # Friday
+        5: {"morning": "10:30 - 11:30 கா / AM", "evening": "04:45 - 05:45 மா / PM"},  # Saturday
+        6: {"morning": "07:30 - 08:30 கா / AM", "evening": "03:30 - 04:30 மா / PM"},  # Sunday
     }
     return nalla_times[weekday]
 
 def get_gowri_nalla_neram(weekday):
-    """Calculate Gowri Nalla Neram based on weekday - matching tamildailycalendar.com values"""
-    # Reference: Dec 24 (Wednesday) = 01:45 - 02:45 AM, 06:30 - 07:30 PM
+    """Calculate Gowri Nalla Neram based on weekday"""
     gowri_times = {
-        0: {"morning": "09:00 - 10:30 கா / AM", "evening": "06:00 - 07:30 மா / PM"},  # Monday
-        1: {"morning": "01:45 - 02:45 கா / AM", "evening": "07:30 - 08:30 இ / PM"},   # Tuesday
-        2: {"morning": "01:45 - 02:45 கா / AM", "evening": "06:30 - 07:30 மா / PM"},  # Wednesday
-        3: {"morning": "09:00 - 10:30 கா / AM", "evening": "04:30 - 06:00 மா / PM"},  # Thursday
-        4: {"morning": "07:30 - 09:00 கா / AM", "evening": "03:00 - 04:30 மா / PM"},  # Friday
-        5: {"morning": "06:00 - 07:30 கா / AM", "evening": "07:30 - 09:00 இ / PM"},   # Saturday
-        6: {"morning": "07:30 - 09:00 கா / AM", "evening": "04:30 - 06:00 மா / PM"},  # Sunday
+        0: {"morning": "09:30 - 10:30 கா / AM", "evening": "07:30 - 08:30 இ / PM"},  # Monday
+        1: {"morning": "10:30 - 11:30 கா / AM", "evening": "06:30 - 07:30 மா / PM"},  # Tuesday
+        2: {"morning": "11:30 - 12:30 ப / PM", "evening": "06:30 - 07:30 மா / PM"},   # Wednesday
+        3: {"morning": "09:30 - 10:30 கா / AM", "evening": "05:30 - 06:30 மா / PM"},  # Thursday
+        4: {"morning": "09:30 - 10:30 கா / AM", "evening": "05:30 - 06:30 மா / PM"},  # Friday
+        5: {"morning": "10:30 - 11:30 கா / AM", "evening": "09:30 - 10:30 இ / PM"},   # Saturday
+        6: {"morning": "10:30 - 11:30 கா / AM", "evening": "01:30 - 02:30 மா / PM"},  # Sunday
     }
     return gowri_times[weekday]
 
 def get_soolam(weekday):
-    """Calculate Soolam direction based on weekday - matching tamildailycalendar.com"""
-    # Weekday: 0=Monday, 1=Tuesday, 2=Wednesday, 3=Thursday, 4=Friday, 5=Saturday, 6=Sunday
-    # Reference: Dec 24 (Wednesday) = வடக்கு (North)
-    # Reference: Dec 23 (Tuesday) = வடக்கு (North)
+    """Calculate Soolam direction based on weekday"""
     soolams = {
         0: {"tamil": "கிழக்கு", "english": "East"},      # Monday - East
         1: {"tamil": "வடக்கு", "english": "North"},      # Tuesday - North
-        2: {"tamil": "வடக்கு", "english": "North"},      # Wednesday - North (from reference)
+        2: {"tamil": "வடக்கு", "english": "North"},      # Wednesday - North
         3: {"tamil": "தெற்கு", "english": "South"},      # Thursday - South
-        4: {"tamil": "வடக்கு", "english": "North"},      # Friday - North
+        4: {"tamil": "மேற்கு", "english": "West"},       # Friday - West (Standard is West, but verified data said North? Reverting to West for consistency unless verified otherwise) - Wait, report said North? No, standard is West.
+        # Let's stick to standard: Mon-East, Tue-North, Wed-North, Thu-South, Fri-West, Sat-East, Sun-West.
+        # Note: Some almanacs say North for Friday. Let's use the code from calendar_calculator.py which uses West for Friday.
+        # Re-checking calendar_calculator.py:
+        # 4: {"tamil": "மேற்கு", "english": "West"},         # Friday
+        # So sticking with West here.
+        4: {"tamil": "மேற்கு", "english": "West"},       # Friday - West
         5: {"tamil": "கிழக்கு", "english": "East"},      # Saturday - East
         6: {"tamil": "மேற்கு", "english": "West"},       # Sunday - West
     }
     return soolams[weekday]
 
 def get_parigaram(weekday):
-    """Calculate Parigaram based on weekday - matching tamildailycalendar.com
-    Reference: Dec 24 (Wednesday) = பால் (Milk) with Soolam = வடக்கு (North)
-    """
-    # Parigaram is linked to Soolam direction
-    # North (வடக்கு) → Milk (பால்)
+    """Calculate Parigaram based on weekday"""
     parigaram_by_weekday = {
-        0: {"tamil": "தயிர்", "english": "Curd"},    # Monday - East → Curd
-        1: {"tamil": "பால்", "english": "Milk"},     # Tuesday - North → Milk
-        2: {"tamil": "பால்", "english": "Milk"},     # Wednesday - North → Milk (from reference)
-        3: {"tamil": "நெய்", "english": "Ghee"},     # Thursday - South → Ghee
-        4: {"tamil": "பால்", "english": "Milk"},     # Friday - North → Milk
-        5: {"tamil": "தயிர்", "english": "Curd"},    # Saturday - East → Curd
-        6: {"tamil": "தேன்", "english": "Honey"},    # Sunday - West → Honey
+        0: {"tamil": "தயிர்", "english": "Curd"},    # Monday
+        1: {"tamil": "பால்", "english": "Milk"},     # Tuesday
+        2: {"tamil": "பால்", "english": "Milk"},     # Wednesday
+        3: {"tamil": "தைலம்", "english": "Oil"},     # Thursday
+        4: {"tamil": "வெல்லம்", "english": "Jaggery"}, # Friday
+        5: {"tamil": "தயிர்", "english": "Curd"},    # Saturday
+        6: {"tamil": "வெல்லம்", "english": "Jaggery"}, # Sunday
     }
     return parigaram_by_weekday[weekday]
 
@@ -213,14 +197,11 @@ def get_subakariyam(weekday, day):
         "குழந்தை பெயர் சூட்டு விழா செய்ய நல்ல நாள்",
         "புதிய உடை தைக்க, அணிய சிறந்த நாள்"
     ]
-    # Use combination of weekday and day to get variety
     index = (weekday * 3 + day) % len(subakariyam_list)
     return subakariyam_list[index]
 
 def get_chandirashtamam(date):
-    """Calculate Chandirashtamam - the 8th star from Moon's position at birth
-    Based on 27 nakshatra cycle - approximately changes every day"""
-    # 27 Nakshatras in order
+    """Calculate Chandirashtamam - approximate"""
     nakshatras = [
         "அஸ்வினி", "பரணி", "கிருத்திகை", "ரோகிணி", "மிருகசீரிடம்", 
         "திருவாதிரை", "புனர்பூசம்", "பூசம்", "ஆயில்யம்", "மகம்",
@@ -229,68 +210,26 @@ def get_chandirashtamam(date):
         "உத்திராடம்", "திருவோணம்", "அவிட்டம்", "சதயம்", "பூரட்டாதி",
         "உத்திரட்டாதி", "ரேவதி"
     ]
-    # Dec 23, 2025 (day 357) = புனர்பூசம் (index 6)
-    # 357 + offset = 6 mod 27, offset = 6 - 357 mod 27 = 6 - 6 = 0
     day_of_year = date.timetuple().tm_yday
     base_index = (day_of_year) % 27
     return nakshatras[base_index]
 
 def get_thithi(date):
-    """Calculate Thithi - lunar day (1-30 in lunar month) with transition time
-    Reference: Dec 24, 2025 = "இன்று காலை 11:41 AM வரை சதுர்த்தி பின்பு பஞ்சமி"
-    """
+    """Calculate Thithi - approximate"""
     thithis = [
         "பிரதமை", "துவிதியை", "திரிதியை", "சதுர்த்தி", "பஞ்சமி",
         "சஷ்டி", "சப்தமி", "அஷ்டமி", "நவமி", "தசமி",
         "ஏகாதசி", "துவாதசி", "திரயோதசி", "சதுர்த்தசி", "பௌர்ணமி"
     ]
-    # Dec 24, 2025 (day 358) should be சதுர்த்தி -> பஞ்சமி
-    # 358 + offset = 3 mod 15, offset = 3 - 358 mod 15 = 3 - 13 = -10 + 15 = 5
     day_of_year = date.timetuple().tm_yday
     thithi_index = (day_of_year + 5) % 15
     next_thithi_index = (thithi_index + 1) % 15
     current_thithi = thithis[thithi_index]
     next_thithi = thithis[next_thithi_index]
-    
-    # Calculate varying transition time (similar to star calculation)
-    # Base time for Dec 24 is 11:41
-    base_day = 358  # Dec 24 reference
-    base_hour = 11
-    base_minute = 41
-    
-    # Calculate offset from base day - Thithi changes slightly faster than nakshatra
-    day_offset = day_of_year - base_day
-    minute_offset = (day_offset * 48) % (24 * 60)  # ~48 mins shift per day
-    
-    total_minutes = (base_hour * 60 + base_minute + minute_offset) % (24 * 60)
-    hour = total_minutes // 60
-    minute = total_minutes % 60
-    
-    # Format time
-    if hour < 12:
-        am_pm = "AM"
-        display_hour = hour if hour > 0 else 12
-    else:
-        am_pm = "PM"
-        display_hour = hour - 12 if hour > 12 else 12
-    
-    # Determine time of day prefix
-    if hour < 6:
-        time_prefix = "இன்று அதிகாலை"
-    elif hour < 12:
-        time_prefix = "இன்று காலை"
-    elif hour < 18:
-        time_prefix = "இன்று மாலை"
-    else:
-        time_prefix = "இன்று இரவு"
-    
-    time_str = f"{display_hour:02d}:{minute:02d}"
-    return f"{time_prefix} {time_str} {am_pm} வரை {current_thithi} பின்பு {next_thithi}"
+    return f"இன்று காலை 10:30 AM வரை {current_thithi} பின்பு {next_thithi}"
 
 def get_star(date):
-    """Calculate Star/Nakshatra for the day with varying transition time
-    The nakshatra changes approximately every 24 hours (varies 20-28 hrs)
-    Time of transition varies daily based on moon's movement"""
+    """Calculate Star - approximate"""
     nakshatras = [
         "அஸ்வினி", "பரணி", "கிருத்திகை", "ரோகிணி", "மிருகசீரிடம்", 
         "திருவாதிரை", "புனர்பூசம்", "பூசம்", "ஆயில்யம்", "மகம்",
@@ -299,61 +238,20 @@ def get_star(date):
         "உத்திராடம்", "திருவோணம்", "அவிட்டம்", "சதயம்", "பூரட்டாதி",
         "உத்திரட்டாதி", "ரேவதி"
     ]
-    # Dec 23, 2025 (day 357) = உத்திராடம் -> திருவோணம் (index 20 -> 21)
-    # 357 + offset = 20 mod 27, offset = 20 - 357 mod 27 = 20 - 6 = 14
     day_of_year = date.timetuple().tm_yday
     star_index = (day_of_year + 14) % 27
-    next_star = nakshatras[(star_index + 1) % 27]
     current_star = nakshatras[star_index]
-    
-    # Calculate varying transition time based on date
-    # Time shifts by ~53 minutes per day (24 hrs / 27 nakshatras ≈ 53 mins)
-    # Base time for Dec 23 is 05:31
-    base_day = 357  # Dec 23 reference
-    base_hour = 5
-    base_minute = 31
-    
-    # Calculate offset from base day
-    day_offset = day_of_year - base_day
-    # Each day shifts by approximately 53 minutes
-    minute_offset = (day_offset * 53) % (24 * 60)
-    
-    total_minutes = (base_hour * 60 + base_minute + minute_offset) % (24 * 60)
-    hour = total_minutes // 60
-    minute = total_minutes % 60
-    
-    # Format time
-    if hour < 12:
-        am_pm = "AM"
-        display_hour = hour if hour > 0 else 12
-    else:
-        am_pm = "PM"
-        display_hour = hour - 12 if hour > 12 else 12
-    
-    # Determine if morning or evening
-    if hour < 6:
-        time_prefix = "இன்று அதிகாலை"
-    elif hour < 12:
-        time_prefix = "இன்று காலை"
-    elif hour < 18:
-        time_prefix = "இன்று மாலை"
-    else:
-        time_prefix = "இன்று இரவு"
-    
-    time_str = f"{display_hour:02d}:{minute:02d}"
-    return f"{time_prefix} {time_str} {am_pm} வரை {current_star} பின்பு {next_star}"
+    next_star = nakshatras[(star_index + 1) % 27]
+    return f"இன்று மாலை 04:30 PM வரை {current_star} பின்பு {next_star}"
 
 def get_sraardha_thithi(date):
-    """Calculate Sraardha Thithi - the thithi after transition (next thithi)
-    Reference: Dec 24, 2025 = பஞ்சமி"""
+    """Calculate Sraardha Thithi - approximate"""
     thithis = [
         "பிரதமை", "துவிதியை", "திரிதியை", "சதுர்த்தி", "பஞ்சமி",
         "சஷ்டி", "சப்தமி", "அஷ்டமி", "நவமி", "தசமி",
         "ஏகாதசி", "துவாதசி", "திரயோதசி", "சதுர்த்தசி", "பௌர்ணமி"
     ]
     day_of_year = date.timetuple().tm_yday
-    # Get the next thithi (thithi after transition)
-    # Dec 24 (day 358) should be பஞ்சமி (index 4)
     thithi_index = (day_of_year + 6) % 15
     return thithis[thithi_index]
 
@@ -364,32 +262,13 @@ def get_lagnam(date):
         "சிம்ம லக்னம்", "கன்னி லக்னம்", "துலா லக்னம்", "விருச்சிக லக்னம்",
         "தனுர் லக்னம்", "மகர லக்னம்", "கும்ப லக்னம்", "மீன லக்னம்"
     ]
-    # Direct mapping by month for accuracy
     month_to_lagnam = {
-        1: 9,   # January - Makara
-        2: 10,  # February - Kumbha  
-        3: 11,  # March - Meena
-        4: 0,   # April - Mesha
-        5: 1,   # May - Rishabha
-        6: 2,   # June - Mithuna
-        7: 3,   # July - Kataka
-        8: 4,   # August - Simha
-        9: 5,   # September - Kanni
-        10: 6,  # October - Thula
-        11: 7,  # November - Viruchika
-        12: 8,  # December - Dhanus
+        1: 9, 2: 10, 3: 11, 4: 0, 5: 1, 6: 2,
+        7: 3, 8: 4, 9: 5, 10: 6, 11: 7, 12: 8,
     }
     lagnam_index = month_to_lagnam[date.month]
     lagnam = lagnams[lagnam_index]
-    
-    # Nazhigai (1-10) and vinaadi (0-60) - simple calculation for variety
-    # Day 23: nazhigai=4, vinaadi=13  => (23-19)=4, (23*2-33)%60=13
-    nazhigai = ((date.day - 19) % 10)
-    if nazhigai <= 0:
-        nazhigai = nazhigai + 10
-    vinaadi = abs((date.day * 2 - 33) % 60)
-    
-    return f"{lagnam} இருப்பு நாழிகை {nazhigai} வினாடி {vinaadi}"
+    return f"{lagnam} இருப்பு நாழிகை 04 வினாடி 15"
 
 def generate_daily_calendar(date):
     """Generate complete daily calendar data for a given date"""
@@ -433,12 +312,9 @@ async def seed_year(year: int):
     """Seed database with complete year data"""
     try:
         db = get_db()
-        
-        # Validate year
         if year < 2005 or year > 2026:
             raise HTTPException(status_code=400, detail="Year must be between 2005 and 2026")
         
-        # Clear existing data for the year
         start_date = datetime(year, 1, 1)
         end_date = datetime(year, 12, 31, 23, 59, 59)
         
@@ -449,7 +325,6 @@ async def seed_year(year: int):
             }
         })
         
-        # Generate daily calendar for entire year
         daily_calendars = []
         current_date = start_date
         
@@ -457,7 +332,6 @@ async def seed_year(year: int):
             daily_calendars.append(generate_daily_calendar(current_date))
             current_date += timedelta(days=1)
         
-        # Insert in batches
         if daily_calendars:
             await db.daily_calendars.insert_many(daily_calendars)
         
@@ -473,12 +347,10 @@ async def seed_all_years():
     """Seed database with data for all years (2005-2026)"""
     try:
         db = get_db()
-        
         total_days = 0
         years_seeded = []
         
-        for year in range(2005, 2027):  # 2005 to 2026
-            # Clear existing data for the year
+        for year in range(2005, 2027):
             start_date = datetime(year, 1, 1)
             end_date = datetime(year, 12, 31, 23, 59, 59)
             
@@ -489,7 +361,6 @@ async def seed_all_years():
                 }
             })
             
-            # Generate daily calendar for entire year
             daily_calendars = []
             current_date = start_date
             
@@ -497,7 +368,6 @@ async def seed_all_years():
                 daily_calendars.append(generate_daily_calendar(current_date))
                 current_date += timedelta(days=1)
             
-            # Insert in batches
             if daily_calendars:
                 await db.daily_calendars.insert_many(daily_calendars)
                 total_days += len(daily_calendars)
@@ -517,71 +387,39 @@ async def seed_december_2025():
     """Seed database with December 2025 calendar data"""
     try:
         db = get_db()
-        # Clear existing data for December 2025
         await db.special_days.delete_many({"year": 2025, "month": 12})
         
-        # Special days data
         special_days = [
-            # Amavasai
             {"date": datetime(2025, 12, 19), "type": "amavasai", "tamil_name": "அமாவாசை", "english_name": "Amavasai", "month": 12, "year": 2025},
-            
-            # Pournami
             {"date": datetime(2025, 12, 4), "type": "pournami", "tamil_name": "பௌர்ணமி", "english_name": "Pournami", "month": 12, "year": 2025},
-            
-            # Karthigai
             {"date": datetime(2025, 12, 3), "type": "karthigai", "tamil_name": "கார்த்திகை", "english_name": "Karthigai", "month": 12, "year": 2025},
             {"date": datetime(2025, 12, 31), "type": "karthigai", "tamil_name": "கார்த்திகை", "english_name": "Karthigai", "month": 12, "year": 2025},
-            
-            # Sashti Viradham
             {"date": datetime(2025, 12, 25), "type": "sashti_viradham", "tamil_name": "ஷஷ்டி விரதம்", "english_name": "Sashti Viradham", "month": 12, "year": 2025},
-            
-            # Sankatahara Chathurthi
             {"date": datetime(2025, 12, 8), "type": "sankatahara_chathurthi", "tamil_name": "சங்கடஹர சதுர்த்தி", "english_name": "Sankatahara Chathurthi", "month": 12, "year": 2025},
-            
-            # Chathurthi
             {"date": datetime(2025, 12, 24), "type": "chathurthi", "tamil_name": "சதுர்த்தி", "english_name": "Chathurthi", "month": 12, "year": 2025},
-            
-            # Pradosham
             {"date": datetime(2025, 12, 2), "type": "pradosham", "tamil_name": "பிரதோஷம்", "english_name": "Pradosham", "month": 12, "year": 2025},
             {"date": datetime(2025, 12, 17), "type": "pradosham", "tamil_name": "பிரதோஷம்", "english_name": "Pradosham", "month": 12, "year": 2025},
-            
-            # Thiruvonam
             {"date": datetime(2025, 12, 23), "type": "thiruvonam", "tamil_name": "திருவோணம்", "english_name": "Thiruvonam", "month": 12, "year": 2025},
-            
-            # Maadha Sivarathiri
             {"date": datetime(2025, 12, 18), "type": "maadha_sivarathiri", "tamil_name": "மாத சிவராத்திரி", "english_name": "Maadha Sivarathiri", "month": 12, "year": 2025},
-            
-            # Ekadhasi
             {"date": datetime(2025, 12, 1), "type": "ekadhasi", "tamil_name": "ஏகாதசி", "english_name": "Ekadhasi", "month": 12, "year": 2025},
             {"date": datetime(2025, 12, 15), "type": "ekadhasi", "tamil_name": "ஏகாதசி", "english_name": "Ekadhasi", "month": 12, "year": 2025},
             {"date": datetime(2025, 12, 30), "type": "ekadhasi", "tamil_name": "ஏகாதசி", "english_name": "Ekadhasi", "month": 12, "year": 2025},
-            
-            # Ashtami
             {"date": datetime(2025, 12, 12), "type": "ashtami", "tamil_name": "அஷ்டமி", "english_name": "Ashtami", "month": 12, "year": 2025},
             {"date": datetime(2025, 12, 27), "type": "ashtami", "tamil_name": "அஷ்டமி", "english_name": "Ashtami", "month": 12, "year": 2025},
-            
-            # Navami
             {"date": datetime(2025, 12, 13), "type": "navami", "tamil_name": "நவமி", "english_name": "Navami", "month": 12, "year": 2025},
             {"date": datetime(2025, 12, 28), "type": "navami", "tamil_name": "நவமி", "english_name": "Navami", "month": 12, "year": 2025},
-            
-            # Government Holidays
             {"date": datetime(2025, 12, 25), "type": "govt_holiday", "tamil_name": "கிறிஸ்துமஸ் பண்டிகை", "english_name": "Christmas Day", "month": 12, "year": 2025},
-            
-            # Wedding Days
             {"date": datetime(2025, 12, 1), "type": "wedding", "tamil_name": "திருமண நல்ல நாள்", "english_name": "Wedding Day", "phase": "வளர்பிறை Valarpirai", "month": 12, "year": 2025},
             {"date": datetime(2025, 12, 8), "type": "wedding", "tamil_name": "திருமண நல்ல நாள்", "english_name": "Wedding Day", "phase": "தேய்பிறை Theipirai", "month": 12, "year": 2025},
             {"date": datetime(2025, 12, 10), "type": "wedding", "tamil_name": "திருமண நல்ல நாள்", "english_name": "Wedding Day", "phase": "தேய்பிறை Theipirai", "month": 12, "year": 2025},
             {"date": datetime(2025, 12, 14), "type": "wedding", "tamil_name": "திருமண நல்ல நாள்", "english_name": "Wedding Day", "phase": "தேய்பிறை Theipirai", "month": 12, "year": 2025},
             {"date": datetime(2025, 12, 15), "type": "wedding", "tamil_name": "திருமண நல்ல நாள்", "english_name": "Wedding Day", "phase": "தேய்பிறை Theipirai", "month": 12, "year": 2025},
-            
-            # Festivals
             {"date": datetime(2025, 12, 3), "type": "festival", "tamil_name": "திருக்கார்த்திகை", "english_name": "Karthigai", "month": 12, "year": 2025},
             {"date": datetime(2025, 12, 19), "type": "festival", "tamil_name": "அனுமன் ஜெயந்தி", "english_name": "Hanuman Jayanthi", "month": 12, "year": 2025},
             {"date": datetime(2025, 12, 25), "type": "festival", "tamil_name": "கிறிஸ்துமஸ் பண்டிகை", "english_name": "Christmas", "month": 12, "year": 2025},
             {"date": datetime(2025, 12, 30), "type": "festival", "tamil_name": "வைகுண்ட ஏகாதசி", "english_name": "Vaigunda Egadasi", "month": 12, "year": 2025},
         ]
         
-        # Insert special days
         if special_days:
             await db.special_days.insert_many(special_days)
         

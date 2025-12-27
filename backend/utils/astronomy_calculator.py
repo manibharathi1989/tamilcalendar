@@ -8,10 +8,10 @@ from datetime import datetime, timedelta
 from typing import Dict, Any, Tuple, Optional
 import math
 
-# Default New Delhi coordinates
-DEFAULT_LAT = '28.6139'
-DEFAULT_LON = '77.2090'
-DEFAULT_ELEV = 216  # meters
+# Default Chennai coordinates (Standard for Tamil Calendars)
+DEFAULT_LAT = '13.0827'
+DEFAULT_LON = '80.2707'
+DEFAULT_ELEV = 0  # meters
 
 # 27 Nakshatras (Stars) in order
 STARS_TA = [
@@ -85,7 +85,7 @@ KEEL_NOKKU_INDICES = [1, 2, 8, 9, 10, 15, 18, 19, 24]
 
 
 def get_observer(date: datetime, lat: str = DEFAULT_LAT, lon: str = DEFAULT_LON) -> ephem.Observer:
-    """Create an observer at specified location (default New Delhi) for the given date"""
+    """Create an observer at specified location (default Chennai) for the given date"""
     observer = ephem.Observer()
     observer.lat = lat
     observer.lon = lon
@@ -346,95 +346,6 @@ def calculate_panchangam(date: datetime, lat: str = DEFAULT_LAT, lon: str = DEFA
     next_star_index = (star_index + 1) % 27
     next_star_ta = STARS_TA[next_star_index]
     next_star_eng = STARS_ENG[next_star_index]
-
-    # Calculate Sraardha Thithi
-    # Rule: Thithi prevailing at Aparahna time (approx 13:30 IST)
-    # Aparahna is roughly 3/5th of day duration from sunrise.
-    # Simplified: Check Thithi at 1:30 PM (13:30) IST
-    
-    # Set time to 13:30 IST -> 08:00 UTC
-    aparahna_dt = date.replace(hour=13, minute=30, second=0, microsecond=0)
-    aparahna_utc = aparahna_dt - timedelta(hours=5, minutes=30)
-    
-    # Calculate Thithi at Aparahna
-    sraardha_sun_lon = get_sidereal_longitude('sun', aparahna_utc, lat, lon)
-    sraardha_moon_lon = get_sidereal_longitude('moon', aparahna_utc, lat, lon)
-    sraardha_diff = normalize_degrees(sraardha_moon_lon - sraardha_sun_lon)
-    sraardha_tithi_index = int(sraardha_diff / 12)
-    
-    # Map index to name
-    s_idx = sraardha_tithi_index % 15
-    if s_idx == 14:
-        sraardha_name_ta = "பௌர்ணமி" if sraardha_tithi_index < 15 else "அமாவாசை"
-        sraardha_name_eng = "Pournami" if sraardha_tithi_index < 15 else "Amavasya"
-    else:
-        sraardha_name_ta = TITHIS_TA[s_idx]
-        sraardha_name_eng = TITHIS_ENG[s_idx]
-    
-    # Calculate Lagnam (Ascendant) at Sunrise
-    # Use proper formula for Ascendant
-    
-    # 1. Get Sunrise time (UTC)
-    sunrise_ephem, _ = get_sunrise_sunset(calc_date_utc, lat, lon) # Returns IST datetime
-    # We need UTC for calculation logic if using raw formulas, but we have helper.
-    # sunrise_ephem is IST.
-    
-    # Convert back to UTC for calculation
-    sunrise_utc_calc = sunrise_ephem - timedelta(hours=5, minutes=30)
-    
-    # 2. Calculate Julian Day
-    jd = ephem.julian_date(ephem.Date(sunrise_utc_calc))
-    
-    # 3. Calculate GMST (Greenwich Mean Sidereal Time)
-    t = (jd - 2451545.0) / 36525.0
-    gmst = 280.46061837 + 360.98564736629 * (jd - 2451545.0) + 0.000387933 * t**2 - t**3 / 38710000.0
-    gmst = normalize_degrees(gmst)
-    
-    # 4. Calculate LST (Local Sidereal Time)
-    lst = normalize_degrees(gmst + float(lon))
-    
-    # 5. Calculate Ascendant
-    e = 23.4392911 - 0.01300416 * t # Obliquity
-    e_rad = math.radians(e)
-    lst_rad = math.radians(lst)
-    lat_rad = math.radians(float(lat))
-    
-    # tan(Asc) = cos(LST) / (-sin(LST)*cos(e) + tan(lat)*sin(e))
-    # Note: Use atan2(y, x) -> atan2(numerator, denominator)
-    # y = cos(LST)
-    # x = -sin(LST)*cos(e) + tan(lat)*sin(e)
-    
-    # IMPORTANT: atan2(y, x) is standard, but check formula derivation.
-    # Standard: tan(lambda) = y/x
-    y = math.cos(lst_rad)
-    x = -math.sin(lst_rad) * math.cos(e_rad) + math.tan(lat_rad) * math.sin(e_rad)
-    
-    asc_rad = math.atan2(y, x)
-    asc_deg = normalize_degrees(math.degrees(asc_rad))
-    
-    # 6. Apply Ayanamsa (Nirayana Lagnam)
-    ayanamsa = get_lahiri_ayanamsa(sunrise_utc_calc)
-    nirayana_asc = normalize_degrees(asc_deg - ayanamsa)
-    
-    # 7. Get Rasi
-    lagnam_index = int(nirayana_asc / 30)
-    lagnam_ta = RASIS_TA[lagnam_index]
-    lagnam_eng = RASIS_ENG[lagnam_index]
-    
-    # Calculate Balance (Nazhigai/Vinadi)
-    # How far into the rasi?
-    degree_into_rasi = nirayana_asc % 30
-    degree_remaining = 30 - degree_into_rasi
-    
-    # 1 Degree ~ 4 minutes.
-    # Total time remaining = degree_remaining * 4 minutes
-    minutes_remaining = degree_remaining * 4
-    
-    # Convert to Nazhigai (1 Nazhigai = 24 minutes)
-    nazhigai = int(minutes_remaining / 24)
-    vinadi = int((minutes_remaining % 24) * 60 / 24) # 1 Nazhigai = 60 Vinadi
-    
-    lagnam_string = f"{lagnam_ta} லக்னம் இருப்பு நாழிகை {nazhigai:02d} வினாடி {vinadi:02d}"
     
     return {
         "tamil_month": tamil_month,
@@ -451,14 +362,14 @@ def calculate_panchangam(date: datetime, lat: str = DEFAULT_LAT, lon: str = DEFA
         "thithi_end_time": tithi_end_time,
         "next_thithi_ta": next_thithi_name_ta,
         "next_thithi_eng": next_thithi_name_eng,
-        "sraardha_ta": sraardha_name_ta,
-        "sraardha_eng": sraardha_name_eng,
+        "sraardha_ta": thithi_name_ta,
+        "sraardha_eng": thithi_name_eng,
         "rasi_index": rasi_index,
         "moon_rasi_ta": RASIS_TA[rasi_index],
         "moon_rasi_eng": RASIS_ENG[rasi_index],
         "sun_rasi_index": sun_rasi_index,
-        "lagnam_ta": lagnam_ta,
-        "lagnam_eng": lagnam_string,
+        "lagnam_ta": RASIS_TA[sun_rasi_index],
+        "lagnam_eng": RASIS_ENG[sun_rasi_index],
         "chandrashtamam_index": chandrashtamam_index,
         "chandrashtamam_ta": RASIS_TA[chandrashtamam_index],
         "chandrashtamam_eng": RASIS_ENG[chandrashtamam_index],

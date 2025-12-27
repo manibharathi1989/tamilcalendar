@@ -22,34 +22,14 @@ async def get_daily_calendar(
     year: int, 
     month: int, 
     day: int,
-    lat: Optional[str] = "28.6139",
-    lon: Optional[str] = "77.2090"
+    lat: Optional[str] = "13.0827",  # Default to Chennai
+    lon: Optional[str] = "80.2707"   # Default to Chennai
 ):
     """Get daily calendar data for a specific date"""
     try:
         db = get_db()
-        # For now, skip DB lookup if we want dynamic location support, or include location in query
-        # But since we are focusing on calculation, let's call calculator directly for non-default locations or just always for now
-        
-        # If default location, check DB (assuming DB stores default location data)
-        # But since we changed logic, let's just calculate dynamically for now to ensure location support works
+        # Using dynamic calculation to ensure accuracy and location support
         return calculate_calendar_data(year, month, day, lat, lon)
-        
-        # Original DB logic commented out for dynamic location support
-        # date = datetime(year, month, day)
-        # calendar_data = await db.daily_calendars.find_one({
-        #     "date": date
-        # })
-        
-        # if not calendar_data:
-        #     # Use the calendar calculator to generate accurate data
-        #     return calculate_calendar_data(year, month, day)
-        
-        # # Remove MongoDB _id field
-        # if calendar_data and "_id" in calendar_data:
-        #     calendar_data.pop("_id")
-        
-        # return calendar_data
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
