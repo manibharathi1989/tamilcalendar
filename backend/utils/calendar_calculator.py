@@ -462,6 +462,7 @@ def calculate_calendar_data(year: int, month: int, day: int, lat: str = '28.6139
             
             thithi_ta = panchang["thithi_ta"]
             thithi_end = panchang["thithi_end_time"]
+            next_thithi_ta = panchang["next_thithi_ta"]
             
             sraardha_ta = panchang["sraardha_ta"]
             
@@ -475,6 +476,19 @@ def calculate_calendar_data(year: int, month: int, day: int, lat: str = '28.6139
             
             sunrise = panchang["sunrise"]
             sunset = panchang["sunset"]
+            
+            # Format Thithi Display
+            if "till" in thithi_end or "Next Day" in thithi_end:
+                thithi_display = f"{thithi_ta} ({thithi_end}) பின்பு {next_thithi_ta}"
+            else:
+                thithi_display = f"{thithi_ta} ({thithi_end})"
+                
+            # Format Star Display
+            star_ta_next = panchang["next_star_ta"]
+            if "till" in star_end or "Next Day" in star_end:
+                star_display = f"{star_ta} ({star_end}) பின்பு {star_ta_next}"
+            else:
+                star_display = f"{star_ta} ({star_end})"
             
             return {
                 "date": dt.isoformat(),
@@ -502,8 +516,8 @@ def calculate_calendar_data(year: int, month: int, day: int, lat: str = '28.6139
                 "sun_rise": sunrise,
                 "sun_set": sunset,
                 "sraardha_thithi": sraardha_ta,
-                "thithi": f"{thithi_ta} ({thithi_end})",
-                "star": f"{star_ta} ({star_end})",
+                "thithi": thithi_display,
+                "star": star_display,
                 "yogam": yogam_display,
                 "subakariyam": get_subakariyam(weekday, star_index)
             }
