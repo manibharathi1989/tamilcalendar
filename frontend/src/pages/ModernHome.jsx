@@ -5,10 +5,16 @@ import ModernDailyCalendar from '../components/ModernDailyCalendar';
 import ModernRasiPalan from '../components/ModernRasiPalan';
 import ModernSpecialDays from '../components/ModernSpecialDays';
 import ModernFooter from '../components/ModernFooter';
+import LocationSelector from '../components/LocationSelector';
 import { calendarAPI } from '../services/calendarAPI';
 
 const ModernHome = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [location, setLocation] = useState({
+    name: 'New Delhi',
+    lat: '28.6139',
+    lon: '77.2090'
+  });
   const [calendarData, setCalendarData] = useState(null);
   const [specialDays, setSpecialDays] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -23,7 +29,7 @@ const ModernHome = () => {
 
         // Fetch daily calendar and special days
         const [dailyData, specialData] = await Promise.all([
-          calendarAPI.getDailyCalendar(year, month, day),
+          calendarAPI.getDailyCalendar(year, month, day, location),
           calendarAPI.getSpecialDays(year, month),
         ]);
 
@@ -37,11 +43,16 @@ const ModernHome = () => {
     };
     
     fetchData();
-  }, [currentDate]);
+  }, [currentDate, location]);
 
   const handleDateChange = (newDate) => {
     setCurrentDate(newDate);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  
+  const handleLocationChange = (newLocation) => {
+    setLocation(newLocation);
+    // Data will re-fetch due to useEffect dependency
   };
 
   if (loading) {
@@ -60,6 +71,15 @@ const ModernHome = () => {
       <ModernHeader />
       
       <main className="max-w-7xl mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
+            <div>
+                <LocationSelector currentLocation={location} onLocationChange={handleLocationChange} />
+            </div>
+            <div>
+                 {/* Placeholder for alignment or extra tools */}
+            </div>
+        </div>
+        
         <ModernDateSelector currentDate={currentDate} onDateChange={handleDateChange} />
         
         {calendarData ? (
