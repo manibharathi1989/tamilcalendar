@@ -36,13 +36,18 @@ const ModernSpecialDays = ({ specialDays, month, year }) => {
     </div>
   );
 
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6">
       <h3 className="text-2xl font-bold text-gray-800 text-center mb-2">
-        Tamil Calendar December 2025
+        Tamil Calendar {monthNames[month - 1]} {year}
       </h3>
       <p className="text-center text-purple-600 font-semibold mb-6">
-        தமிழ் காலண்டர் டிசம்பர் 2025
+        தமிழ் காலண்டர் {monthNames[month - 1]} {year}
       </p>
 
       {/* Tabs */}
