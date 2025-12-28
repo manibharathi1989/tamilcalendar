@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Calendar, Save, ArrowLeft, Plus, Trash2, Edit2 } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
-import { adminAPI } from '../../services/adminAPI';
+import { useAuth } from '@/context/AuthContext';
+import { adminAPI } from '@/services/adminAPI';
 
 const SpecialDaysEditor = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -43,15 +43,7 @@ const SpecialDaysEditor = () => {
     { value: 'wedding', label: 'Wedding Day' },
   ];
 
-  useEffect(() => {
-    if (!token) {
-      navigate('/admin/login');
-    } else {
-      fetchSpecialDays();
-    }
-  }, [token, navigate, selectedYear, selectedMonth]);
-
-  const fetchSpecialDays = async () => {
+  const fetchSpecialDays = useCallback(async () => {
     setLoading(true);
     try {
       const data = await adminAPI.getSpecialDays(selectedYear, selectedMonth, token);
@@ -61,7 +53,15 @@ const SpecialDaysEditor = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedYear, selectedMonth, token]);
+
+  useEffect(() => {
+    if (!token) {
+      navigate('/admin/login');
+    } else {
+      fetchSpecialDays();
+    }
+  }, [token, navigate, fetchSpecialDays]);
 
   const handleAddDay = async () => {
     if (!newDay.date || !newDay.type) return;

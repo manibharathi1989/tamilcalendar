@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import ModernHeader from '../components/ModernHeader';
-import ModernFooter from '../components/ModernFooter';
+import React, { useState, useEffect, useCallback } from 'react';
+import ModernHeader from '@/components/ModernHeader';
+import ModernFooter from '@/components/ModernFooter';
 import { Sun, Calendar, Sparkles } from 'lucide-react';
-import { calendarAPI } from '../services/calendarAPI';
+import { calendarAPI } from '@/services/calendarAPI';
 
 const Pournami = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -11,11 +11,7 @@ const Pournami = () => {
 
   const years = Array.from({ length: 22 }, (_, i) => 2005 + i);
 
-  useEffect(() => {
-    fetchPournamiDates();
-  }, [selectedYear]);
-
-  const fetchPournamiDates = async () => {
+  const fetchPournamiDates = useCallback(async () => {
     setLoading(true);
     try {
       const allDates = [];
@@ -33,7 +29,11 @@ const Pournami = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedYear]);
+
+  useEffect(() => {
+    fetchPournamiDates();
+  }, [fetchPournamiDates]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-white to-orange-50">

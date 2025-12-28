@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import ModernHeader from '../components/ModernHeader';
-import ModernFooter from '../components/ModernFooter';
+import React, { useState, useEffect, useCallback } from 'react';
+import ModernHeader from '@/components/ModernHeader';
+import ModernFooter from '@/components/ModernFooter';
 import { Lightbulb, Sparkles, Flame } from 'lucide-react';
-import { calendarAPI } from '../services/calendarAPI';
+import { calendarAPI } from '@/services/calendarAPI';
 
 const Karthigai = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -11,11 +11,7 @@ const Karthigai = () => {
 
   const years = Array.from({ length: 22 }, (_, i) => 2005 + i);
 
-  useEffect(() => {
-    fetchKarthigaiDates();
-  }, [selectedYear]);
-
-  const fetchKarthigaiDates = async () => {
+  const fetchKarthigaiDates = useCallback(async () => {
     setLoading(true);
     try {
       const allDates = [];
@@ -33,7 +29,11 @@ const Karthigai = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedYear]);
+
+  useEffect(() => {
+    fetchKarthigaiDates();
+  }, [fetchKarthigaiDates]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-yellow-50">

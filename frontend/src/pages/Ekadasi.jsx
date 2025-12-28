@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import ModernHeader from '../components/ModernHeader';
-import ModernFooter from '../components/ModernFooter';
+import React, { useState, useEffect, useCallback } from 'react';
+import ModernHeader from '@/components/ModernHeader';
+import ModernFooter from '@/components/ModernFooter';
 import { Calendar, Sparkles, AlertCircle } from 'lucide-react';
-import { calendarAPI } from '../services/calendarAPI';
+import { calendarAPI } from '@/services/calendarAPI';
 
 const Ekadasi = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -11,11 +11,7 @@ const Ekadasi = () => {
 
   const years = Array.from({ length: 22 }, (_, i) => 2005 + i);
 
-  useEffect(() => {
-    fetchEkadasiDates();
-  }, [selectedYear]);
-
-  const fetchEkadasiDates = async () => {
+  const fetchEkadasiDates = useCallback(async () => {
     setLoading(true);
     try {
       const allDates = [];
@@ -33,7 +29,11 @@ const Ekadasi = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedYear]);
+
+  useEffect(() => {
+    fetchEkadasiDates();
+  }, [fetchEkadasiDates]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-teal-50">

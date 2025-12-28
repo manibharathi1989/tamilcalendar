@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { BarChart, Calendar, Edit, LogOut, Database, TrendingUp, Star, PieChart } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
-import { adminAPI } from '../../services/adminAPI';
+import { useAuth } from '@/context/AuthContext';
+import { adminAPI } from '@/services/adminAPI';
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState(null);
@@ -10,11 +10,7 @@ const AdminDashboard = () => {
   const { token, logout } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchStats();
-  }, []);
-
-  const fetchStats = async () => {
+  const fetchStats = useCallback(async () => {
     try {
       const data = await adminAPI.getStats(token);
       setStats(data);
@@ -23,7 +19,11 @@ const AdminDashboard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token]);
+
+  useEffect(() => {
+    fetchStats();
+  }, [fetchStats]);
 
   const handleLogout = () => {
     logout();

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import ModernHeader from '../components/ModernHeader';
-import ModernFooter from '../components/ModernFooter';
+import React, { useState, useEffect, useCallback } from 'react';
+import ModernHeader from '@/components/ModernHeader';
+import ModernFooter from '@/components/ModernFooter';
 import { Moon, Sparkles, Flame } from 'lucide-react';
-import { calendarAPI } from '../services/calendarAPI';
+import { calendarAPI } from '@/services/calendarAPI';
 
 const MaadhaSivarathiri = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -11,11 +11,7 @@ const MaadhaSivarathiri = () => {
 
   const years = Array.from({ length: 22 }, (_, i) => 2005 + i);
 
-  useEffect(() => {
-    fetchSivarathiriDates();
-  }, [selectedYear]);
-
-  const fetchSivarathiriDates = async () => {
+  const fetchSivarathiriDates = useCallback(async () => {
     setLoading(true);
     try {
       const allDates = [];
@@ -33,7 +29,11 @@ const MaadhaSivarathiri = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedYear]);
+
+  useEffect(() => {
+    fetchSivarathiriDates();
+  }, [fetchSivarathiriDates]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-50">

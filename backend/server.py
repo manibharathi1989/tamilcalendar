@@ -15,14 +15,25 @@ from routes.calendar_routes import router as calendar_router
 from routes.seed_routes import router as seed_router
 from routes.admin_routes import router as admin_router
 
+# Robustly load .env file
+# Get the directory where server.py is located
+BASE_DIR = Path(__file__).resolve().parent
+ENV_PATH = BASE_DIR / '.env'
 
-ROOT_DIR = Path(__file__).parent
-load_dotenv(ROOT_DIR / '.env')
+# Load the .env file
+load_dotenv(dotenv_path=ENV_PATH)
 
 # MongoDB connection
-mongo_url = os.environ['MONGO_URL']
+mongo_url = os.environ.get('MONGO_URL')
+if not mongo_url:
+    # Fallback for development if .env fails to load, or raise clear error
+    print(f"Warning: MONGO_URL not found in env. Attempting to load from {ENV_PATH}")
+    mongo_url = "mongodb://localhost:27017" # Default fallback
+
+db_name = os.environ.get('DB_NAME', 'test_database')
+
 client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+db = client[db_name]
 
 # Create the main app without a prefix
 app = FastAPI()

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import ModernHeader from '../components/ModernHeader';
-import ModernFooter from '../components/ModernFooter';
-import { Moon, Calendar, Sparkles } from 'lucide-react';
-import { calendarAPI } from '../services/calendarAPI';
+import React, { useState, useEffect, useCallback } from 'react';
+import ModernHeader from '@/components/ModernHeader';
+import ModernFooter from '@/components/ModernFooter';
+import { Moon, Sparkles } from 'lucide-react';
+import { calendarAPI } from '@/services/calendarAPI';
 
 const Amavasai = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -11,11 +11,7 @@ const Amavasai = () => {
 
   const years = Array.from({ length: 22 }, (_, i) => 2005 + i);
 
-  useEffect(() => {
-    fetchAmavasaiDates();
-  }, [selectedYear]);
-
-  const fetchAmavasaiDates = async () => {
+  const fetchAmavasaiDates = useCallback(async () => {
     setLoading(true);
     try {
       const allDates = [];
@@ -33,7 +29,11 @@ const Amavasai = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedYear]);
+
+  useEffect(() => {
+    fetchAmavasaiDates();
+  }, [fetchAmavasaiDates]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-slate-50">

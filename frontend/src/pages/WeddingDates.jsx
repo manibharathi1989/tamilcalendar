@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import ModernHeader from '../components/ModernHeader';
-import ModernFooter from '../components/ModernFooter';
+import React, { useState, useEffect, useCallback } from 'react';
+import ModernHeader from '@/components/ModernHeader';
+import ModernFooter from '@/components/ModernFooter';
 import { Heart, Calendar } from 'lucide-react';
-import { calendarAPI } from '../services/calendarAPI';
+import { calendarAPI } from '@/services/calendarAPI';
 
 const WeddingDates = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -11,11 +11,7 @@ const WeddingDates = () => {
 
   const years = Array.from({ length: 22 }, (_, i) => 2005 + i);
 
-  useEffect(() => {
-    fetchWeddingDates();
-  }, [selectedYear]);
-
-  const fetchWeddingDates = async () => {
+  const fetchWeddingDates = useCallback(async () => {
     setLoading(true);
     try {
       const allWeddingDates = [];
@@ -34,7 +30,11 @@ const WeddingDates = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedYear]);
+
+  useEffect(() => {
+    fetchWeddingDates();
+  }, [fetchWeddingDates]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-rose-50">

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import ModernHeader from '../components/ModernHeader';
-import ModernFooter from '../components/ModernFooter';
-import { Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
-import { calendarAPI } from '../services/calendarAPI';
+import React, { useState, useEffect, useCallback } from 'react';
+import ModernHeader from '../components/ModernHeader.jsx';
+import ModernFooter from '../components/ModernFooter.jsx';
+import { ChevronLeft, ChevronRight, AlertCircle } from 'lucide-react';
+import { calendarAPI } from '../services/calendarAPI.js';
 import { useParams } from 'react-router-dom';
 
 const MonthlyCalendar = () => {
@@ -11,13 +11,11 @@ const MonthlyCalendar = () => {
   const [currentYear, setCurrentYear] = useState(parseInt(urlYear) || new Date().getFullYear());
   const [monthData, setMonthData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchMonthData();
-  }, [currentMonth, currentYear]);
-
-  const fetchMonthData = async () => {
+  const fetchMonthData = useCallback(async () => {
     setLoading(true);
+    setError(null);
     try {
       // Fetch all days for the month
       const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
@@ -28,13 +26,26 @@ const MonthlyCalendar = () => {
       }
       
       const results = await Promise.all(promises);
-      setMonthData(results);
+      
+      // Filter out any null responses (failed requests)
+      const validResults = results.filter(day => day !== null);
+      
+      if (validResults.length === 0) {
+        setError("Unable to fetch calendar data. Please check your connection.");
+      }
+      
+      setMonthData(validResults);
     } catch (error) {
       console.error('Error fetching month data:', error);
+      setError("An error occurred while loading the calendar.");
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentMonth, currentYear]);
+
+  useEffect(() => {
+    fetchMonthData();
+  }, [fetchMonthData]);
 
   const monthNames = [
     'January', 'February', 'March', 'April', 'May', 'June',
@@ -107,50 +118,71 @@ const MonthlyCalendar = () => {
           </div>
         </div>
 
-        {/* Calendar Grid */}
-        <div className="bg-white rounded-2xl shadow-lg p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {monthData.map((dayData, index) => {
-              const date = new Date(dayData.date);
-              const day = date.getDate();
-              
-              return (
-                <div
-                  key={index}
-                  className="border-2 border-orange-100 rounded-xl p-4 hover:shadow-lg hover:border-orange-300 transition-all"
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <div>
-                      <div className="text-3xl font-bold text-orange-600">{day}</div>
-                      <div className="text-sm text-gray-600">{dayData.english_day}</div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-lg font-semibold text-purple-600">{dayData.tamil_day}</div>
-                      <div className="text-xs text-gray-500">{dayData.tamil_month}</div>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2 text-sm">
-                    <div className="bg-yellow-50 rounded p-2">
-                      <p className="font-semibold text-yellow-800 text-xs">Nalla Neram</p>
-                      <p className="text-yellow-700 text-xs">{dayData.nalla_neram?.morning}</p>
-                    </div>
-                    
-                    <div className="bg-red-50 rounded p-2">
-                      <p className="font-semibold text-red-800 text-xs">Raahu Kaalam</p>
-                      <p className="text-red-700 text-xs">{dayData.raahu_kaalam}</p>
-                    </div>
-                    
-                    <div className="bg-purple-50 rounded p-2">
-                      <p className="font-semibold text-purple-800 text-xs">Star</p>
-                      <p className="text-purple-700 text-xs line-clamp-2">{dayData.star}</p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+        {/* Error State */}
+        {error && (
+          <div className="bg-red-50 border-2 border-red-200 rounded-xl p-8 text-center mb-6">
+            <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-3" />
+            <h3 className="text-xl font-bold text-red-800 mb-2">Data Unavailable</h3>
+            <p className="text-red-600">{error}</p>
+            <button 
+              onClick={fetchMonthData}
+              className="mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+            >
+              Retry
+            </button>
           </div>
-        </div>
+        )}
+
+        {/* Calendar Grid */}
+        {!error && monthData.length > 0 ? (
+          <div className="bg-white rounded-2xl shadow-lg p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {monthData.map((dayData, index) => {
+                const date = new Date(dayData.date);
+                const day = date.getDate();
+                
+                return (
+                  <div
+                    key={index}
+                    className="border-2 border-orange-100 rounded-xl p-4 hover:shadow-lg hover:border-orange-300 transition-all"
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      <div>
+                        <div className="text-3xl font-bold text-orange-600">{day}</div>
+                        <div className="text-sm text-gray-600">{dayData.english_day}</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-lg font-semibold text-purple-600">{dayData.tamil_day}</div>
+                        <div className="text-xs text-gray-500">{dayData.tamil_month}</div>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-2 text-sm">
+                      <div className="bg-yellow-50 rounded p-2">
+                        <p className="font-semibold text-yellow-800 text-xs">Nalla Neram</p>
+                        <p className="text-yellow-700 text-xs">{dayData.nalla_neram?.morning}</p>
+                      </div>
+                      
+                      <div className="bg-red-50 rounded p-2">
+                        <p className="font-semibold text-red-800 text-xs">Raahu Kaalam</p>
+                        <p className="text-red-700 text-xs">{dayData.raahu_kaalam}</p>
+                      </div>
+                      
+                      <div className="bg-purple-50 rounded p-2">
+                        <p className="font-semibold text-purple-800 text-xs">Star</p>
+                        <p className="text-purple-700 text-xs line-clamp-2">{dayData.star}</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ) : !loading && !error && (
+          <div className="bg-white rounded-2xl shadow-lg p-12 text-center">
+            <p className="text-gray-500 text-lg">No calendar data found for this month.</p>
+          </div>
+        )}
       </main>
       
       <ModernFooter />

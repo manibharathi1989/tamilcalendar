@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import ModernHeader from '@/components/ModernHeader';
-import ModernDateSelector from '@/components/ModernDateSelector';
-import ModernDailyCalendar from '@/components/ModernDailyCalendar';
-import ModernRasiPalan from '@/components/ModernRasiPalan';
-import ModernSpecialDays from '@/components/ModernSpecialDays';
-import ModernFooter from '@/components/ModernFooter';
-import LocationSelector from '@/components/LocationSelector';
-import { calendarAPI } from '@/services/calendarAPI';
+import React, { useState, useEffect, useCallback } from 'react';
+import ModernHeader from '../components/ModernHeader';
+import ModernDateSelector from '../components/ModernDateSelector';
+import ModernDailyCalendar from '../components/ModernDailyCalendar';
+import ModernRasiPalan from '../components/ModernRasiPalan';
+import ModernSpecialDays from '../components/ModernSpecialDays';
+import ModernFooter from '../components/ModernFooter';
+import LocationSelector from '../components/LocationSelector';
+import { calendarAPI } from '../services/calendarAPI';
 
 const ModernHome = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -20,31 +20,31 @@ const ModernHome = () => {
   const [specialDays, setSpecialDays] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const year = currentDate.getFullYear();
-        const month = currentDate.getMonth() + 1;
-        const day = currentDate.getDate();
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth() + 1;
+      const day = currentDate.getDate();
 
-        // Fetch daily calendar and special days
-        const [dailyData, specialData] = await Promise.all([
-          calendarAPI.getDailyCalendar(year, month, day, location),
-          calendarAPI.getSpecialDays(year, month),
-        ]);
+      // Fetch daily calendar and special days
+      const [dailyData, specialData] = await Promise.all([
+        calendarAPI.getDailyCalendar(year, month, day, location),
+        calendarAPI.getSpecialDays(year, month),
+      ]);
 
-        setCalendarData(dailyData);
-        setSpecialDays(specialData);
-      } catch (error) {
-        console.error('Error fetching calendar data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    
-    fetchData();
+      setCalendarData(dailyData);
+      setSpecialDays(specialData);
+    } catch (error) {
+      console.error('Error fetching calendar data:', error);
+    } finally {
+      setLoading(false);
+    }
   }, [currentDate, location]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const handleDateChange = (newDate) => {
     setCurrentDate(newDate);

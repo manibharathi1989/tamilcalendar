@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { BarChart3, ArrowLeft, Calendar, TrendingUp, Users, Database } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
-import { adminAPI } from '../../services/adminAPI';
+import { useAuth } from '@/context/AuthContext';
+import { adminAPI } from '@/services/adminAPI';
 
 const Analytics = () => {
   const [stats, setStats] = useState(null);
@@ -10,15 +10,7 @@ const Analytics = () => {
   const { token, logout } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!token) {
-      navigate('/admin/login');
-    } else {
-      fetchAnalytics();
-    }
-  }, [token, navigate]);
-
-  const fetchAnalytics = async () => {
+  const fetchAnalytics = useCallback(async () => {
     setLoading(true);
     try {
       const data = await adminAPI.getAnalytics(token);
@@ -43,7 +35,15 @@ const Analytics = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token]);
+
+  useEffect(() => {
+    if (!token) {
+      navigate('/admin/login');
+    } else {
+      fetchAnalytics();
+    }
+  }, [token, navigate, fetchAnalytics]);
 
   const StatCard = ({ icon: Icon, label, value, color }) => (
     <div className={`bg-gradient-to-br ${color} rounded-2xl p-6 text-white shadow-lg`}>
